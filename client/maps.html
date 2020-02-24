@@ -1,44 +1,41 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-  <title>Place Autocomplete</title>
-  <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-  <meta charset="utf-8">
-  <link rel="stylesheet" href="styleMap.css">
-  <script src="index.js " type="text/javascript"></script>
-</head>
-
-<body>
-
   <head>
-    <nav class="headerBody">
-      <h1>
-        <a href="index.html" class="Logo">ParkSystem</a>
-      </h1>
-      <input id="placeInput" type="text" placeholder="Enter a location">
-      <button type="submit" class="searchButton">Search</button>
-
-      <ul class="signinLinks">
-        <li><a href="#" class="login">login</a></li>
-        <li><a href="#" class="register">Register</a></li>
-      </ul>
-    </nav>
-
+    <title>Place Autocomplete</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="styleMap.css">
+    <script src="index.js" charset="utf-8"></script>
   </head>
+  <body>
+    <header>
+      <nav class="headerBody">
+        <h1>
+          <a href="index.html" class="Logo">ParkSystem</a>
+        </h1>
+          <input id="placeInput" type="text"
+              placeholder="Enter a location">
+          <button type="submit" class="searchButton">Search</button>
 
-  <article class="mapBody">
-    <section class="mapListContainer">
+        <ul class="signinLinks">
+          <li><a href="#" class="login">login</a></li>
+          <li><a href="#" class="register">Register</a></li>
+        </ul>
+      </nav>
 
-    </section>
-    <section class="mapContainer">
-      <div id="map"></div>
-    </section>
+    </header>
 
-  </article>
+    <article class="mapBody">
+      <section id="mapListContainer" class="mapListContainer">
 
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAzmcJq7y-HW3_beX9kDsSG5k6hyo1TcNE&libraries=places&callback=createMap" async defer></script>
+      </section>
+      <section class="mapContainer">
+        <div id="map"></div>
+      </section>
 
-</body>
+    </article>
 
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBgEMibjP-KKDle5DwwhmWyf_jtQgBF1bM&libraries=places&callback=createMap"
+        async defer></script>
+   </body>
 </html>
