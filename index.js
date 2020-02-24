@@ -31,6 +31,7 @@
           console.log("PlacesServiceStatus Not OK");
         }
       }
+      
 
       // creats a marker on google map
       function createMarker(place) {
