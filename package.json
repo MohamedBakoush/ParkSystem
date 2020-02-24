@@ -1,0 +1,30 @@
+{
+  "name": "parksystem",
+  "version": "0.0.1",
+  "description": "Software Engineering Coursework - Parking System",
+  "main": "index.js",
+  "scripts": {
+    "start": "node svr",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MohamedBakoush/ParkSystem.git"
+  },
+  "author": "Mohamed Bakoush",
+  "contributors": [
+    "Mohamed Bakoush",
+    "Gavin Samraj",
+    "Kane Austin",
+    "Max Hutchings",
+    "Tsz Lee"
+  ],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MohamedBakoush/ParkSystem/issues"
+  },
+  "homepage": "https://github.com/MohamedBakoush/ParkSystem#readme"
+}
