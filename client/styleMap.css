@@ -52,7 +52,7 @@ nav  {
 
 .mapBody{
   display: grid;
-  grid-template-columns: 3fr 10fr;
+  grid-template-columns: 4fr 10fr;
   grid-gap: 1ch;
 }
 .mapContainer{
@@ -64,7 +64,15 @@ nav  {
 
 .ParkingInfo{
   display: grid;
-  grid-template-columns: repeat(2,1fr);
-  border: 3px solid;
+  grid-template-columns: 2fr 1fr;
+  border: 1px solid;
   border-color: rgb(0,0,0);
+}
+
+.ParkingInfoName, .ParkingInfoAddress, .ParkingInfoCost{
+    padding: .5rem;
+    margin: auto;
+}
+.ParkingInfoContainerCost{
+      display: grid;
 }

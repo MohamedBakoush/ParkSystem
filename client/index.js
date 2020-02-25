@@ -81,14 +81,15 @@ function fetchParkingInfo(place) {
   let ParkingInfoName = document.createElement('div');
   ParkingInfoName.id = 'ParkingInfoName';
   ParkingInfoName.classList = 'ParkingInfoName';
-  ParkingInfoName.textContent = place.name;
+  ParkingInfoName.textContent = `Name: ${place.name}`;
   ParkingInfoContainerInfo.appendChild(ParkingInfoName);
 
   // Address of parking space inside in ParkingInfoContainerInfo
   let ParkingInfoAddress = document.createElement('div');
   ParkingInfoAddress.id = 'ParkingInfoAddress';
   ParkingInfoAddress.classList = 'ParkingInfoAddress';
-  ParkingInfoAddress.textContent = place.vicinity;
+  ParkingInfoAddress.textContent = `Address: ${place.vicinity}`;
+  //place.vicinity
   ParkingInfoContainerInfo.appendChild(ParkingInfoAddress);
 
   // Parking Info Cost Container Containg parking cost
