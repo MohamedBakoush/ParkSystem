@@ -68,33 +68,39 @@ function fetchParkingInfo(place) {
   // creates a div in mapListContainer which is already defined in html code
   let ParkingInfo = document.createElement('div');
   ParkingInfo.id = "ParkingInfo";
+  ParkingInfo.classList = "ParkingInfo";
   mapListContainer.appendChild(ParkingInfo);
 
   // Parking Info Container for containg parking Information
   let ParkingInfoContainerInfo = document.createElement('div');
   ParkingInfoContainerInfo.id = 'ParkingInfoContainerInfo';
+  ParkingInfoContainerInfo.classList = 'ParkingInfoContainerInfo';
   ParkingInfo.appendChild(ParkingInfoContainerInfo);
 
   // name of parking space inside in ParkingInfoContainerInfo
   let ParkingInfoName = document.createElement('div');
   ParkingInfoName.id = 'ParkingInfoName';
+  ParkingInfoName.classList = 'ParkingInfoName';
   ParkingInfoName.textContent = place.name;
   ParkingInfoContainerInfo.appendChild(ParkingInfoName);
 
   // Address of parking space inside in ParkingInfoContainerInfo
   let ParkingInfoAddress = document.createElement('div');
   ParkingInfoAddress.id = 'ParkingInfoAddress';
+  ParkingInfoAddress.classList = 'ParkingInfoAddress';
   ParkingInfoAddress.textContent = place.vicinity;
   ParkingInfoContainerInfo.appendChild(ParkingInfoAddress);
 
   // Parking Info Cost Container Containg parking cost
   let ParkingInfoContainerCost = document.createElement('div');
   ParkingInfoContainerCost.id = 'ParkingInfoContainerCost';
+  ParkingInfoContainerCost.classList = 'ParkingInfoContainerCost';
   ParkingInfo.appendChild(ParkingInfoContainerCost);
 
   // Cost of parking space inside in ParkingInfoContainerCost
   let ParkingInfoCost = document.createElement('div');
   ParkingInfoCost.id = 'ParkingInfoCost';
+  ParkingInfoCost.classList = 'ParkingInfoCost';
   ParkingInfoCost.textContent = 'ParkingInfoCost';
   ParkingInfoContainerCost.appendChild(ParkingInfoCost);
 }
