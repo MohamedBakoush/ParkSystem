@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Place Autocomplete</title>
+    <title>Parking System</title>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
     <link rel="stylesheet" href="styleMap.css">
@@ -26,16 +26,20 @@
     </header>
 
     <article class="mapBody">
-      <section id="mapListContainer" class="mapListContainer">
 
+      <section id="mapListContainer" class="mapListContainer">
       </section>
-      <section class="mapContainer">
-        <div id="map"></div>
+
+      <section id="mapContainer" class="mapContainer">
+        <div id="map" class="map"></div>
       </section>
 
     </article>
 
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBgEMibjP-KKDle5DwwhmWyf_jtQgBF1bM&libraries=places&callback=createMap"
+    <!--
+      Google API Key Mohamed: AIzaSyAcQlOXG9jMpJ1ZXyq-u0JxkTiOk6XWjHo
+    -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcQlOXG9jMpJ1ZXyq-u0JxkTiOk6XWjHo&libraries=places&callback=createMap"
         async defer></script>
    </body>
 </html>
