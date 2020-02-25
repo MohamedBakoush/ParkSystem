@@ -64,15 +64,15 @@ nav  {
 
 .ParkingInfo{
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: 1fr 2fr 1fr;
   border: 1px solid;
   border-color: rgb(0,0,0);
 }
 
-.ParkingInfoName, .ParkingInfoAddress, .ParkingInfoCost{
+.ParkingInfoName, .ParkingInfoAddress, .ParkingInfoCost, .ParkingPictureImg{
     padding: .5rem;
     margin: auto;
 }
-.ParkingInfoContainerCost{
+.ParkingInfoContainerCost, .ParkingPictureContainer{
       display: grid;
 }

@@ -71,6 +71,28 @@ function fetchParkingInfo(place) {
   ParkingInfo.classList = "ParkingInfo";
   mapListContainer.appendChild(ParkingInfo);
 
+  // create picture element
+  let ParkingPictureContainer = document.createElement('picture');
+  ParkingPictureContainer.id = "ParkingPictureContainer";
+  ParkingPictureContainer.classList = "ParkingPictureContainer";
+  ParkingInfo.appendChild(ParkingPictureContainer);
+
+  //create img element
+  let ParkingPictureImg = document.createElement('img');
+  ParkingPictureImg.id = "ParkingPictureImg";
+  ParkingPictureImg.classList = "ParkingPictureImg";
+  // if there are available pictures from google places api
+  if(place.photos != null){ // if size dosent show img try 32 insted
+    ParkingPictureImg.src = place.photos[0].getUrl({maxWidth: 100, maxHeight: 100});
+    ParkingPictureContainer.appendChild(ParkingPictureImg);
+  } else{ // if there is no pictures from google places api
+    // noParkingImgFound.png will show insted
+    ParkingPictureImg.src = "pictures/noParkingImgFound.png";
+    ParkingPictureImg.height = "100";
+    ParkingPictureImg.width = "100";
+    ParkingPictureContainer.appendChild(ParkingPictureImg);
+  }
+
   // Parking Info Container for containg parking Information
   let ParkingInfoContainerInfo = document.createElement('div');
   ParkingInfoContainerInfo.id = 'ParkingInfoContainerInfo';
