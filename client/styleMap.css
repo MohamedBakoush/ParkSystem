@@ -34,6 +34,12 @@ nav  {
   width: 100%;
 }
 
+.mapListContainer {
+  /*  to be able scroll for parkingList  */
+  overflow-y: scroll;
+  height: 60vh;
+  }
+
 #placeInput {
   background-color: #fff;
   font-family: Roboto;
@@ -53,18 +59,19 @@ nav  {
 .mapBody{
   display: grid;
   grid-template-columns: 4fr 10fr;
-  grid-gap: 1ch;
+  /* grid-gap: 1ch; */
 }
-.mapContainer{
-  padding: 1rem;
-}
-.mapListContainer{
-  padding: 1rem;
+
+.mapListContainer, .mapContainer{
+  padding: 0rem;
 }
 
 .ParkingInfo{
   display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-areas:
+    'picture Info Info'
+    'picture Info Info'
+    'picture cost cost';
   border: 1px solid;
   border-color: rgb(0,0,0);
 }
@@ -75,4 +82,10 @@ nav  {
 }
 .ParkingInfoContainerCost, .ParkingPictureContainer{
       display: grid;
+}
+.ParkingPictureContainer { grid-area: picture; }
+.ParkingInfoContainerInfo { grid-area: Info; }
+.ParkingInfoContainerCost {
+  grid-area: cost;
+  background-color: rgb(83, 161, 215);
 }
