@@ -71,21 +71,12 @@ function createMarker(place) {
     title: place.name,
     label: "P",
   });
-  // if opening hours dosent exist show error msg
-  let openingHours;
-  try{
-    openingHours = place.opening_hours.periods[1].open ;
-    }
-    catch(e){
-      openingHours='Opening Hours not available';
-    }
   // link to place ticket page
   const placeInfolink =  `parkingInfo#${place.place_id}`;
   // content string which will be inputed into infowindow in google maps
   const contentString = '<div> <strong>' + place.name + '</strong><br>' +
     'Place ID: ' + place.place_id + '<br>' +
     'vicinity : ' + place.vicinity + '<br>' +
-    'Opening Hours : ' + openingHours + '<br>' +
     'Rateing : ' + place.rating + '<br>' +
     `<a href='${placeInfolink}'> Place Information </a>`;
   let infowindow = new google.maps.InfoWindow({
