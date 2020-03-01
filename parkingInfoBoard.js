@@ -11,6 +11,16 @@ let parkingDetails = [
     cost1Hour: 'Parking_Cost_1_Hour',
     costAdditionalHour: 'Parking_Cost_Additional_Hour',
   },
+
+  { id: 'ChIJ0XjfNHRddEgRQtXe1fjPW8w',
+    // name: "NCP Car Park Portsmouth Cascades",
+    // address: 'Cascades, Charlotte St, Portsmouth PO1 4RS, UK',
+    // phoneNumber: '0345 050 7080',
+    cost15Min: 1.50,
+    cost30Min:  2.00,
+    cost1Hour: 3.00,
+    costAdditionalHour: 1.00,
+  }
 ];
 
 function listParkingDetails() {

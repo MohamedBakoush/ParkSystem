@@ -3,13 +3,12 @@ function showParkingDetail_Info(parkingDetail) {
   //gets data from google places api
   getParkingInfomation();
   //container for ParkingInfo Details
-  // gets data from locol database
-  // TODO: create a database for cost that links to google place id
+  // gets data from local database
   const ParkingCostContainer = document.getElementById('ParkingCost_ul');
-  data(ParkingCostContainer, parkingDetail.cost15Min, "cost15Min");
-  data(ParkingCostContainer, parkingDetail.cost30Min, "cost30Min");
-  data(ParkingCostContainer, parkingDetail.cost1Hour, "cost1Hour");
-  data(ParkingCostContainer, parkingDetail.costAdditionalHour, "costAdditionalHour");
+  costData(ParkingCostContainer, '15 Minutes:','£', parkingDetail.cost15Min, "cost15Min");
+  costData(ParkingCostContainer, '30 Minutes:','£',parkingDetail.cost30Min, "cost30Min");
+  costData(ParkingCostContainer, '1 Hour:', '£', parkingDetail.cost1Hour, "cost1Hour");
+  costData(ParkingCostContainer, 'Additional Hour:', '£', parkingDetail.costAdditionalHour, "costAdditionalHour");
 
 }
 // get parking info from google places API
@@ -47,9 +46,9 @@ function getParkingInfomation(){
  })
 }
 
-// checks if data is undefined or not
+// checks if cost data is not undefined
 // if available show data
-// if not show another type of data
+// else show Not Available:
 function data(container, value, string){
   const dataType = document.createElement('li');
   if(value != undefined){
@@ -61,6 +60,24 @@ function data(container, value, string){
     dataType.id = string;
     dataType.classList = string;
     dataType.textContent = `Not Available: ${string}`;
+    container.appendChild(dataType);
+    };
+}
+
+// checks if cost data is not undefined
+// if available show cost data
+// else show Not Available:
+function costData(container, stringContent, moneySign, value, class_id){
+  const dataType = document.createElement('li');
+  if(value != undefined){
+    dataType.id = class_id;
+    dataType.classList = class_id;
+    dataType.textContent =  `${stringContent}  ${moneySign} ${value.toFixed(2)} `;
+    container.appendChild(dataType);
+  } else {
+    dataType.id = class_id;
+    dataType.classList = class_id;
+    dataType.textContent = `Not Available: ${class_id}`;
     container.appendChild(dataType);
     };
 }
