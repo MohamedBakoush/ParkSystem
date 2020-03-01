@@ -6,19 +6,74 @@
     <link rel="stylesheet" href="styleMap.css">
     <script src="parkingInfo.js" charset="utf-8"></script>
   </head>
+  <style media="screen">
+    .parkingInfoBody{
+      display: grid;
+      grid-template-columns: repeat(2,1fr);
+      grid-gap: 1ch;
+      max-width: calc(100% * 3.5/6);
+      margin: auto;
+      padding: 1rem;
+    }
+    .parkingInfo, .parkingCost{
+          border-bottom: 1px solid #DEDEDE;
+    }
+    .subHeader{
+      text-align: center;
+    }
+    .checkIn, .checkOut, .time{
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+        grid-gap: 1ch;
+        border-bottom: 1px solid #DEDEDE;
+        padding: 1rem;
+        font-weight: 600;
+    }
+    .prevTicket_btn input{
+      width: 50%;
+      font-size: 16px;
+      letter-spacing: 1px;
+      padding: .5rem;
+      margin: auto;
+      display: block;
+      font-weight: 600;
+      background-color: rgb(83, 161, 215);
+    }
+    .prevTicket_btn{
+      padding: 1rem;
+    }
+    .ParkingTimesHeader{
+    }
+  </style>
   <body>
     <article class="parkingInfoBody">
         <!--  Template -->
       <section class="parkingInfoContainer">
+        <!-- info -->
         <div class="parkingInfo">
-          <h1 class="subHeader">Parking Info</h1>
+          <div class="parkingInfoHeader">
+            <h1 class="subHeader">Parking Info</h1>
+          </div>
           <ul id="ParkingInfo_ul">
 
           </ul>
         </div>
+        <!-- cost -->
         <div class="parkingCost">
-          <h1 class="subHeader">rates</h1>
+          <div class="parkingCostHeader">
+            <h1 class="subHeader">Rates</h1>
+          </div>
           <ul id="ParkingCost_ul">
+
+
+          </ul>
+        </div>
+        <!-- time -->
+        <div class="ParkingOpeningHour">
+          <div class="ParkingTimesHeader">
+            <h1 class="subHeader">Opening Hours</h1>
+          </div>
+          <ul id="ParkingOpeningHours_ul">
 
 
           </ul>

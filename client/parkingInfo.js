@@ -12,21 +12,37 @@ function showParkingDetail_Info(parkingDetail) {
   data(ParkingCostContainer, parkingDetail.costAdditionalHour, "costAdditionalHour");
 
 }
-
 // get parking info from google places API
 function getParkingInfomation(){
   const service = new google.maps.places.PlacesService(map);
   const request = {
     placeId: getParkingDetail_Id(),
     // type of values to get from
-    fields: ['name', 'formatted_address', 'place_id','formatted_phone_number']
+    fields: ['name', 'formatted_address', 'place_id','formatted_phone_number','opening_hours','opening_hours.weekday_text']
     };
   service.getDetails(request, function(place) {
+    // giving a var an id to be asigned
     const ParkingInfoContainer = document.getElementById('ParkingInfo_ul');
+    const ParkingTimeContainer = document.getElementById('ParkingOpeningHours_ul');
+    const ParkingTimesState = document.getElementById('ParkingTimesState');
+    //gets data and puts then into ParkingInfoContainer
     data(ParkingInfoContainer, place.place_id, "ParkingInfo_place_id");
     data(ParkingInfoContainer, place.name, "ParkingInfo_name");
     data(ParkingInfoContainer, place.formatted_address, "ParkingInfo_address");
     data(ParkingInfoContainer, place.formatted_phone_number, "ParkingInfo_phoneNumber");
+    // if error is given
+    // then the program will show that there is no opening info available
+    try {
+      // gets opening hours for each day and displays it on ParkingTimeContainer
+      for (const ParkingTime of place.opening_hours.weekday_text) {
+        data(ParkingTimeContainer, ParkingTime , "ParkingTime_openingHours");
+      }
+
+    } catch (e) {
+      // Opening Info Not Available
+      data(ParkingTimeContainer, "Opening Hours Not Available", "ParkingTime_openingHours_");
+    }
+
 
  })
 }
