@@ -13,10 +13,17 @@ nav  {
     padding-left: 1em;
     padding-right: 1em;
 }
+
+label, input {
+  display: block;
+}
+
 .signinLinks{
   display: grid;
   grid-template-columns: repeat(2, 1fr);
 }
+
+
 .login, .register {
     font-weight: 400;
     text-decoration: none;

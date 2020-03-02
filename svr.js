@@ -2,6 +2,7 @@
 const express = require('express');
 const app = express();
 const pib = require('./parkingInfoBoard');
+const uib = require('./userInfo');
 
 // adds html as extensions
 // dont need to write index.html
@@ -31,8 +32,20 @@ function postParkingDetail(req, res) {
   res.json(parkingDetails);
 }
 
+// Nothing at the moment
+async function createAcc(req, res) {
+  const body = req.body;
+  res.json(uib.addUser(body.username, body.password, body.forename, body.surname, body.email, body.phoneNum));
+}
+
+async function getUserList(req, res) {
+  res.json(uib.getAllUsers());
+}
+
 app.get('/parkingDetails', getParkingDetails);
 app.get('/parkingDetails/:id', getParkingDetail);
 app.post('/parkingDetails', express.json(), postParkingDetail);
+app.post('/registerAcc', express.json(), createAcc);
+app.get('/registerAcc', getUserList);
 
 app.listen(8080);
