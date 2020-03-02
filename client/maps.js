@@ -1,5 +1,8 @@
+// TODO: add getDetails() to be able to import formatted_address, etc
+// currently anywhere where formatted_address is seposed to be vicinity takes its place
+// TODO: fix opening times to
 let map;
-// create google maps
+ // create google maps
 function createMap() {
   let location = {
     lat: 50.7952,
@@ -26,10 +29,36 @@ function callback(results, status) {
       // takes all places (parking spaces) available and puts into each function
       createMarker(results[i]);
       fetchParkingInfo(results[i]);
+      sendParkingDetail(results[i]);
     }
     console.log("PlacesServiceStatus OK");
   } else {
     console.log("PlacesServiceStatus Not OK");
+  }
+}
+
+// send parking data details to parkingDetails database
+// http://localhost:8080/parkingDetails - to see database
+
+async function sendParkingDetail(place) {
+  // the data that is being send to parkingDetails (database)
+
+  const payload = {
+    id: place.place_id,
+    name: place.name,
+    address : place.formatted_address,
+    phoneNumber: place.formatted_phone_number};
+    console.log('Payload', payload);
+
+  const response = await fetch('parkingDetails', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  });
+  if (response.ok) {
+    console.log('send parking details to database worked');
+  } else {
+    console.log('failed to send parking details to database', response);
   }
 }
 
@@ -40,16 +69,14 @@ function createMarker(place) {
     map: map,
     position: place.geometry.location,
     title: place.name,
-    url: place.id,
     label: "P",
   });
   // link to place ticket page
-  const placeInfolink = window.location.href + "/place=" + place.place_id;
+  const placeInfolink =  `parkingInfo#${place.place_id}`;
   // content string which will be inputed into infowindow in google maps
   const contentString = '<div> <strong>' + place.name + '</strong><br>' +
     'Place ID: ' + place.place_id + '<br>' +
-    'Address : ' + place.vicinity + '<br>' +
-    'Opening Hours : ' + place.opening_hours + '<br>' +
+    'vicinity : ' + place.vicinity + '<br>' +
     'Rateing : ' + place.rating + '<br>' +
     `<a href='${placeInfolink}'> Place Information </a>`;
   let infowindow = new google.maps.InfoWindow({
@@ -63,13 +90,18 @@ function createMarker(place) {
 
 // fetches parking information and puts into mapListContainer element
 function fetchParkingInfo(place) {
+
   const mapListContainer = document.getElementById('mapListContainer');
+  // herf link for each parking info box
+  let ParkingInfoLink = document.createElement('a');
+  ParkingInfoLink.href = `parkingInfo#${place.place_id}`;
+  mapListContainer.appendChild(ParkingInfoLink);
 
   // creates a div in mapListContainer which is already defined in html code
   let ParkingInfo = document.createElement('div');
   ParkingInfo.id = "ParkingInfo";
   ParkingInfo.classList = "ParkingInfo";
-  mapListContainer.appendChild(ParkingInfo);
+  ParkingInfoLink.appendChild(ParkingInfo);
 
   // create picture element
   let ParkingPictureContainer = document.createElement('picture');
@@ -103,15 +135,15 @@ function fetchParkingInfo(place) {
   let ParkingInfoName = document.createElement('div');
   ParkingInfoName.id = 'ParkingInfoName';
   ParkingInfoName.classList = 'ParkingInfoName';
-  ParkingInfoName.textContent = `Name: ${place.name}`;
+  ParkingInfoName.textContent = `${place.name}`;
   ParkingInfoContainerInfo.appendChild(ParkingInfoName);
 
   // Address of parking space inside in ParkingInfoContainerInfo
   let ParkingInfoAddress = document.createElement('div');
   ParkingInfoAddress.id = 'ParkingInfoAddress';
   ParkingInfoAddress.classList = 'ParkingInfoAddress';
-  ParkingInfoAddress.textContent = `Address: ${place.vicinity}`;
-  //place.vicinity
+  ParkingInfoAddress.textContent = `${place.vicinity}`;
+  //vicinity  is simplifed formatted_address
   ParkingInfoContainerInfo.appendChild(ParkingInfoAddress);
 
   // Parking Info Cost Container Containg parking cost

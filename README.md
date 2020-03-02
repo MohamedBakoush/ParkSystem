@@ -8,3 +8,7 @@ ParkSystem - Software Engineering Project
 * Install all of the dependencies for the website by running 'npm i'
 * Run the website on your local host port 8080 by running 'npm start'
 * Using your chosen web browser go to 'http://localhost:8080/' to view the website
+
+# Google API KEYS 
+* Mohamed - AIzaSyAcQlOXG9jMpJ1ZXyq-u0JxkTiOk6XWjHo
+* Gavin - AIzaSyBgEMibjP-KKDle5DwwhmWyf_jtQgBF1bM
