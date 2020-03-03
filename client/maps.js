@@ -22,7 +22,6 @@ async function createMap() {
   // show defult location which is portsmouth
   let location;
   if(Number.isFinite(latlng.Latitude)){
-    console.log("true");
     location = {
       lat: latlng.Latitude,
       lng: latlng.Longitude
@@ -34,7 +33,7 @@ async function createMap() {
     };
   }
 
-  console.log(location);
+  // console.log(location);
   map = new google.maps.Map(document.getElementById('map'), {
     center: location,
     zoom: 15,

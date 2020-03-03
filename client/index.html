@@ -4,19 +4,33 @@
     <meta charset="utf-8">
     <title>Home | Parking System </title>
     <script src="index.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="styleHeader.css">
   </head>
+
+  <header>
+    <nav class="headerBody">
+      <h1>
+        <a href="index.html" class="Logo">ParkSystem</a>
+      </h1>
+      <ul class="signinLinks">
+        <li><a href="#" class="login">login</a></li>
+        <li><a href="#" class="register">Register</a></li>
+      </ul>
+    </nav>
+
+  </header>
+
   <body>
     <a href="maps">GO TO MAPS</a>
 
     <div id="map"> </div>
-    <div class="container">
-      <div class="form-group">
-        <label>Location:</label>
-        <input type="text" class="form-control" id="serch_input" placeholder="Type address...">
-        <input type="hidden" id="latitude_input"/>
-        <input type="hidden" id="longitude_input"/>
-      </div>
-    </div>
+    <section>
+      <form action="/maps">
+        <input class="serch_input" type="text" id="serch_input" placeholder="Where are you going?"
+        name="l" required="true">
+        <button type="submit">Search</button>
+      </form>
+    </section>
 
     <script async defer src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&key=AIzaSyAcQlOXG9jMpJ1ZXyq-u0JxkTiOk6XWjHo">
     </script>

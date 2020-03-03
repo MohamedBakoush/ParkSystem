@@ -8,15 +8,8 @@ function AutoSearch(){
   const autocomplete = new google.maps.places.Autocomplete((document.getElementById(searchInput)), {
     types: ['geocode']
   });
-
   google.maps.event.addListener(autocomplete, 'place_changed', function (){
-    var near_place = autocomplete.getPlace();
-    // TODO: could prob deleted this section check if value is needed before doing anything
-    const latitude_input = document.getElementById('latitude_input');
-    const longitude_input = document.getElementById('longitude_input');
-    // get latitude and longitude from search input
-    latitude_input.value = near_place.geometry.location.lat();
-    longitude_input.value = near_place.geometry.location.lng();
+    var near_place = autocomplete.getPlace(); 
    // send to database
     sendLatLogDetails(near_place.geometry.location.lat(), near_place.geometry.location.lng());
   });

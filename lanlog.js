@@ -2,7 +2,7 @@
 
 let LatLonDetails = [
   // example of what the databse could look like
-  { id: 'id_example',
+  {
     Latitude: 'Location_Latitude',
     Longitude: 'Location_Longitude',
   },
