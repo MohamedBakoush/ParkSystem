@@ -4,15 +4,18 @@
 }
 
 .search_input{
-  width: 26rem;
-  height: 2rem;
+  width: 25rem;
+  height: 2.5rem;
 }
 
 .search_input_btn{
-  height: 2.5rem;
+    width: 6rem;
   color: #FFF;
   background: #4272CF;
   border: none;
-  text-shadow: none;
-  box-shadow: none;
-} 
+}
+
+.searchForm{
+  display: grid;
+  grid-template-areas: "search_input search_input_btn" ; 
+}
