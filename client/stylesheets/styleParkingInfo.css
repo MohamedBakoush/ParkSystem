@@ -1,0 +1,44 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+li{
+  list-style-type: none;
+}
+.parkingInfoBody{
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  grid-gap: 1ch;
+  max-width: calc(100% * 3.5/6);
+  margin: auto;
+  padding: 1rem;
+}
+.parkingInfo, .parkingCost{
+      border-bottom: 1px solid #DEDEDE;
+}
+.subHeader{
+  text-align: center;
+}
+.checkIn, .checkOut, .time{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    grid-gap: 1ch;
+    border-bottom: 1px solid #DEDEDE;
+    padding: 1rem;
+    font-weight: 600;
+}
+.prevTicket_btn input{
+  width: 50%;
+  font-size: 16px;
+  letter-spacing: 1px;
+  padding: .5rem;
+  margin: auto;
+  display: block;
+  font-weight: 600;
+  background-color: rgb(83, 161, 215);
+}
+.prevTicket_btn{
+  padding: 1rem;
+}
+.ParkingTimesHeader{
+}

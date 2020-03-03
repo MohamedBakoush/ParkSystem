@@ -5,30 +5,7 @@ html, body {
 li{
   list-style-type: none;
 }
-nav  {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: auto;
-    padding-left: 1em;
-    padding-right: 1em;
-}
-.signinLinks{
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-}
-.login, .register {
-    font-weight: 400;
-    text-decoration: none;
-    background-color: rgb(93, 106, 115);
-    padding: .5em;
-    color:rgb(255,255,255);
-}
-.Logo{
-    text-decoration: none;
-    padding: .5em;
-    color: rgb(0, 0, 0);
-}
+ 
 #map {
   height: 60vh;
   width: 100%;

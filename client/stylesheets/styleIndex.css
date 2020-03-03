@@ -1,0 +1,21 @@
+.searchContainer{
+  display: grid;
+  justify-content: center;
+}
+
+.search_input{
+  width: 25rem;
+  height: 2.5rem;
+}
+
+.search_input_btn{
+    width: 6rem;
+  color: #FFF;
+  background: #4272CF;
+  border: none;
+}
+
+.searchForm{
+  display: grid;
+  grid-template-areas: "search_input search_input_btn" ; 
+}
