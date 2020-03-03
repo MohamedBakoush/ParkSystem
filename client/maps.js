@@ -1,13 +1,40 @@
+'use strict';
 // TODO: add getDetails() to be able to import formatted_address, etc
 // currently anywhere where formatted_address is seposed to be vicinity takes its place
 // TODO: fix opening times to
 let map;
+
+
  // create google maps
-function createMap() {
-  let location = {
-    lat: 50.7952,
-    lng: -1.0872
-  };
+async function createMap() {
+  // get the lan and lon from index search page
+  // if value data dosent exist thenn show location
+  const response = await fetch(`LatLonDetails`);
+  let LatLong;
+  if (response.ok) {
+    LatLong = await response.json();
+  } else {
+    LatLong = { msg: 'failed to load messages' };
+  }
+  const latlng = LatLong[0];
+
+  // if latlng is not a number
+  // show defult location which is portsmouth
+  let location;
+  if(Number.isFinite(latlng.Latitude)){
+    console.log("true");
+    location = {
+      lat: latlng.Latitude,
+      lng: latlng.Longitude
+    };
+  } else{
+    location = {
+      lat: 50.7952,
+      lng: -1.0872
+    };
+  }
+
+  console.log(location);
   map = new google.maps.Map(document.getElementById('map'), {
     center: location,
     zoom: 15,
@@ -22,6 +49,9 @@ function createMap() {
   let service = new google.maps.places.PlacesService(map);
   service.nearbySearch(requestParkingSpaces, callback);
 }
+
+
+
 // if staus is ok callback takes each available parking space in area and puts them into specified functions
 function callback(results, status) {
   if (status == google.maps.places.PlacesServiceStatus.OK) {
@@ -29,36 +59,10 @@ function callback(results, status) {
       // takes all places (parking spaces) available and puts into each function
       createMarker(results[i]);
       fetchParkingInfo(results[i]);
-      sendParkingDetail(results[i]);
     }
     console.log("PlacesServiceStatus OK");
   } else {
     console.log("PlacesServiceStatus Not OK");
-  }
-}
-
-// send parking data details to parkingDetails database
-// http://localhost:8080/parkingDetails - to see database
-
-async function sendParkingDetail(place) {
-  // the data that is being send to parkingDetails (database)
-
-  const payload = {
-    id: place.place_id,
-    name: place.name,
-    address : place.formatted_address,
-    phoneNumber: place.formatted_phone_number};
-    console.log('Payload', payload);
-
-  const response = await fetch('parkingDetails', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload),
-  });
-  if (response.ok) {
-    console.log('send parking details to database worked');
-  } else {
-    console.log('failed to send parking details to database', response);
   }
 }
 

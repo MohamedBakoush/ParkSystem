@@ -3,48 +3,9 @@
   <head>
     <meta charset="utf-8">
     <title>Info | Parking System </title>
-    <link rel="stylesheet" href="styleMap.css">
+    <link rel="stylesheet" href="styleParkingInfo.css">
     <script src="parkingInfo.js" charset="utf-8"></script>
   </head>
-  <style media="screen">
-    .parkingInfoBody{
-      display: grid;
-      grid-template-columns: repeat(2,1fr);
-      grid-gap: 1ch;
-      max-width: calc(100% * 3.5/6);
-      margin: auto;
-      padding: 1rem;
-    }
-    .parkingInfo, .parkingCost{
-          border-bottom: 1px solid #DEDEDE;
-    }
-    .subHeader{
-      text-align: center;
-    }
-    .checkIn, .checkOut, .time{
-        display: grid;
-        grid-template-columns: repeat(2,1fr);
-        grid-gap: 1ch;
-        border-bottom: 1px solid #DEDEDE;
-        padding: 1rem;
-        font-weight: 600;
-    }
-    .prevTicket_btn input{
-      width: 50%;
-      font-size: 16px;
-      letter-spacing: 1px;
-      padding: .5rem;
-      margin: auto;
-      display: block;
-      font-weight: 600;
-      background-color: rgb(83, 161, 215);
-    }
-    .prevTicket_btn{
-      padding: 1rem;
-    }
-    .ParkingTimesHeader{
-    }
-  </style>
   <body>
     <article class="parkingInfoBody">
         <!--  Template -->
@@ -112,7 +73,8 @@
       </section>
       <!-- id="map" is here to not break the google api script-->
       <div id="map"> </div>
-      <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcQlOXG9jMpJ1ZXyq-u0JxkTiOk6XWjHo&libraries=places">
+      <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcQlOXG9jMpJ1ZXyq-u0JxkTiOk6XWjHo&libraries=places">
       </script>
 
     </article>

@@ -2,9 +2,23 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Place Details</title>
+    <title>Home | Parking System </title>
+    <script src="index.js" charset="utf-8"></script>
   </head>
   <body>
     <a href="maps">GO TO MAPS</a>
+
+    <div id="map"> </div>
+    <div class="container">
+      <div class="form-group">
+        <label>Location:</label>
+        <input type="text" class="form-control" id="serch_input" placeholder="Type address...">
+        <input type="hidden" id="latitude_input"/>
+        <input type="hidden" id="longitude_input"/>
+      </div>
+    </div>
+
+    <script async defer src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&key=AIzaSyAcQlOXG9jMpJ1ZXyq-u0JxkTiOk6XWjHo">
+    </script>
   </body>
 </html>
