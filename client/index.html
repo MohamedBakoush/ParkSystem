@@ -4,7 +4,8 @@
     <meta charset="utf-8">
     <title>Home | Parking System </title>
     <script src="index.js" charset="utf-8"></script>
-    <link rel="stylesheet" href="styleHeader.css">
+    <link rel="stylesheet" href="stylesheets/styleHeader.css">
+    <link rel="stylesheet" href="stylesheets/styleIndex.css">
   </head>
 
   <header>
@@ -24,11 +25,11 @@
     <a href="maps">GO TO MAPS</a>
 
     <div id="map"> </div>
-    <section>
+    <section class="searchContainer">
       <form action="/maps">
-        <input class="serch_input" type="text" id="serch_input" placeholder="Where are you going?"
+        <input class="search_input" type="text" id="serch_input" placeholder="Where are you going?"
         name="l" required="true">
-        <button type="submit">Search</button>
+        <button class="search_input_btn" type="submit">Search</button>
       </form>
     </section>
 
