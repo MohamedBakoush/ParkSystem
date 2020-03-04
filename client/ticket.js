@@ -13,7 +13,7 @@ async function getTicketInfo() {
    // checkInTime becomes split_date_time[1] which is check in time
  const checkInTime = split_date_time[1];
   //split Hour, Min to  (remove) %3A
- const split_time_checkIn_HourMin = checkInTime.split("%3A"); e
+ const split_time_checkIn_HourMin = checkInTime.split("%3A"); 
   // checkInTime becomes split_date_time[2] which is check out time
  const checkOutTime = split_date_time[2];
    //split Hour, Min to (remove) %3A
