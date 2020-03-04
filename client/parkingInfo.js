@@ -25,7 +25,6 @@ function getParkingInfomation(){
     const ParkingTimeContainer = document.getElementById('ParkingOpeningHours_ul');
     const ParkingTimesState = document.getElementById('ParkingTimesState');
     //gets data and puts then into ParkingInfoContainer
-    data(ParkingInfoContainer, place.place_id, "ParkingInfo_place_id");
     data(ParkingInfoContainer, place.name, "ParkingInfo_name");
     data(ParkingInfoContainer, place.formatted_address, "ParkingInfo_address");
     data(ParkingInfoContainer, place.formatted_phone_number, "ParkingInfo_phoneNumber");
@@ -134,10 +133,16 @@ async function loadCostDetails(){
       const openSplit = opening_hours[todaysDate].split(" ");
       if(openSplit[2] == 24){ // Opening Hours: Open 24 Hours
         console.log(" Open 24 Hours");
+
+
+        const parkingID = document.getElementById("parkingID");
+        createLabel(parkingID, "Parking-ID");
+        ticketDataDate(parkingID, "id", getParkingDetail_Id() , false);
+
+        console.log(typeof(getParkingDetail_Id()));
         const checkIn = document.getElementById("checkIn");
         createLabel(checkIn, "Arrivel Date");
         ticketDataDate(checkIn, "date", currentDate, false);
-
 
         const timeIn = document.getElementById("timeIn");
         createLabel(timeIn, "Time-In");
@@ -184,6 +189,10 @@ async function loadCostDetails(){
           }
         }
 
+        const parkingID = document.getElementById("parkingID");
+        createLabel(parkingID, "Parking-ID");
+        ticketDataDate(parkingID, "id", getParkingDetail_Id() , false);
+
         const checkIn = document.getElementById("checkIn");
         createLabel(checkIn, "Arrivel Date");
         ticketDataDate(checkIn, "date", currentDate, false);
@@ -204,6 +213,11 @@ async function loadCostDetails(){
     } catch (e) { // this is here if Open hour dont exist
 
       console.log("Open hour dont exist");
+
+      const parkingID = document.getElementById("parkingID");
+      createLabel(parkingID, "Parking-ID");
+      ticketDataDate(parkingID, "id", getParkingDetail_Id() , false);
+
       const checkIn = document.getElementById("checkIn");
       createLabel(checkIn, "Arrivel Date");
       ticketDataDate(checkIn, "date", currentDate, true);

@@ -3,12 +3,12 @@
    justify-items: center;
    margin: auto;
 }
-  .DateDiffrence, .TimeCheckIn,.TimeCheckOut, .TimeDiffrence{
+  .parkingCostFinal, .DateDiffrence, .TimeCheckIn,.TimeCheckOut, .TimeDiffrence{
     display: grid;
     grid-template-columns: repeat(2,1fr);
     width: 25rem;
   }
-  .timeCheckIn, .timeCheckOut, .timeDiffrence, .dateDiffrence{
+  .finalCost, .timeCheckIn, .timeCheckOut, .timeDiffrence, .dateDiffrence{
   text-align: right;
  }
  .buyTicket_btn input{

@@ -19,7 +19,7 @@ li{
 .subHeader{
   text-align: center;
 }
-.checkIn, .checkOut, .time{
+.parkingID, .checkIn, .checkOut, .time{
     display: grid;
     grid-template-columns: repeat(2,1fr);
     grid-gap: 1ch;
