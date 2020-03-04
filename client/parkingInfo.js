@@ -135,12 +135,9 @@ async function loadCostDetails(){
       if(openSplit[2] == 24){ // Opening Hours: Open 24 Hours
         console.log(" Open 24 Hours");
         const checkIn = document.getElementById("checkIn");
-        createLabel(checkIn, "Check-In");
+        createLabel(checkIn, "Arrivel Date");
         ticketDataDate(checkIn, "date", currentDate, false);
 
-        const checkOut = document.getElementById("checkOut");
-        createLabel(checkOut, "Check-Out");
-        ticketDataDate(checkOut, "date", currentDate, false);
 
         const timeIn = document.getElementById("timeIn");
         createLabel(timeIn, "Time-In");
@@ -163,12 +160,9 @@ async function loadCostDetails(){
         const openStringTime_close24hr  =  `${ Number(splitCloseTime[0]) + 12}:${splitCloseTime[1]}`;
 
         const checkIn = document.getElementById("checkIn");
-        createLabel(checkIn, "Check-In");
+        createLabel(checkIn, "Arrivel Date");
         ticketDataDate(checkIn, "date", currentDate, false);
 
-        const checkOut = document.getElementById("checkOut");
-        createLabel(checkOut, "Check-Out");
-        ticketDataDate(checkOut, "date", currentDate, false);
 
         const timeIn = document.getElementById("timeIn");
         createLabel(timeIn, "Time-In");
@@ -186,12 +180,8 @@ async function loadCostDetails(){
 
       console.log("Open hour dont exist");
       const checkIn = document.getElementById("checkIn");
-      createLabel(checkIn, "Check-In");
+      createLabel(checkIn, "Arrivel Date");
       ticketDataDate(checkIn, "date", currentDate, true);
-
-      const checkOut = document.getElementById("checkOut");
-      createLabel(checkOut, "Check-Out");
-      ticketDataDate(checkOut, "date", currentDate, true);
 
       const timeIn = document.getElementById("timeIn");
       createLabel(timeIn, "Time-In");
