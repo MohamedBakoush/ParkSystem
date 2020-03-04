@@ -7,7 +7,19 @@
     <link rel="stylesheet" href="stylesheets/styleParkingInfo.css">
     <script src="parkingInfo.js" charset="utf-8"></script>
   </head>
+
   <body>
+    <header>
+      <nav class="headerBody">
+        <h1>
+          <a href="index.html" class="Logo">ParkSystem</a>
+        </h1>
+        <ul class="signinLinks">
+          <li><a href="#" class="login">login</a></li>
+          <li><a href="#" class="register">Register</a></li>
+        </ul>
+      </nav>
+    </header>
     <article class="parkingInfoBody">
         <!--  Template -->
       <section class="parkingInfoContainer">
@@ -46,28 +58,15 @@
         <form action="ticket.html">
           <h1 class="subHeader">Buy a ticket</h1>
           <ul>
-              <li>
-                <div class="checkIn">
-                  <label for="">Check-In</label>
-                  <input type="date" name="" value="">
-                </div>
-                <div class="time">
-                  <label for="">Time</label>
-                  <input type="time" name="" value="00:00">
-                </div>
+              <li id="checkIn" class="checkIn">
               </li>
-              <li>
-                <div class="checkOut">
-                  <label for="">Check-Out</label>
-                  <input type="date" name="" value="">
-                </div>
-                <div class="time">
-                  <label for="">Time</label>
-                  <input type="time" name="" value="00:00">
-                </div>
+              <li id="timeIn" class="time">
               </li>
-              <div class="prevTicket_btn">
-                <input type="submit" value="Preview Ticket" />
+              <li id="checkOut" class="checkOut">
+              </li>
+              <li id="timeOut" class="time">
+              </li>
+              <div id="prevTicket_btn" class="prevTicket_btn">
               </div>
           </ul>
         </form>
@@ -75,7 +74,7 @@
       <!-- id="map" is here to not break the google api script-->
       <div id="map"> </div>
       <script async defer
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcQlOXG9jMpJ1ZXyq-u0JxkTiOk6XWjHo&libraries=places">
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDNDyXPpAMGdAA1PnEWSeVu_YyNovRQVAw&libraries=places">
       </script>
 
     </article>
