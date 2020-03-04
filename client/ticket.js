@@ -13,7 +13,7 @@ async function getTicketInfo() {
    // checkInTime becomes split_date_time[1] which is check in time
  const checkInTime = split_date_time[1];
   //split Hour, Min to  (remove) %3A
- const split_time_checkIn_HourMin = checkInTime.split("%3A"); 
+ const split_time_checkIn_HourMin = checkInTime.split("%3A");
   // checkInTime becomes split_date_time[2] which is check out time
  const checkOutTime = split_date_time[2];
    //split Hour, Min to (remove) %3A
@@ -22,6 +22,10 @@ async function getTicketInfo() {
  let timeDiffrenceHour = split_time_checkOut_HourMin[0] - split_time_checkIn_HourMin[0];
   // calculates timeDiffrenceMin
  let timeDiffrenceMin = split_time_checkOut_HourMin[1] - split_time_checkIn_HourMin[1];
+ if (timeDiffrenceMin < 0) { // if number timeDiffrenceMin is negative then reverse the values
+   timeDiffrenceMin = split_time_checkIn_HourMin[1] - split_time_checkOut_HourMin[1]; 
+ }
+  console.log(Number(timeDiffrenceMin));
 // if timeDiffrenceHour is singel diget then add 0 infront of number
  if (timeDiffrenceHour < 10) { timeDiffrenceHour = checkTime(timeDiffrenceHour);
  }// if timeDiffrenceMin is singel diget then add 0 infromt of number
