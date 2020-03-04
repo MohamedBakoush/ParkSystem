@@ -23,14 +23,20 @@ async function getTicketInfo() {
   // calculates timeDiffrenceMin
  let timeDiffrenceMin = split_time_checkOut_HourMin[1] - split_time_checkIn_HourMin[1];
  if (timeDiffrenceMin < 0) { // if number timeDiffrenceMin is negative then reverse the values
-   timeDiffrenceMin = split_time_checkIn_HourMin[1] - split_time_checkOut_HourMin[1]; 
+   timeDiffrenceMin = split_time_checkIn_HourMin[1] - split_time_checkOut_HourMin[1];
+   timeDiffrenceMin = 60 - timeDiffrenceMin;
+   timeDiffrenceHour = timeDiffrenceHour - 1;
  }
-  console.log(Number(timeDiffrenceMin));
-// if timeDiffrenceHour is singel diget then add 0 infront of number
- if (timeDiffrenceHour < 10) { timeDiffrenceHour = checkTime(timeDiffrenceHour);
- }// if timeDiffrenceMin is singel diget then add 0 infromt of number
- if (timeDiffrenceMin < 10) { timeDiffrenceMin = checkTime(timeDiffrenceMin);
+ if (timeDiffrenceMin < 10) {  // if timeDiffrenceMin is singel diget then add 0 infromt of number
+  timeDiffrenceMin = checkTime(timeDiffrenceMin);
  }
+
+  if (timeDiffrenceHour < 0) { // when timeDiffrenceHour is negative it makes all the values timeDiffrenceHour and Min Into a string
+    timeDiffrenceHour = "TotalTime";
+    timeDiffrenceMin = "Error";
+  } else if (timeDiffrenceHour < 10) { // if timeDiffrenceHour is singel diget then add 0 infront of number
+   timeDiffrenceHour = checkTime(timeDiffrenceHour);
+   }
  // add timeCheckIn Hour,Min together
  const  timeCheckIn = `${split_time_checkIn_HourMin[0]}:${split_time_checkIn_HourMin[1]}`;
  // add timeCheckOut Hour,Min together
