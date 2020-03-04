@@ -225,6 +225,7 @@ function createLabel(container, string){
 function ticketDataDate(container, type, value, disabled){
   const input = document.createElement('input');
   input.type = type;
+  input.name = type;
   input.value = value;
   input.required = "true";
   input.disabled = disabled;
@@ -234,6 +235,7 @@ function ticketDataDate(container, type, value, disabled){
 function ticketDataTime(container, type, open, close, displayTime, disabled){
   const input = document.createElement('input');
   input.type = type;
+  input.name = type;
   input.min = open;
   input.max = close;
   input.value = displayTime;
