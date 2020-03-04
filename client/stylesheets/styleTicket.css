@@ -1,0 +1,26 @@
+.ticketForm{
+    display: grid;
+   justify-items: center;
+   margin: auto;
+}
+  .parkingCostFinal, .DateDiffrence, .TimeCheckIn,.TimeCheckOut, .TimeDiffrence{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    width: 25rem;
+  }
+  .finalCost, .timeCheckIn, .timeCheckOut, .timeDiffrence, .dateDiffrence{
+  text-align: right;
+ }
+ .buyTicket_btn input{
+   width: 100%;
+   font-size: 16px;
+   letter-spacing: 1px;
+   padding: .5rem;
+   margin: auto;
+   display: block;
+   font-weight: 600;
+   background-color: rgb(83, 161, 215);
+ }
+ .buyTicket_btn{
+   padding: 1rem;
+ }
