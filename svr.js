@@ -32,12 +32,19 @@ function postParkingDetail(req, res) {
   res.json(parkingDetails);
 }
 
-// Nothing at the moment
-async function createAcc(req, res) {
+// Creates an account using the form
+function createAcc(req, res) {
   const body = req.body;
   res.json(uib.addUser(body.username, body.password, body.forename, body.surname, body.email, body.phoneNum));
 }
 
+// Will log the user in
+function login(req, res) {
+  const result =  uib.logIn(req.body.username, req.body.password);
+  res.send(result);
+}
+
+// Gets all the user information
 async function getUserList(req, res) {
   res.json(uib.getAllUsers());
 }
@@ -47,5 +54,6 @@ app.get('/parkingDetails/:id', getParkingDetail);
 app.post('/parkingDetails', express.json(), postParkingDetail);
 app.post('/registerAcc', express.json(), createAcc);
 app.get('/registerAcc', getUserList);
+app.post('/loginAcc', express.json(), login);
 
 app.listen(8080);

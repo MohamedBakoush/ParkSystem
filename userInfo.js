@@ -2,11 +2,18 @@
 
 let users = [
   {
-    username: "aaec"
+    username: "Heisenburg",
+    password: "meth",
+    forename: "Walter",
+    surname: "White",
+    email: "email@email.com",
+    phoneNum: "BetterCallSaul",
+    loggedIn: false
   }
 
 ];
 
+// Finds a user by username
 function findUser(username){
   for (const user of users) {
     if (user.username === username) {
@@ -16,6 +23,20 @@ function findUser(username){
   return null;
 }
 
+// Find the username and will compare the username and password or the account with the given parameters
+function logIn(username, password) {
+  const user = findUser(username);
+  if (user !== null) {
+    if (user.password === password) {
+      user.loggedIn = true;
+      return "user logged in";
+    }
+    return "password wrong";
+  }
+  return "username wrong";
+}
+
+// Adds a user to the database if the username doesn't exist
 function addUser(username, password, forename, surname, email, phoneNum) {
   if (findUser(username) === null) {
     const newUser = {
@@ -24,14 +45,24 @@ function addUser(username, password, forename, surname, email, phoneNum) {
       forename,
       surname,
       email,
-      phoneNum
+      phoneNum,
+      loggedIn: false,
     };
     users = [newUser, ...users.slice(0)];
     return newUser;
   }
 }
 
-// This is a test function to see all of the users in the object
+// Removes a user
+function removeUser(username) {
+  for (let i = 0; i <= users.length; i++) {
+    if (users[i].username === username) {
+      users.splice(i, 1);
+    }
+  }
+}
+
+// Shows all of the user in /registerAcc
 function getAllUsers() {
   return users;
 }
@@ -39,4 +70,6 @@ function getAllUsers() {
 module.exports = {
   addUser,
   getAllUsers,
+  removeUser,
+  logIn,
 };

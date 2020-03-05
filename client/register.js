@@ -1,3 +1,4 @@
+'use strict';
 /*Object to hold the commonly accessed elements*/
 const elem = {};
 
@@ -23,32 +24,8 @@ async function addEventListeners() {
   elem.regBut.addEventListener('click', grabEverything);
 }
 
-/*Sends the account information form to the server*/
-async function registerAccount() {
-  let accountInfo = grabEverything();
-  const response = await fetch('/registerAcc', {
-    method: 'POST',
-    headers: {'Content-Type':'application/json'},
-    body: JSON.stringify(accountInfo),
-  });
-
-  if (response.ok) {
-    console.log('account created with the following info: ', accountInfo);
-  }
-}
-
-async function getAllUserInfoInJSON() {
-  const response = await fetch('userInfoDetails');
-  if (response.ok) {
-    const userList = response.json();
-  }
-}
-
-
-async function sendUserInfo(thing) {
-  // the data that is being send to parkingDetails (database)
-
-  //const thing = grabEverything();
+// Creates an account if the username doesn't exist
+async function createUserAccount(thing) {
   const payload = {
     username: thing.username,
     password: thing.password,
@@ -66,9 +43,9 @@ async function sendUserInfo(thing) {
     body: JSON.stringify(payload),
   });
   if (response.ok) {
-    console.log('send parking details to database worked');
+    console.log('user account created');
   } else {
-    console.log('failed to send parking details to database', response);
+    console.log('failed to create account', response);
   }
 }
 
@@ -81,7 +58,7 @@ function grabEverything() {
   accountInfo.surname = elem.surname.value;
   accountInfo.email = elem.email.value;
   accountInfo.phoneNum = elem.phoneNum.value;
-  sendUserInfo(accountInfo);
+  createUserAccount(accountInfo);
 }
 
 /*Once page has loaded, will call function pageLoaded*/
