@@ -7,24 +7,17 @@ let map;
 
  // create google maps
 async function createMap() {
-  // get the lan and lon from index search page
-  // if value data dosent exist thenn show location
-  const response = await fetch(`LatLonDetails`);
-  let LatLong;
-  if (response.ok) {
-    LatLong = await response.json();
-  } else {
-    LatLong = { msg: 'failed to load messages' };
-  }
-  const latlng = LatLong[0];
 
-  // if latlng is not a number
-  // show defult location which is portsmouth
+  const latitude =  loadLatLonDetail()[0];
+  const longitude =  loadLatLonDetail()[1];
   let location;
-  if(Number.isFinite(latlng.Latitude)){
+  // check if lat and lon both are numbers, if yest then put corrdients
+  // in location for later use
+  // if not redirect to portsmouth (for testing purposes)
+  if(Number(latitude) && Number(longitude) ){
     location = {
-      lat: latlng.Latitude,
-      lng: latlng.Longitude
+      lat: Number(latitude),
+      lng: Number(longitude)
     };
   } else{
     location = {
@@ -162,3 +155,18 @@ function fetchParkingInfo(place) {
   ParkingInfoCost.textContent = 'ParkingInfoCost';
   ParkingInfoContainerCost.appendChild(ParkingInfoCost);
 }
+
+function loadLatLonDetail(){
+  // split up herf to get lat an lon
+  const splitherf = window.location.href.split("lat=",2);
+  const splitLatLon = splitherf[1].split("&lon=");
+  const latitude = splitLatLon[0];
+  const longitude = splitLatLon[1];
+  return [latitude, longitude];
+}
+
+
+function pageLoaded() {
+}
+
+window.addEventListener('load', pageLoaded);

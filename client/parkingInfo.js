@@ -163,7 +163,7 @@ async function loadCostDetails(){
         const splitCloseTime = openSplit[4].split(":");
         let openStringTime_Open24hr;
         let openStringTime_close24hr;
-        // when the parking spaces open
+        // when the parking spaces open 
         if(openSplit[2] == "AM"){
           console.log("Open_AM");
           if (splitOpenTime[0] >= 10){
@@ -175,7 +175,6 @@ async function loadCostDetails(){
           console.log("Open_PM");
           openStringTime_Open24hr  =  `${Number(splitOpenTime[0]) + 12}:${splitOpenTime[1]}`;
         }
-
         // when the parking spaces close
         if(openSplit[5] == "PM"){
           console.log("Closed_PM");
@@ -183,9 +182,9 @@ async function loadCostDetails(){
         } else {
           console.log("Closed_AM");
           if (splitCloseTime[0] >= 10){
-            openStringTime_Open24hr  =  `${splitCloseTime[0]}:${splitCloseTime[1]}`;
+            openStringTime_close24hr  =  `${splitCloseTime[0]}:${splitCloseTime[1]}`;
           }else {
-            openStringTime_Open24hr  =  `0${splitCloseTime[0]}:${splitCloseTime[1]}`;
+            openStringTime_close24hr  =  `0${splitCloseTime[0]}:${splitCloseTime[1]}`;
           }
         }
 
