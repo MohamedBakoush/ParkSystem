@@ -9,7 +9,11 @@ function AutoSearch(){
     types: ['geocode']
   });
   google.maps.event.addListener(autocomplete, 'place_changed', function (){
-    var near_place = autocomplete.getPlace(); 
+    const near_place = autocomplete.getPlace();
+    document.getElementById("latitude_input").value = near_place.geometry.location.lat();
+    document.getElementById("longitude_input").value = near_place.geometry.location.lng();
+
+
    // send to database
     sendLatLogDetails(near_place.geometry.location.lat(), near_place.geometry.location.lng());
   });
@@ -50,7 +54,7 @@ function  southampton(){
 }
 
 function pageLoaded() {
-  AutoSearch();
+  AutoSearch(); 
 }
 
 window.addEventListener('load', pageLoaded);

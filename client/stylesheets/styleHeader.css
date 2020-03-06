@@ -30,4 +30,6 @@ nav  {
       text-decoration: none;
       padding: .5em;
       color: rgb(0, 0, 0);
+      font-size: 32px;
+    font-weight: bold;
   }
