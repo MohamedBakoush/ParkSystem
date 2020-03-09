@@ -5,7 +5,7 @@ html, body {
 li{
   list-style-type: none;
 }
- 
+
 #map {
   height: 60vh;
   width: 100%;
@@ -52,11 +52,17 @@ li{
   border: 1px solid;
   border-color: rgb(0,0,0);
 }
-
+.ParkingInfoLink{
+  text-decoration: none;
+  color: black;
+}
 .ParkingInfoName, .ParkingInfoAddress, .ParkingInfoCost, .ParkingPictureImg{
     padding: .5rem;
     margin: auto;
 }
+ .ParkingInfoName, .ParkingInfoAddress, .ParkingInfoCost{
+   text-align: center;
+ }
 .ParkingInfoContainerCost, .ParkingPictureContainer{
       display: grid;
 }

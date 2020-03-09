@@ -3,8 +3,6 @@
 // currently anywhere where formatted_address is seposed to be vicinity takes its place
 // TODO: fix opening times to
 let map;
-
-
  // create google maps
 async function createMap() {
 
@@ -50,7 +48,7 @@ function callback(results, status) {
     for (var i = 0; i < results.length; i++) {
       // takes all places (parking spaces) available and puts into each function
       createMarker(results[i]);
-      fetchParkingInfo(results[i]);
+      loadParkingDetail(results[i]);
     }
     console.log("PlacesServiceStatus OK");
   } else {
@@ -84,12 +82,26 @@ function createMarker(place) {
   });
 }
 
-// fetches parking information and puts into mapListContainer element
-function fetchParkingInfo(place) {
+async function loadParkingDetail(place) {
+  const id = place.place_id;
+  const response = await fetch(`parkingDetails/${id}`);
+  let parkingDetail;
+  if (response.ok) {
+    parkingDetail = await response.json();
+  } else {
+    parkingDetail = { msg: 'failed to load messages' };
+  }
+  // puts place and parkingDetail in fetchParkingInfo
+  fetchParkingInfo(place, parkingDetail);
+}
 
+// fetches parking information and puts into mapListContainer element
+function fetchParkingInfo(place, parkingDetail) {
   const mapListContainer = document.getElementById('mapListContainer');
   // herf link for each parking info box
   let ParkingInfoLink = document.createElement('a');
+  ParkingInfoLink.id = "ParkingInfoLink";
+  ParkingInfoLink.classList = "ParkingInfoLink";
   ParkingInfoLink.href = `parkingInfo#${place.place_id}`;
   mapListContainer.appendChild(ParkingInfoLink);
 
@@ -107,18 +119,12 @@ function fetchParkingInfo(place) {
 
   //create img element
   let ParkingPictureImg = document.createElement('img');
-  ParkingPictureImg.id = "ParkingPictureImg";
-  ParkingPictureImg.classList = "ParkingPictureImg";
   // if there are available pictures from google places api
   if(place.photos != null){ // if size dosent show img try 32 insted
-    ParkingPictureImg.src = place.photos[0].getUrl({maxWidth: 100, maxHeight: 100});
-    ParkingPictureContainer.appendChild(ParkingPictureImg);
+    dataParkingPhoto(ParkingPictureContainer, 'img', "ParkingPictureImg", "ParkingPictureImg", "100", "100", place.photos[0].getUrl({maxWidth: 100, maxHeight: 100}))
   } else{ // if there is no pictures from google places api
     // noParkingImgFound.png will show insted
-    ParkingPictureImg.src = "pictures/noParkingImgFound.png";
-    ParkingPictureImg.height = "100";
-    ParkingPictureImg.width = "100";
-    ParkingPictureContainer.appendChild(ParkingPictureImg);
+    dataParkingPhoto(ParkingPictureContainer, 'img', "ParkingPictureImg", "ParkingPictureImg", "100", "100", "pictures/noParkingImgFound.png")
   }
 
   // Parking Info Container for containg parking Information
@@ -128,32 +134,48 @@ function fetchParkingInfo(place) {
   ParkingInfo.appendChild(ParkingInfoContainerInfo);
 
   // name of parking space inside in ParkingInfoContainerInfo
-  let ParkingInfoName = document.createElement('div');
-  ParkingInfoName.id = 'ParkingInfoName';
-  ParkingInfoName.classList = 'ParkingInfoName';
-  ParkingInfoName.textContent = `${place.name}`;
-  ParkingInfoContainerInfo.appendChild(ParkingInfoName);
-
+  dataParking(ParkingInfoContainerInfo,"div", 'ParkingInfoName', 'ParkingInfoName', `${place.name}`);
   // Address of parking space inside in ParkingInfoContainerInfo
-  let ParkingInfoAddress = document.createElement('div');
-  ParkingInfoAddress.id = 'ParkingInfoAddress';
-  ParkingInfoAddress.classList = 'ParkingInfoAddress';
-  ParkingInfoAddress.textContent = `${place.vicinity}`;
-  //vicinity  is simplifed formatted_address
-  ParkingInfoContainerInfo.appendChild(ParkingInfoAddress);
+  dataParking(ParkingInfoContainerInfo,"div", 'ParkingInfoAddress', 'ParkingInfoAddress', `${place.vicinity}`);
 
   // Parking Info Cost Container Containg parking cost
   let ParkingInfoContainerCost = document.createElement('div');
   ParkingInfoContainerCost.id = 'ParkingInfoContainerCost';
   ParkingInfoContainerCost.classList = 'ParkingInfoContainerCost';
   ParkingInfo.appendChild(ParkingInfoContainerCost);
+  // fill ParkingInfoContainerCost with cost data
+  costData(ParkingInfoContainerCost, "div", 'ParkingInfoCost', 'ParkingInfoCost', '£', parkingDetail.cost1Hour);
+}
 
-  // Cost of parking space inside in ParkingInfoContainerCost
-  let ParkingInfoCost = document.createElement('div');
-  ParkingInfoCost.id = 'ParkingInfoCost';
-  ParkingInfoCost.classList = 'ParkingInfoCost';
-  ParkingInfoCost.textContent = 'ParkingInfoCost';
-  ParkingInfoContainerCost.appendChild(ParkingInfoCost);
+function dataParking(container, type, idHere, claseHere, textContent){
+  let ParkingData = document.createElement(type);
+  ParkingData.id = idHere;
+  ParkingData.classList = claseHere;
+  ParkingData.textContent = textContent;
+  container.appendChild(ParkingData);
+}
+function dataParkingPhoto(container, type, idHere, claseHere, height, width, src){
+  let ParkingPictureImg = document.createElement(type);
+  ParkingPictureImg.id = idHere;
+  ParkingPictureImg.classList = claseHere;
+  ParkingPictureImg.src = src;
+  ParkingPictureImg.height = height;
+  ParkingPictureImg.width = width;
+  container.appendChild(ParkingPictureImg);
+}
+function costData(container, type, idHere, claseHere, moneySign, value){
+  const costData = document.createElement(type);
+  if(value != undefined){
+    costData.id = idHere;
+    costData.classList = claseHere;
+    costData.textContent =  `${moneySign} ${value.toFixed(2)} `;
+    container.appendChild(costData);
+  } else {
+    costData.id = idHere;
+    costData.classList = claseHere;
+    costData.textContent = `Cost Not Available`;
+    container.appendChild(costData);
+    };
 }
 
 function loadLatLonDetail(){
@@ -164,7 +186,6 @@ function loadLatLonDetail(){
   const longitude = splitLatLon[1];
   return [latitude, longitude];
 }
-
 
 function pageLoaded() {
 }

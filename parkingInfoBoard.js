@@ -1,27 +1,10 @@
 'use strict';
+const fs = require('fs');
+// gets parkingDetails from parkingDetails.json
+let data = fs.readFileSync('parkingDetails.json');
+let parkingDetails = JSON.parse(data);
 
-let parkingDetails = [
-  // example of what the databse could look like
-  { id: 'id_example',
-    name: 'Parking_Info_Name',
-    address: 'Parking_Info_Address',
-    phoneNumber: 'Parking_Info_Phone_Number',
-    cost15Min: 'Parking_Cost_15_Min',
-    cost30Min: 'Parking_Cost_30_Min',
-    cost1Hour: 'Parking_Cost_1_Hour',
-    costAdditionalHour: 'Parking_Cost_Additional_Hour',
-  },
-
-  { id: 'ChIJ0XjfNHRddEgRQtXe1fjPW8w',
-    // name: "NCP Car Park Portsmouth Cascades",
-    // address: 'Cascades, Charlotte St, Portsmouth PO1 4RS, UK',
-    // phoneNumber: '0345 050 7080',
-    cost15Min: 1.50,
-    cost30Min:  2.00,
-    cost1Hour: 3.00,
-    costAdditionalHour: 1.00,
-  }
-];
+// console.log(parkingDetails);
 
 function listParkingDetails() {
   // returns parking details
