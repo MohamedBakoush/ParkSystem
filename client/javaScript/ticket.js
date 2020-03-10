@@ -152,5 +152,5 @@ window.addEventListener('load', pageLoaded);
 module.exports = {
   // export modules
   checkTime,
-  getParkingDetail_Id, 
+  getParkingDetail_Id,  
 };
