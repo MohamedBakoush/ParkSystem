@@ -25,17 +25,8 @@ function getParkingDetail(req, res){
   res.json(result);
 }
 
-
-function postParkingDetail(req, res) {
-  // adds parking parkingDetail to the database
-  // TODO: Fill out required data for parkingDetails
-  const parkingDetails = pib.addParkingDetails(req.body.id, req.body.name, req.body.address, );
-  res.json(parkingDetails);
-}
-
 // for patking detail (mainly cost)
 app.get('/parkingDetails', getParkingDetails);
 app.get('/parkingDetails/:id', getParkingDetail);
-app.post('/parkingDetails', express.json(), postParkingDetail);
 
 app.listen(8080);
