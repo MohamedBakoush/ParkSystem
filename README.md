@@ -9,6 +9,13 @@ ParkSystem - Software Engineering Project
 * Run the website on your local host port 8080 by running 'npm start'
 * Using your chosen web browser go to 'http://localhost:8080/' to view the website
 
-# Google API KEYS 
-* Mohamed - AIzaSyAcQlOXG9jMpJ1ZXyq-u0JxkTiOk6XWjHo
-* Gavin - AIzaSyBgEMibjP-KKDle5DwwhmWyf_jtQgBF1bM
+# Start Server
+* npm start
+
+# Start Test
+* npm test
+
+# Google API KEYS
+* Mohamed: AIzaSyAcQlOXG9jMpJ1ZXyq-u0JxkTiOk6XWjHo
+* Gavin: AIzaSyBgEMibjP-KKDle5DwwhmWyf_jtQgBF1bM
+* Max: AIzaSyAzmcJq7y-HW3_beX9kDsSG5k6hyo1TcNE

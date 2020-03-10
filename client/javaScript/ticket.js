@@ -1,5 +1,5 @@
 'use strict';
-async function getTicketInfo(parkingDetail) {
+const getTicketInfo = async (parkingDetail) => {
   // speperates the herf into diffrent sections
   // parking id, date , check in time and check out time
  const splitTicket = window.location.href.split("ticket",2);
@@ -114,22 +114,21 @@ function  ticketData(container, textContent, datatype, classHere, idHere){
 
 // if time is less the then 10 it will show as a singel didget
 //  this function adds a 0 before the i value to show time as a double didget
-function checkTime(i) {
+const checkTime = (i) => {
   if (i < 10) {
     i = "0" + i;
   }
   return i;
 }
 
-
-
-function getParkingDetail_Id(){
+const getParkingDetail_Id = () => {
   const splitHerf = window.location.href.split("ticket?id=",2);
   const split_id_date = splitHerf[1].split("&");
   const parkingID = split_id_date[0];
   return parkingID;
 };
-async function loadParkingDetail() {
+
+const loadParkingDetail = async() => {
   const id = getParkingDetail_Id();
   const response = await fetch(`parkingDetails/${id}`);
   let parkingDetail;
@@ -149,3 +148,9 @@ function pageLoaded() {
 }
 
 window.addEventListener('load', pageLoaded);
+
+module.exports = {
+  // export modules
+  checkTime,
+  getParkingDetail_Id, 
+};
