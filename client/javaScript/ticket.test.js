@@ -18,4 +18,3 @@ test('check if ID gets corrent value from url', () => {
   const id = getParkingDetail_Id();
   expect(id).toBe("ChIJ0XjfNHRddEgRQtXe1fjPW8w");
 });
- 

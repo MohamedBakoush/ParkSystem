@@ -162,6 +162,7 @@ function dataParkingPhoto(container, type, idHere, claseHere, height, width, src
   ParkingPictureImg.height = height;
   ParkingPictureImg.width = width;
   container.appendChild(ParkingPictureImg);
+  return src;
 }
 function costData(container, type, idHere, claseHere, moneySign, value){
   const costData = document.createElement(type);
@@ -170,11 +171,13 @@ function costData(container, type, idHere, claseHere, moneySign, value){
     costData.classList = claseHere;
     costData.textContent =  `${moneySign} ${value.toFixed(2)} `;
     container.appendChild(costData);
+    return "Cost Available";
   } else {
     costData.id = idHere;
     costData.classList = claseHere;
     costData.textContent = `Cost Not Available`;
     container.appendChild(costData);
+    return "Cost Not Available";
     };
 }
 
@@ -191,3 +194,11 @@ function pageLoaded() {
 }
 
 window.addEventListener('load', pageLoaded);
+
+
+module.exports = {
+  // export modules
+  loadLatLonDetail,
+  costData,
+  dataParkingPhoto,
+};
