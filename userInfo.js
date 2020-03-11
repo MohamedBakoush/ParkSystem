@@ -1,17 +1,8 @@
 'use strict';
 
-let users = [
-  {
-    username: "Heisenburg",
-    password: "meth",
-    forename: "Walter",
-    surname: "White",
-    email: "email@email.com",
-    phoneNum: "BetterCallSaul",
-    loggedIn: false
-  }
-
-];
+const fs = require('fs');
+const data = fs.readFileSync('userInfo.json');
+const users = JSON.parse(data);
 
 // Finds a user by username
 function findUser(username){
@@ -38,8 +29,9 @@ function logIn(username, password) {
 
 // Adds a user to the database if the username doesn't exist
 function addUser(username, password, forename, surname, email, phoneNum) {
-  if (findUser(username) === null) {
-    const newUser = {
+  // if (findUser(username) === null) {
+    let newData;
+    newData = {
       username: username,
       password,
       forename,
@@ -48,9 +40,12 @@ function addUser(username, password, forename, surname, email, phoneNum) {
       phoneNum,
       loggedIn: false,
     };
-    users = [newUser, ...users.slice(0)];
-    return newUser;
-  }
+    users.push(newData);
+    fs.writeFileSync('userInfo.json', JSON.stringify(users, null, 2), Finished);
+    function Finished(err) {
+      console.log('all set');
+    }
+  // }
 }
 
 // Removes a user
@@ -66,6 +61,7 @@ function removeUser(username) {
 function getAllUsers() {
   return users;
 }
+
 
 module.exports = {
   addUser,
