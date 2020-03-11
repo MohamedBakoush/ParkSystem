@@ -1,24 +1,15 @@
-[
-  {
-    "username": "rgrg",
-    "password": "",
-    "forename": "",
-    "surname": "",
-    "email": "",
-    "phoneNum": "",
+{
+  "userExample": {
+    "username": "username",
+    "password": "password",
+    "forename": "forename",
+    "surname": "surname",
+    "email": "email",
+    "phoneNum": "phoneNum",
     "loggedIn": false
   },
-  {
-    "username": "aaaa",
-    "password": "",
-    "forename": "",
-    "surname": "",
-    "email": "",
-    "phoneNum": "",
-    "loggedIn": false
-  },
-  {
-    "username": "aaaatrgrgrgr",
+  "userExam": {
+    "username": "userExam",
     "password": "",
     "forename": "",
     "surname": "",
@@ -26,4 +17,4 @@
     "phoneNum": "",
     "loggedIn": false
   }
-]
+}

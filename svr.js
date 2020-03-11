@@ -35,7 +35,8 @@ function postParkingDetail(req, res) {
 // Creates an account using the form
 function createAcc(req, res) {
   const body = req.body;
-  res.json(uib.addUser(body.username, body.password, body.forename, body.surname, body.email, body.phoneNum));
+  const account = uib.addUser(body.username, body.password, body.forename, body.surname, body.email, body.phoneNum);
+  res.json(account);
 }
 
 // Will log the user in
