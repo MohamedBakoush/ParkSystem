@@ -1,4 +1,4 @@
-const { loadLatLonDetail, costData, dataParkingPhoto} = require('./maps');
+const { loadLatLonDetail, costData, dataParkingPhoto, dataParking, fetchParkingInfo } = require('./maps');
 global.window = Object.create(window);
 const url = "http://localhost:8080/maps?l=Stockholm%2C+Sweden&lat=59.32932349999999&lon=18.0685808";
 Object.defineProperty(window, 'location', {
@@ -23,28 +23,52 @@ describe('maps', function () {
        // if there is a value then
        const withValueInput = costData(container, "div", "idHere", "claseHere", "£", 5);
        expect(withValueInput).toBeDefined();
-       expect(withValueInput).toBe("Cost Available");
+       expect(withValueInput.id).toBe("idHere");
+       expect(withValueInput.classList[0]).toBe("claseHere");
+       expect(withValueInput.textContent).toBe("£ 5.00");
        // if there is no value then
        const noValueInput = costData(container);
        expect(noValueInput).toBeDefined();
-       expect(noValueInput).toBe("Cost Not Available");
+       expect(withValueInput.id).toBe("idHere", "div", "idHere", "claseHere");
+       expect(withValueInput.classList[0]).toBe("claseHere");
+       expect(noValueInput.textContent).toBe("Cost Not Available");
     });
 
     it('Get dataParkingPhoto', () => {
       // this is to imitate the element that is beign passes in into the function
       const container = document.createElement('picture');
-       // if there is a value then
-      const googlePic = dataParkingPhoto(container, 'img', "ParkingPictureImg", "ParkingPictureImg", "100", "100", google.maps.places.photos[0])
+
+      const noGooglePic = dataParkingPhoto(container, 'img', "ParkingPictureImg", "ParkingPictureImg", "100", "100", "pictures/noParkingImgFound.png")
+      expect(noGooglePic).toBeDefined();
+      expect(noGooglePic.id).toBe("ParkingPictureImg");
+      expect(noGooglePic.classList[0]).toBe("ParkingPictureImg");
+      expect(noGooglePic.height).toBe(100);
+      expect(noGooglePic.width).toBe(100);
+      expect(noGooglePic.src).toBe("http://localhost/pictures/noParkingImgFound.png");
+
+      const googlePic = dataParkingPhoto(container, 'img', "ParkingPictureImg", "ParkingPictureImg", "100", "100", google.maps.places.photos)
       expect(googlePic).toBeDefined();
-      expect(typeof googlePic).toBe('object');
-      expect(googlePic).toBe(google.maps.places.photos[0]); 
-      // if there is no value then
-      const noGooglePic = dataParkingPhoto(container, 'img', "ParkingPictureImg", "ParkingPictureImg", "100", "100", "pictures/noParkingImgFound.png");
-       expect(noGooglePic).toBeDefined();
-       expect(noGooglePic).toBe("pictures/noParkingImgFound.png");
+      expect(googlePic.id).toBe("ParkingPictureImg");
+      expect(googlePic.classList[0]).toBe("ParkingPictureImg");
+      expect(googlePic.height).toBe(100);
+      expect(googlePic.width).toBe(100);
+      //undefined becouse i havent stated what maps.places.photos means below
+      expect(googlePic.src).toBe("http://localhost/googlePicture.png");
+    });
+
+    it('Get dataParking', () => {
+      // this is to imitate the element that is beign passes in into the function
+      const container = document.createElement('div');
+      const parkingData = dataParking(container,"div", 'ParkingInfoName', 'ParkingInfoName', "parkingDataTextContent");
+      expect(parkingData).toBeDefined();
+      expect(parkingData.id).toBe("ParkingInfoName");
+      expect(parkingData.classList[0]).toBe("ParkingInfoName");
+      expect(parkingData.textContent).toBe("parkingDataTextContent");
+    });
+
+    it('Get fetchParkingInfo', () => {  
     });
 })
-
 
 const setupGoogleMock = () => {
   /*** Mock Google Maps JavaScript API ***/
@@ -61,9 +85,7 @@ const setupGoogleMock = () => {
           UNKNOWN_ERROR: 'UNKNOWN_ERROR',
           ZERO_RESULTS: 'ZERO_RESULTS',
         },
-        photos: [
-        { INVALID_REQUEST: 'INVALID_REQUEST' }
-      ]
+        photos: ["googlePicture.png"]
       },
       Geocoder: () => {},
       GeocoderStatus: {

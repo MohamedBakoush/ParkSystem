@@ -153,6 +153,7 @@ function dataParking(container, type, idHere, claseHere, textContent){
   ParkingData.classList = claseHere;
   ParkingData.textContent = textContent;
   container.appendChild(ParkingData);
+  return ParkingData;
 }
 function dataParkingPhoto(container, type, idHere, claseHere, height, width, src){
   let ParkingPictureImg = document.createElement(type);
@@ -162,22 +163,22 @@ function dataParkingPhoto(container, type, idHere, claseHere, height, width, src
   ParkingPictureImg.height = height;
   ParkingPictureImg.width = width;
   container.appendChild(ParkingPictureImg);
-  return src;
+  return ParkingPictureImg;
 }
 function costData(container, type, idHere, claseHere, moneySign, value){
   const costData = document.createElement(type);
   if(value != undefined){
     costData.id = idHere;
     costData.classList = claseHere;
-    costData.textContent =  `${moneySign} ${value.toFixed(2)} `;
+    costData.textContent =  `${moneySign} ${value.toFixed(2)}`;
     container.appendChild(costData);
-    return "Cost Available";
+    return costData;
   } else {
     costData.id = idHere;
     costData.classList = claseHere;
     costData.textContent = `Cost Not Available`;
     container.appendChild(costData);
-    return "Cost Not Available";
+    return costData;
     };
 }
 
@@ -201,4 +202,6 @@ module.exports = {
   loadLatLonDetail,
   costData,
   dataParkingPhoto,
+  dataParking,
+  fetchParkingInfo,
 };
