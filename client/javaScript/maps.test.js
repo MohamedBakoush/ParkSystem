@@ -1,4 +1,6 @@
-const { loadLatLonDetail, costData, dataParkingPhoto, dataParking, fetchParkingInfo } = require('./maps');
+'use strict'
+
+const { loadLatLonDetail, costData, dataParkingPhoto, dataParking, fetchParkingInfo, loadParkingDetail, createMarker, callback, createMap} = require('./maps');
 global.window = Object.create(window);
 const url = "http://localhost:8080/maps?l=Stockholm%2C+Sweden&lat=59.32932349999999&lon=18.0685808";
 Object.defineProperty(window, 'location', {
@@ -6,6 +8,8 @@ Object.defineProperty(window, 'location', {
     href: url
   }
 });
+
+// TODO: createMap, callback, createMarker, loadParkingDetail, fetchParkingInfo
 
 describe('maps', function () {
 
@@ -66,8 +70,6 @@ describe('maps', function () {
       expect(parkingData.textContent).toBe("parkingDataTextContent");
     });
 
-    it('Get fetchParkingInfo', () => {  
-    });
 })
 
 const setupGoogleMock = () => {
@@ -85,7 +87,8 @@ const setupGoogleMock = () => {
           UNKNOWN_ERROR: 'UNKNOWN_ERROR',
           ZERO_RESULTS: 'ZERO_RESULTS',
         },
-        photos: ["googlePicture.png"]
+        photos: ["googlePicture.png"],
+        place_id: ["id"]
       },
       Geocoder: () => {},
       GeocoderStatus: {
@@ -101,6 +104,7 @@ const setupGoogleMock = () => {
   };
   global.window.google = google;
 };
+
 
 // in test file.
 beforeAll(() => {

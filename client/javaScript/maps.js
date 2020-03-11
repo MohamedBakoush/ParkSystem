@@ -204,4 +204,8 @@ module.exports = {
   dataParkingPhoto,
   dataParking,
   fetchParkingInfo,
+  loadParkingDetail,
+  createMarker,
+  callback,
+  createMap,
 };
