@@ -10,7 +10,7 @@ Object.defineProperty(window, 'location', {
     href: url
   }
 });
-
+// TODO: loadParkingDetail, getTicketInfo
 const {findParkingDetail} = require('../../parkingInfoBoard');
 
 describe('ticket', function () {
@@ -32,7 +32,7 @@ describe('ticket', function () {
     expect(time.totalTimeDiffrence).toBe("10:30");
     expect(time.timeDiffrenceHour).toBe(10);
     expect(time.timeDiffrenceMin).toBe(30);
-  }); 
+  });
 
   const parkingDetail = findParkingDetail("ChIJ0XjfNHRddEgRQtXe1fjPW8w");   // to get data from the database id - ChIJ0XjfNHRddEgRQtXe1fjPW8w
   const cost = calculateCost(parkingDetail, time.timeDiffrenceHour, time.timeDiffrenceMin);
@@ -84,12 +84,4 @@ describe('ticket', function () {
     expect(id).toBe("ChIJ0XjfNHRddEgRQtXe1fjPW8w");
     expect(typeof id).toBe("string");
   });
-
-  // TODO: loadParkingDetail
-  // it('check loadParkingDetail', () => {
-  // });
-
-  // TODO: getTicketInfo
-  // it('check getTicketInfo', () => {
-  // });
 })
