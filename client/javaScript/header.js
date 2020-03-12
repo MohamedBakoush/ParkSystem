@@ -1,6 +1,6 @@
 
 function showHeader_Info() {
-  const container = getById("headerNav");
+  const container = document.getElementById("headerNav");
   const logoContainer = makeElement(container, "section", "logoLinks", "logoLinks");
   contentInfo(logoContainer, "a", "Logo", "Logo", "ParkSystem", "/");
 
@@ -9,11 +9,6 @@ function showHeader_Info() {
   const accInfoLogin = makeElement(accInfoContainer, "li");
   contentInfo(accInfoLogin, "a", "login", "login", "login", "#");
   contentInfo(accInfoRegister, "a", "register", "register", "register", "#");
-}
-
-function getById(idName) {
-  const container = document.getElementById(idName);
-  return container;
 }
 
 function makeElement(container, elementTypeList, classHere, idHere){
@@ -31,6 +26,7 @@ function contentInfo(container, elementType, classHere , idHere, textContent, hr
   element.href = href;
   element.textContent  = textContent;
   container.appendChild(element);
+  return element;
 }
 
 function pageLoaded() {
@@ -38,3 +34,12 @@ function pageLoaded() {
 }
 
 window.addEventListener('load', pageLoaded);
+
+
+
+module.exports = {
+  // export modules
+  showHeader_Info,
+  makeElement,
+  contentInfo,
+};

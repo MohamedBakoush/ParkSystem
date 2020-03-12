@@ -1,5 +1,5 @@
 'use strict'
-const {splitHref, calculateTime, getByI, costData,
+const {splitHref, calculateTime, costData,
       calculateCost, createBuyTicket, ticketData,
       checkTime,getParkingDetail_Id, loadParkingDetail,
       getTicketInfo} = require('./ticket');
@@ -32,11 +32,7 @@ describe('ticket', function () {
     expect(time.totalTimeDiffrence).toBe("10:30");
     expect(time.timeDiffrenceHour).toBe(10);
     expect(time.timeDiffrenceMin).toBe(30);
-  });
-
-  // TODO: getById
-  // it('check getById', () => {
-  // });
+  }); 
 
   const parkingDetail = findParkingDetail("ChIJ0XjfNHRddEgRQtXe1fjPW8w");   // to get data from the database id - ChIJ0XjfNHRddEgRQtXe1fjPW8w
   const cost = calculateCost(parkingDetail, time.timeDiffrenceHour, time.timeDiffrenceMin);

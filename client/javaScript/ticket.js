@@ -45,11 +45,6 @@ function calculateTime(checkInHour, checkInMin, checkOutHour, checkOutMin ) {
   return {timeCheckIn, timeCheckOut, totalTimeDiffrence, timeDiffrenceHour, timeDiffrenceMin};
 }
 
-function getById(idName) {
-  const container = document.getElementById(idName);
-  return container;
-}
-
 function costData(container, costCurrency, costContent, createElementType, classHere, idHere) {
   if (isNaN(costContent) == false) { //if cost is not a number then
     ticketData(container, `${costCurrency}${costContent}`, createElementType, classHere, idHere);
@@ -142,12 +137,12 @@ function getTicketInfo(parkingDetail) {
   const cost = calculateCost(parkingDetail, time.timeDiffrenceHour, time.timeDiffrenceMin );
 
   // get element id from ticket.html
-  const timeCheckInContainer = getById("TimeCheckIn");
-  const timeCheckOutContainer = getById("TimeCheckOut");
-  const timeDiffrenceContainer = getById("TimeDiffrence");
-  const dateDiffrenceContainer = getById("DateDiffrence");
-  const costContainer = getById("parkingCostFinal");
-  const buyTicket_btn = getById("buyTicket_btn");
+  const timeCheckInContainer = document.getElementById("TimeCheckIn");
+  const timeCheckOutContainer = document.getElementById("TimeCheckOut");
+  const timeDiffrenceContainer =document.getElementById("TimeDiffrence");
+  const dateDiffrenceContainer = document.getElementById("DateDiffrence");
+  const costContainer = document.getElementById("parkingCostFinal");
+  const buyTicket_btn = document.getElementById("buyTicket_btn");
  // shows ticket data in html
 
   ticketData(timeCheckInContainer, time.timeCheckIn, "p", "timeCheckIn", "timeCheckIn");
@@ -168,7 +163,6 @@ module.exports = {
   // export modules
   splitHref,
   calculateTime,
-  getById,
   costData,
   calculateCost,
   createBuyTicket,
