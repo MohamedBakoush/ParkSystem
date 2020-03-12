@@ -14,35 +14,24 @@ Object.defineProperty(window, 'location', {
 const {findParkingDetail} = require('../../parkingInfoBoard');
 
 describe('ticket', function () {
-  const herf = splitHref();
-  const parkingID = herf[0];
-  const checkInDate = herf[1];
-  const checkInHour = herf[2];
-  const checkInMin = herf[3];
-  const checkOutHour = herf[4];
-  const checkOutMin = herf[5];
+  const herfData = splitHref();
   it('check splitHref', () => {
-    expect(herf).toBeDefined();
-    expect(parkingID).toBe("ChIJ0XjfNHRddEgRQtXe1fjPW8w");
-    expect(checkInDate).toBe("2020-03-09");
-    expect(checkInHour).toBe("08");
-    expect(checkInMin).toBe("00");
-    expect(checkOutHour).toBe("18");
-    expect(checkOutMin).toBe("30");
+    expect(herfData).toBeDefined();
+    expect(herfData.parkingID).toBe("ChIJ0XjfNHRddEgRQtXe1fjPW8w");
+    expect(herfData.checkInDate).toBe("2020-03-09");
+    expect(herfData.checkInHour).toBe("08");
+    expect(herfData.checkInMin).toBe("00");
+    expect(herfData.checkOutHour).toBe("18");
+    expect(herfData.checkOutMin).toBe("30");
   });
-  const time = calculateTime(checkInHour, checkInMin, checkOutHour, checkOutMin);
-  const timeCheckIn = time[0];
-  const timeCheckOut = time[1];
-  const totalTimeDiffrence = time[2];
-  const timeDiffrenceHour = time[3];
-  const timeDiffrenceMin = time[4];
+  const time = calculateTime(herfData.checkInHour, herfData.checkInMin, herfData.checkOutHour, herfData.checkOutMin);
   it('check calculateTime', () => {
     expect(time).toBeDefined();
-    expect(timeCheckIn).toBe("08:00");
-    expect(timeCheckOut).toBe("18:30");
-    expect(totalTimeDiffrence).toBe("10:30");
-    expect(timeDiffrenceHour).toBe(10);
-    expect(timeDiffrenceMin).toBe(30);
+    expect(time.timeCheckIn).toBe("08:00");
+    expect(time.timeCheckOut).toBe("18:30");
+    expect(time.totalTimeDiffrence).toBe("10:30");
+    expect(time.timeDiffrenceHour).toBe(10);
+    expect(time.timeDiffrenceMin).toBe(30);
   });
 
   // TODO: getById
@@ -50,10 +39,10 @@ describe('ticket', function () {
   // });
 
   const parkingDetail = findParkingDetail("ChIJ0XjfNHRddEgRQtXe1fjPW8w");   // to get data from the database id - ChIJ0XjfNHRddEgRQtXe1fjPW8w
-  const cost = calculateCost(parkingDetail, timeDiffrenceHour, timeDiffrenceMin);
+  const cost = calculateCost(parkingDetail, time.timeDiffrenceHour, time.timeDiffrenceMin);
   it('check calculateCost', () => {
     expect(cost).toBeDefined();
-    expect(cost).toBe(13);;
+    expect(cost).toBe(13);
   });
 
   const createElement = document.createElement("section");
