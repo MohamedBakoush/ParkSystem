@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+
+
+
+<style>
+
+@font-face {
+  font-family: "AeroBold";
+  src:url("pictures/AeromaticsBold.ttf");
+}
+
+
+
+body{
+  background: url(pictures/hiresStreet.jpg) no-repeat center center fixed;
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover;
+}
+
+h1{
+  position: absolute;
+  left: 50%;
+  top: 35%;
+  transform: translateX(-50%) translateY(-50%);
+  text-align:center;
+  font-size: 5em;
+  font-family: 'AeroBold';
+  color: #dddddd;
+  background-color: #555555;
+  width: 100%;
+  opacity: 95%;
+  margin: 10px 0px 10px;
+}
+
+div{
+
+}
+
+.button {
+  background-color: #eeeeee;
+  position: absolute;
+  padding: 30px 0px 30px;
+  opacity: 50%;
+  width: 100%;
+  margin-bottom: 2%;
+  border: none;
+  color: black;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1.5em;
+  font-family: 'AeroBold';
+  cursor: pointer;
+
+
+}
+
+.button1 {
+
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.button2{
+
+  left: 50%;
+  top: 60%;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+
+.button3{
+  left: 50%;
+  top: 70%;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.hoverAnim:hover{
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.5),0 17px 50px 0 rgba(0,0,0,0.5);
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+}
+
+
+@media screen and ( max-height: 80%; ) {
+  .button2{
+    top: 70%;
+    width: 50%;
+  }
+
+  .button3{
+    top: 90%;
+  }
+
+  h1{
+    top:0%;
+  }
+
+}
+
+
+</style>
+
+</head>
+
+<div>
+<h1>Portsmouth Parking</h1>
+
+</div>
+
+
+
+<div class="button button1 hoverAnim">
+  <form action="/maps.html" method="get" target="_blank">
+     <button type="submit">Log In</button>
+  </form>
+</div>
+
+<div class="button button2 hoverAnim">
+  <form action="/maps.html" method="get" target="_blank">
+     <button type="submit">Register</button>
+  </form>
+</div>
+
+<div class="button button3 hoverAnim">
+  <form action="/maps.html" method="get" target="_blank">
+     <button type="submit">Find a Space</button>
+  </form>
+</div>
+
+
+
+<div id="map"> </div>
+
+
+
+</html>
