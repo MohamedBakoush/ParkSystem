@@ -1,18 +1,22 @@
-function showParkingDetail_Info(parkingDetail) {
-  //container for ParkingInfo Details
-  //gets data from google places api
-  getParkingInfomation();
-  //container for ParkingInfo Details
-  // gets data from local database
-  const ParkingCostContainer = document.getElementById('ParkingCost_ul');
-  costData(ParkingCostContainer, '15 Minutes:','£', parkingDetail.cost15Min, "cost15Min");
-  costData(ParkingCostContainer, '30 Minutes:','£',parkingDetail.cost30Min, "cost30Min");
-  costData(ParkingCostContainer, '1 Hour:', '£', parkingDetail.cost1Hour, "cost1Hour");
-  costData(ParkingCostContainer, 'Additional Hour:', '£', parkingDetail.costAdditionalHour, "costAdditionalHour");
-
+'use strict';
+function getParkingDetail_Id() {// gets id from herf
+ return window.location.hash.substring(1);
 }
-// get parking info from google places API
-function getParkingInfomation(){
+
+async function loadParkingDetail() {// useing id fetch details from parkingDetail (database)
+  const id = getParkingDetail_Id();
+  const response = await fetch(`parkingDetails/${id}`);
+  let parkingDetail;
+  if (response.ok) {
+    parkingDetail = await response.json();
+  } else {
+    parkingDetail = { msg: 'failed to load messages' };
+  }
+  createMap(parkingDetail); // show parking details in createMap
+}
+
+async function createMap(parkingDetail){
+  const google = window.google;
   const service = new google.maps.places.PlacesService(map);
   const request = {
     placeId: getParkingDetail_Id(),
@@ -20,35 +24,33 @@ function getParkingInfomation(){
     fields: ['name', 'formatted_address', 'place_id','formatted_phone_number','opening_hours','opening_hours.weekday_text']
     };
   service.getDetails(request, function(place) {
-    // giving a var an id to be asigned
+    loadCostDetails(place);
+    showParkingDetails(place, parkingDetail);
+  });
+}
+
+function showParkingDetails(place, parkingDetail){
     const ParkingInfoContainer = document.getElementById('ParkingInfo_ul');
     const ParkingTimeContainer = document.getElementById('ParkingOpeningHours_ul');
-    const ParkingTimesState = document.getElementById('ParkingTimesState');
-    //gets data and puts then into ParkingInfoContainer
     data(ParkingInfoContainer, place.name, "ParkingInfo_name");
     data(ParkingInfoContainer, place.formatted_address, "ParkingInfo_address");
     data(ParkingInfoContainer, place.formatted_phone_number, "ParkingInfo_phoneNumber");
-    // if error is given
-    // then the program will show that there is no opening info available
-    try {
-      // gets opening hours for each day and displays it on ParkingTimeContainer
+    try { // gets opening hours for each day and displays it on ParkingTimeContainer
       for (const ParkingTime of place.opening_hours.weekday_text) {
         data(ParkingTimeContainer, ParkingTime , "ParkingTime_openingHours");
       }
-
-    } catch (e) {
-      // Opening Info Not Available
+    } catch (e) { // if error is given,then the program will show that there is no opening info available
       data(ParkingTimeContainer, "Opening Hours Not Available", "ParkingTime_openingHours");
     }
 
-
- })
+    const ParkingCostContainer = document.getElementById('ParkingCost_ul');
+    costData(ParkingCostContainer, '15 Minutes:','£', parkingDetail.cost15Min, "cost15Min");
+    costData(ParkingCostContainer, '30 Minutes:','£',parkingDetail.cost30Min, "cost30Min");
+    costData(ParkingCostContainer, '1 Hour:', '£', parkingDetail.cost1Hour, "cost1Hour");
+    costData(ParkingCostContainer, 'Additional Hour:', '£', parkingDetail.costAdditionalHour, "costAdditionalHour");
 }
 
-// checks if cost data is not undefined
-// if available show data
-// else show Not Available:
-function data(container, value, string){
+function data(container, value, string){ // checks if cost data is not undefined, if available show data, else show Not Available:
   const dataType = document.createElement('li');
   if(value != undefined){
     dataType.id = string;
@@ -60,13 +62,10 @@ function data(container, value, string){
     dataType.classList = string;
     dataType.textContent = `Not Available: ${string}`;
     container.appendChild(dataType);
-    };
+  }
 }
 
-// checks if cost data is not undefined
-// if available show cost data
-// else show Not Available:
-function costData(container, stringContent, moneySign, value, class_id){
+function costData(container, stringContent, moneySign, value, class_id){ // checks if cost data is not undefined, if available show cost data, else show Not Available:
   const dataType = document.createElement('li');
   if(value != undefined){
     dataType.id = class_id;
@@ -78,179 +77,70 @@ function costData(container, stringContent, moneySign, value, class_id){
     dataType.classList = class_id;
     dataType.textContent = `Not Available: ${class_id}`;
     container.appendChild(dataType);
-    };
-}
-
-// gets id from herf
-function getParkingDetail_Id() {
- return window.location.hash.substring(1);
-}
-
-// useing id fetch details from parkingDetail (database)
-async function loadParkingDetail() {
-  const id = getParkingDetail_Id();
-  const response = await fetch(`parkingDetails/${id}`);
-  let parkingDetail;
-  if (response.ok) {
-    parkingDetail = await response.json();
-  } else {
-    parkingDetail = { msg: 'failed to load messages' };
   }
-  // show parking details
-  showParkingDetail_Info(parkingDetail);
 }
 
-
-async function loadCostDetails(){
-  const service = new google.maps.places.PlacesService(map);
-  const request = {
-    placeId: getParkingDetail_Id(),
-    // type of values to get from
-    fields: ['opening_hours','opening_hours.weekday_text']
-    };
-  service.getDetails(request, function(place) {
-    // get current Date and Hour/Min
-    const date = new Date();
-    const currentDate = date.toISOString().slice(0,10);
-    currentHour = checkTime(date.getHours());
-    currentHMinute = checkTime(date.getMinutes());
-    const currentTime = `${currentHour}:${currentHMinute}`;
-
-    // gets Date and depending on the date it will update
-    // todays date accordingly
-   let todaysDate;
-    if(date.getDay() == 1){ todaysDate = 0;
-    } else if(date.getDay() == 2) { todaysDate = 1;
-    } else if(date.getDay() == 3) { todaysDate = 2;
-    } else if(date.getDay() == 4) { todaysDate = 3;
-    } else if(date.getDay() == 5) { todaysDate = 4;
-    } else if(date.getDay() == 6) { todaysDate = 5;
-    } else if(date.getDay() == 7) { todaysDate = 6;
-    }
+function loadCostDetails(place){
+    const date = getDate();
     try {
-      const opening_hours = place.opening_hours.weekday_text;
       // splits up the array opening_hours
-      const openSplit = opening_hours[todaysDate].split(" ");
-      if(openSplit[2] == 24){ // Opening Hours: Open 24 Hours
-        console.log(" Open 24 Hours");
+      const opening_hours = place.opening_hours.weekday_text;
+      const time24 = openCloseTimes24Hours(opening_hours, date);
 
-
-        const parkingID = document.getElementById("parkingID");
-        createLabel(parkingID, "Parking-ID");
-        ticketDataDate(parkingID, "id", getParkingDetail_Id() , false);
-
-        console.log(typeof(getParkingDetail_Id()));
-        const checkIn = document.getElementById("checkIn");
-        createLabel(checkIn, "Arrivel Date");
-        ticketDataDate(checkIn, "date", currentDate, false);
-
-        const timeIn = document.getElementById("timeIn");
-        createLabel(timeIn, "Time-In");
-        ticketDataTime(timeIn, "time", "00:00", "24:00", "00:00", false);
-
-        const timeOut = document.getElementById("timeOut");
-        createLabel(timeOut, "Time-Out");
-        ticketDataTime(timeOut, "time", "00:00", "24:00", "23:59", false);
-
-        const prevTicket_btn = document.getElementById("prevTicket_btn");
-        createprevTicket(prevTicket_btn, "submit", "Preview Ticket", false);
+      if(Number(time24.getTime) == 24){ // Opening Hours: Open 24 Hours
+        createTicket("00:00", "23:59", false);
 
       } else {  // Opening Hours: Open specific Hours
-        console.log("Open specific Hours");
-        const opening_hours = place.opening_hours.weekday_text;
-        const openSplit = opening_hours[todaysDate].split(" ");
-        const splitOpenTime = openSplit[1].split(":");
-        const splitCloseTime = openSplit[4].split(":");
-        let openStringTime_Open24hr;
-        let openStringTime_close24hr;
-        // when the parking spaces open 
-        if(openSplit[2] == "AM"){
-          console.log("Open_AM");
-          if (splitOpenTime[0] >= 10){
-            openStringTime_Open24hr  =  `${splitOpenTime[0]}:${splitOpenTime[1]}`;
-          }else {
-            openStringTime_Open24hr  =  `0${splitOpenTime[0]}:${splitOpenTime[1]}`;
-          }
-        } else {
-          console.log("Open_PM");
-          openStringTime_Open24hr  =  `${Number(splitOpenTime[0]) + 12}:${splitOpenTime[1]}`;
-        }
-        // when the parking spaces close
-        if(openSplit[5] == "PM"){
-          console.log("Closed_PM");
-          openStringTime_close24hr  =  `${ Number(splitCloseTime[0]) + 12}:${splitCloseTime[1]}`;
-        } else {
-          console.log("Closed_AM");
-          if (splitCloseTime[0] >= 10){
-            openStringTime_close24hr  =  `${splitCloseTime[0]}:${splitCloseTime[1]}`;
-          }else {
-            openStringTime_close24hr  =  `0${splitCloseTime[0]}:${splitCloseTime[1]}`;
-          }
-        }
-
-        const parkingID = document.getElementById("parkingID");
-        createLabel(parkingID, "Parking-ID");
-        ticketDataDate(parkingID, "id", getParkingDetail_Id() , false);
-
-        const checkIn = document.getElementById("checkIn");
-        createLabel(checkIn, "Arrivel Date");
-        ticketDataDate(checkIn, "date", currentDate, false);
-
-
-        const timeIn = document.getElementById("timeIn");
-        createLabel(timeIn, "Time-In");
-        ticketDataTime(timeIn, "time", openStringTime_Open24hr, openStringTime_close24hr, openStringTime_Open24hr, false);
-
-        const timeOut = document.getElementById("timeOut");
-        createLabel(timeOut, "Time-Out");
-        ticketDataTime(timeOut, "time", openStringTime_Open24hr, openStringTime_close24hr, openStringTime_close24hr, false);
-
-        const prevTicket_btn = document.getElementById("prevTicket_btn");
-        createprevTicket(prevTicket_btn, "submit", "Preview Ticket", false);
+        const time = openCloseTimes(opening_hours, date);
+        const openClose = getOpenCloseTimes(time);
+        console.log("Open specific Hours"); 
+        createTicket(openClose.getOpenTime, openClose.getCloseTime, false);
       }
-
     } catch (e) { // this is here if Open hour dont exist
-
       console.log("Open hour dont exist");
-
-      const parkingID = document.getElementById("parkingID");
-      createLabel(parkingID, "Parking-ID");
-      ticketDataDate(parkingID, "id", getParkingDetail_Id() , false);
-
-      const checkIn = document.getElementById("checkIn");
-      createLabel(checkIn, "Arrivel Date");
-      ticketDataDate(checkIn, "date", currentDate, true);
-
-      const timeIn = document.getElementById("timeIn");
-      createLabel(timeIn, "Time-In");
-      ticketDataTime(timeIn, "time", "00:00", "00:00", "00:00", true);
-
-      const timeOut = document.getElementById("timeOut");
-      createLabel(timeOut, "Time-Out");
-      ticketDataTime(timeOut, "time", "00:00", "00:00", "00:00", true);
-
-      const prevTicket_btn = document.getElementById("prevTicket_btn");
-      createprevTicket(prevTicket_btn, "submit", "Preview Ticket", true);
+      createTicket("00:00", "00:00", true);
     }
-  });
+}
+
+function getDate() {
+  const date = new Date();
+  const currentDate = date.toISOString().slice(0,10);
+  const todaysDate = date.getDay() - 1;
+
+  return {currentDate, todaysDate};
+}
+
+function createTicket(openTime, closeTime , disabled) {
+  const date = getDate();
+
+  const parkingID = document.getElementById("parkingID");
+  createLabel(parkingID, "Parking-ID");
+  ticketDataDate(parkingID, "id", getParkingDetail_Id() , disabled);
+
+  const checkIn = document.getElementById("checkIn");
+  createLabel(checkIn, "Arrivel Date");
+  ticketDataDate(checkIn, "date", date.currentDate, disabled);
+
+  const timeIn = document.getElementById("timeIn");
+  createLabel(timeIn, "Time-In");
+  ticketDataTime(timeIn, "time", openTime, closeTime, openTime, disabled);
+
+  const timeOut = document.getElementById("timeOut");
+  createLabel(timeOut, "Time-Out");
+  ticketDataTime(timeOut, "time", openTime, closeTime, closeTime, disabled);
+
+  const prevTicket_btn = document.getElementById("prevTicket_btn");
+  createprevTicket(prevTicket_btn, "submit", "Preview Ticket", disabled);
 
 }
-// Creats button for prev Ticket
-function createprevTicket(container, type, value, disabled){
-  const button = document.createElement('input');
-  button.type = type;
-  button.value = value;
-  button.disabled = disabled;
-  container.appendChild(button);
-}
-// label maker
-function createLabel(container, string){
+
+function createLabel(container, string){ // label maker
   const label = document.createElement('label');
   label.textContent = string;
   container.appendChild(label);
 }
-// Creats input section for ticket Date
-function ticketDataDate(container, type, value, disabled){
+
+function ticketDataDate(container, type, value, disabled){ // Creats input section for ticket Date
   const input = document.createElement('input');
   input.type = type;
   input.name = type;
@@ -259,8 +149,8 @@ function ticketDataDate(container, type, value, disabled){
   input.disabled = disabled;
   container.appendChild(input);
 }
-// Creats input section for ticket time
-function ticketDataTime(container, type, open, close, displayTime, disabled){
+
+function ticketDataTime(container, type, open, close, displayTime, disabled){ // Creats input section for ticket time
   const input = document.createElement('input');
   input.type = type;
   input.name = type;
@@ -271,8 +161,56 @@ function ticketDataTime(container, type, open, close, displayTime, disabled){
   input.disabled = disabled;
   container.appendChild(input);
 }
-// if time is less the then 10 it will show as a singel didget
-// to avoid show as a double didget this function adds a 0 before the i value
+
+function createprevTicket(container, type, value, disabled){ // Creats button for prev Ticket
+  const button = document.createElement('input');
+  button.type = type;
+  button.value = value;
+  button.disabled = disabled;
+  container.appendChild(button);
+}
+
+function openCloseTimes24Hours(opening_hours, date) {
+  const openSplit = opening_hours[date.todaysDate].split(" ");
+  const getOpenTimeHour = openSplit[0];
+  const getOpenClose = openSplit[1];
+  const getTime = openSplit[2];
+  const getHours = openSplit[3];
+  return {getOpenTimeHour, getOpenClose, getTime, getHours};
+}
+
+function openCloseTimes(opening_hours, date) {
+  const openSplit = opening_hours[date.todaysDate].split(" ");
+  const openTime = openSplit[1].split(":");
+  const openTimeHour = openTime[0];
+  const openTimeMin = openTime[1];
+  const openTime_AM_PM = openSplit[2];
+  const closeTime = openSplit[4].split(":");
+  const closeTimeHour = closeTime[0];
+  const closeTimeMin = closeTime[1];
+  const closeTime_AM_PM = openSplit[5];
+  return {openSplit, openTime, openTimeHour, openTimeMin, openTime_AM_PM,closeTime, closeTimeHour, closeTimeMin, closeTime_AM_PM };
+}
+
+function getOpenCloseTimes(time) {
+  let getOpenTime, getCloseTime;
+  if(time.openTime_AM_PM == "AM" || time.openTime_AM_PM == "am" ){ // when open
+    console.log("Open_AM");
+    getOpenTime = `${checkTime(Number(time.openTimeHour))}:${time.openTimeMin}`;
+  } else {
+    console.log("Open_PM");
+    getOpenTime = `${Number(time.openTimeHour) + 12}:${time.openTimeMin}`;
+  }
+  if(time.closeTime_AM_PM == "PM" || time.closeTime_AM_PM == "pm" ){ // when the parking spaces close
+    console.log("Closed_PM");
+    getCloseTime = `${ Number(time.closeTimeHour) + 12}:${time.closeTimeMin}`;
+  } else {
+    console.log("Closed_AM");
+    getCloseTime = `${checkTime(Number(time.closeTimeHour))}:${time.closeTimeMin}`;
+  }
+  return {getOpenTime, getCloseTime};
+}
+
 function checkTime(i) {
   if (i < 10) {
     i = "0" + i;
@@ -282,7 +220,27 @@ function checkTime(i) {
 
 function pageLoaded() {
   loadParkingDetail();
-  loadCostDetails();
 }
 
 window.addEventListener('load', pageLoaded);
+
+module.exports = {
+  // export modules
+ getParkingDetail_Id,
+ loadParkingDetail,
+ createMap,
+ showParkingDetails,
+ data,
+ costData,
+ loadCostDetails,
+ getDate,
+ createTicket,
+ createLabel,
+ ticketDataDate,
+ ticketDataTime,
+ createprevTicket,
+ openCloseTimes24Hours,
+ openCloseTimes,
+ getOpenCloseTimes,
+ checkTime
+};

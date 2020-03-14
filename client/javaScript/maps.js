@@ -10,8 +10,7 @@ async function createMap() {  // create google maps
     zoom: 15,
     mapTypeId: "roadmap"
   });
-  // to requrest only parking sapce and the radius it covers
-  let requestParkingSpaces = {
+  let requestParkingSpaces = { // to requrest only parking and the radius it covers
     location: map.getCenter(),
     radius: 8000,
     types: ['parking']
@@ -19,6 +18,7 @@ async function createMap() {  // create google maps
   let service = new google.maps.places.PlacesService(map);
   service.nearbySearch(requestParkingSpaces, callback);
 }
+
 function callback(results, status) { // if staus is ok callback takes each available parking space in area and puts them into specified functions
   const google = window.google;
   if (status == google.maps.places.PlacesServiceStatus.OK) {
@@ -26,9 +26,9 @@ function callback(results, status) { // if staus is ok callback takes each avail
       createMarker(results[i]);
       loadParkingDetail(results[i]);
     }
-    console.log("PlacesServiceStatus OK");
+    return "PlacesServiceStatus OK";
   } else {
-    console.log("PlacesServiceStatus Not OK");
+    return "PlacesServiceStatus Not OK";
   }
 }
 
@@ -81,42 +81,32 @@ async function loadParkingDetail(place) {
   } else {
     parkingDetail = { msg: 'failed to load messages' };
   }
-  // puts place and parkingDetail in fetchParkingInfo
-  fetchParkingInfo(place, parkingDetail);
+
+  fetchParkingInfo(place, parkingDetail)
 }
 
-// fetches parking information and puts into mapListContainer element
-function fetchParkingInfo(place, parkingDetail) {
-  const mapListContainer = document.getElementById('mapListContainer');
-  const ParkingInfoLink = dataParking(mapListContainer, "a", "ParkingInfoLink", "ParkingInfoLink", `parkingInfo#${place.place_id}`);
-  // creates a div in mapListContainer which is already defined in html code
-  const ParkingInfo = dataParking(ParkingInfoLink, "div", "ParkingInfo", "ParkingInfo");
-  // create picture element
-  const ParkingPictureContainer = dataParking(ParkingInfo, "picture", "ParkingPictureContainer", "ParkingPictureContainer");
-  // if there are available pictures from google places api
-  checkGooglePhoto(place.photos, ParkingPictureContainer, 'img', "ParkingPictureImg", "ParkingPictureImg", "100", "100" );
-
+function fetchParkingInfo(place, parkingDetail) { // fetches parking information and puts into mapListContainer element
+  const mapListContainer = document.getElementById('mapListContainer'); // get mapListContainer id from maps.html
+  const ParkingInfoLink = dataParking(mapListContainer, "a", "ParkingInfoLink", "ParkingInfoLink", `parkingInfo#${place.place_id}`); // uniq herf link with place id for refrence
+  const ParkingInfo = dataParking(ParkingInfoLink, "div", "ParkingInfo", "ParkingInfo"); // create div
+  const ParkingPictureContainer = dataParking(ParkingInfo, "picture", "ParkingPictureContainer", "ParkingPictureContainer");// create picture container
+  const photo = checkGooglePhoto(place.photos);   // check if place.photo is undefined or not
+  dataParkingPhoto(ParkingPictureContainer, 'img', "ParkingPictureImg", "ParkingPictureImg", "100", "100",  photo);
   const ParkingInfoContainerInfo = dataParking(ParkingInfo, "div", "ParkingInfoContainerInfo", "ParkingInfoContainerInfo");
-
-  // name of parking space inside in ParkingInfoContainerInfo
-  dataParking(ParkingInfoContainerInfo, "div", "ParkingInfoName", "ParkingInfoName", "", place.name )
-  // Address of parking space inside in ParkingInfoContainerInfo
-  dataParking(ParkingInfoContainerInfo, "div", "ParkingInfoAddress", "ParkingInfoAddress", "", place.vicinity )
-
-  // Parking Info Cost Container Containg parking cost
-  const ParkingInfoContainerCost = dataParking(ParkingInfo, "div", "ParkingInfoContainerCost", "ParkingInfoContainerCost");
-  // fill ParkingInfoContainerCost with cost data
-  costData(ParkingInfoContainerCost, "div", 'ParkingInfoCost', 'ParkingInfoCost', '1 Hour: £', parkingDetail.cost1Hour);
+  dataParking(ParkingInfoContainerInfo, "div", "ParkingInfoName", "ParkingInfoName", "", place.name ) // name of parking space inside in ParkingInfoContainerInfo
+  dataParking(ParkingInfoContainerInfo, "div", "ParkingInfoAddress", "ParkingInfoAddress", "", place.vicinity )   // vicinity of parking space inside in ParkingInfoContainerInfo
+  const ParkingInfoContainerCost = dataParking(ParkingInfo, "div", "ParkingInfoContainerCost", "ParkingInfoContainerCost");  // Parking Info Cost Container Containg parking cost
+  costData(ParkingInfoContainerCost, "div", 'ParkingInfoCost', 'ParkingInfoCost', '1 Hour: £', parkingDetail.cost1Hour);   // fill ParkingInfoContainerCost with cost data
 }
 
-function checkGooglePhoto(photo, container, elementType, idHere, classHere, height, width) {
-  if(photo != null){ // if size dosent show img try 32 insted
-    dataParkingPhoto(container, elementType, idHere, classHere, height, width, photo[0].getUrl({maxWidth: 32, maxHeight: 32}));
-    return "Google Photo Exists";
-  } else{ // if there is no pictures from google places api noParkingImgFound.png will show insted
-    dataParkingPhoto(container, elementType, idHere, classHere, height, width, "pictures/noParkingImgFound.png");
-    return "Google Photo null";
-  }
+function checkGooglePhoto(photo) {
+  let checkPhoto;
+  if (photo == undefined) {
+    checkPhoto = "pictures/noParkingImgFound.png";
+  } else {
+      checkPhoto = photo[0].getUrl({maxWidth: 32, maxHeight: 32});
+    }
+  return checkPhoto;
 }
 
 function dataParking(container, elementType, idHere, classHere, href, textContent ) {
@@ -139,6 +129,7 @@ function dataParkingPhoto(container, type, idHere, claseHere, height, width, src
   container.appendChild(ParkingPictureImg);
   return ParkingPictureImg;
 }
+
 function costData(container, type, idHere, claseHere, moneySign, value){
   const costData = document.createElement(type);
   if(value != undefined){
@@ -156,8 +147,7 @@ function costData(container, type, idHere, claseHere, moneySign, value){
     }
 }
 
-function loadLatLonDetail(){
-  // split up herf to get lat an lon
+function loadLatLonDetail(){ // split up herf to get lat an lon
   const splitherf = window.location.href.split("lat=",2);
   const splitLatLon = splitherf[1].split("&lon=");
   const latitude = splitLatLon[0];
@@ -166,10 +156,10 @@ function loadLatLonDetail(){
 }
 
 function pageLoaded() {
+  createMap();
 }
 
 window.addEventListener('load', pageLoaded);
-
 
 module.exports = {
   // export modules
