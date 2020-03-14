@@ -1,8 +1,9 @@
 'use strict'
-const {splitHref, calculateTime, costData,
-      calculateCost, createBuyTicket, ticketData,
-      checkTime,getParkingDetail_Id, loadParkingDetail,
-      getTicketInfo} = require('./ticket');
+const { splitHref, calculateTime, costData,
+        calculateCost, createBuyTicket, ticketData, checkTime,
+        getParkingDetail_Id, loadParkingDetail, getTicketInfo
+    } = require('./ticket');
+const {findParkingDetail} = require('../../parkingInfoBoard');
 global.window = Object.create(window);
 const url = "http://localhost:8080/ticket?id=ChIJ0XjfNHRddEgRQtXe1fjPW8w&date=2020-03-09&time=08%3A00&time=18%3A30";
 Object.defineProperty(window, 'location', {
@@ -10,11 +11,12 @@ Object.defineProperty(window, 'location', {
     href: url
   }
 });
-// TODO: loadParkingDetail, getTicketInfo
-const {findParkingDetail} = require('../../parkingInfoBoard');
 
 describe('ticket', function () {
   const herfData = splitHref();
+  const createElement = document.createElement("section");
+  const time = calculateTime(herfData.checkInHour, herfData.checkInMin, herfData.checkOutHour, herfData.checkOutMin);
+
   it('check splitHref', () => {
     expect(herfData).toBeDefined();
     expect(herfData.parkingID).toBe("ChIJ0XjfNHRddEgRQtXe1fjPW8w");
@@ -24,7 +26,7 @@ describe('ticket', function () {
     expect(herfData.checkOutHour).toBe("18");
     expect(herfData.checkOutMin).toBe("30");
   });
-  const time = calculateTime(herfData.checkInHour, herfData.checkInMin, herfData.checkOutHour, herfData.checkOutMin);
+
   it('check calculateTime', () => {
     expect(time).toBeDefined();
     expect(time.timeCheckIn).toBe("08:00");
@@ -41,7 +43,6 @@ describe('ticket', function () {
     expect(cost).toBe(13);
   });
 
-  const createElement = document.createElement("section");
   it('check costData', () => {
     const dataCost = costData(createElement, "£", cost,  "p", "finalCost", "finalCost")
     expect(dataCost).toBe("costContent is not Null");
@@ -83,5 +84,14 @@ describe('ticket', function () {
     expect(id).toBeDefined();
     expect(id).toBe("ChIJ0XjfNHRddEgRQtXe1fjPW8w");
     expect(typeof id).toBe("string");
+  });
+  it('check loadParkingDetail', () => {
+    const load = loadParkingDetail();
+    expect(load).toBeDefined();
+  });
+  it('check getTicketInfo', () => {
+    const getTicket = getTicketInfo(parkingDetail);
+    expect(getTicket).toBeDefined();
+    expect(getTicket).toBe("getTicketInfo worked");
   });
 })

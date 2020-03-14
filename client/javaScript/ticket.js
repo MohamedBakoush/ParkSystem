@@ -81,24 +81,32 @@ function calculateCost(parkingDetail, timeDiffrenceHour, timeDiffrenceMin) {
 
 // shows BuyTicket button in html
 function createBuyTicket(container, type, value, disabled, classHere, idHere){
-  const button = document.createElement('input');
-  button.type = type;
-  button.value = value;
-  button.classList = classHere;
-  button.id = idHere;
-  button.disabled = disabled;
-  container.appendChild(button);
-  return button;
+  if(container != null){
+    const button = document.createElement('input');
+    button.type = type;
+    button.value = value;
+    button.classList = classHere;
+    button.id = idHere;
+    button.disabled = disabled;
+    container.appendChild(button);
+    return button;
+  }else {
+    return "container is equal to null"
+  }
 }
 
 // shows ticket data in html
 function ticketData(container, textContent, datatype, classHere, idHere){
-  const ticketData = document.createElement(datatype);
-  ticketData.textContent = textContent;
-  ticketData.classList = classHere;
-  ticketData.id = idHere;
-  container.appendChild(ticketData);
-  return ticketData;
+    try {
+      const ticketData = document.createElement(datatype);
+      ticketData.textContent = textContent;
+      ticketData.classList = classHere;
+      ticketData.id = idHere;
+      container.appendChild(ticketData);
+      return ticketData;
+    } catch (e) {
+      return "ticketData failed"
+    }
 }
 
 // if time is less the then 10 it will show as a singel didget
@@ -135,7 +143,6 @@ function getTicketInfo(parkingDetail) {
   const herfData = splitHref();
   const time = calculateTime(herfData.checkInHour, herfData.checkInMin, herfData.checkOutHour, herfData.checkOutMin);
   const cost = calculateCost(parkingDetail, time.timeDiffrenceHour, time.timeDiffrenceMin );
-
   // get element id from ticket.html
   const timeCheckInContainer = document.getElementById("TimeCheckIn");
   const timeCheckOutContainer = document.getElementById("TimeCheckOut");
@@ -143,7 +150,7 @@ function getTicketInfo(parkingDetail) {
   const dateDiffrenceContainer = document.getElementById("DateDiffrence");
   const costContainer = document.getElementById("parkingCostFinal");
   const buyTicket_btn = document.getElementById("buyTicket_btn");
- // shows ticket data in html
+  // shows ticket data in html
 
   ticketData(timeCheckInContainer, time.timeCheckIn, "p", "timeCheckIn", "timeCheckIn");
   ticketData(timeCheckOutContainer, time.timeCheckOut, "p", "timeCheckOut", "timeCheckOut");
@@ -151,6 +158,8 @@ function getTicketInfo(parkingDetail) {
   ticketData(dateDiffrenceContainer, herfData.checkInDate, "p", "dateDiffrence", "dateDiffrence");
   costData(costContainer, "£", cost, "p", "finalCost", "finalCost");
   createBuyTicket(buyTicket_btn, "submit", "Buy Ticket", true, "buyTicket", "buyTicket");
+  return "getTicketInfo worked";
+
 }
 
 function pageLoaded() {
@@ -159,8 +168,7 @@ function pageLoaded() {
 
 window.addEventListener('load', pageLoaded);
 
-module.exports = {
-  // export modules
+module.exports = { // export modules
   splitHref,
   calculateTime,
   costData,
