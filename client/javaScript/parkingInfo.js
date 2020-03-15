@@ -1,6 +1,8 @@
 'use strict';
 function getParkingDetail_Id() {// gets id from herf
- return window.location.hash.substring(1);
+  const url = window.location.href.split("parkingInfo#", 2);
+  const parkingID = url[1];
+  return parkingID;
 }
 
 async function loadParkingDetail() {// useing id fetch details from parkingDetail (database)
@@ -13,6 +15,7 @@ async function loadParkingDetail() {// useing id fetch details from parkingDetai
     parkingDetail = { msg: 'failed to load messages' };
   }
   createMap(parkingDetail); // show parking details in createMap
+  return parkingDetail;
 }
 
 async function createMap(parkingDetail){
@@ -48,64 +51,78 @@ function showParkingDetails(place, parkingDetail){
     costData(ParkingCostContainer, '30 Minutes:','£',parkingDetail.cost30Min, "cost30Min");
     costData(ParkingCostContainer, '1 Hour:', '£', parkingDetail.cost1Hour, "cost1Hour");
     costData(ParkingCostContainer, 'Additional Hour:', '£', parkingDetail.costAdditionalHour, "costAdditionalHour");
+    return "showParkingDetails worked";
 }
 
 function data(container, value, string){ // checks if cost data is not undefined, if available show data, else show Not Available:
   const dataType = document.createElement('li');
-  if(value != undefined){
-    dataType.id = string;
-    dataType.classList = string;
-    dataType.textContent = `${value}`;
-    container.appendChild(dataType);
-  } else {
-    dataType.id = string;
-    dataType.classList = string;
-    dataType.textContent = `Not Available: ${string}`;
-    container.appendChild(dataType);
+  try {
+    if(value != undefined){
+        dataType.id = string;
+        dataType.classList = string;
+        dataType.textContent = `${value}`;
+        container.appendChild(dataType);
+        return dataType;
+    } else {
+        dataType.id = string;
+        dataType.classList = string;
+        dataType.textContent = `Not Available: ${string}`;
+        container.appendChild(dataType);
+        return dataType;
+    }
+  } catch (e) {
+    return "data failed"
   }
 }
 
 function costData(container, stringContent, moneySign, value, class_id){ // checks if cost data is not undefined, if available show cost data, else show Not Available:
   const dataType = document.createElement('li');
-  if(value != undefined){
-    dataType.id = class_id;
-    dataType.classList = class_id;
-    dataType.textContent =  `${stringContent}  ${moneySign} ${value.toFixed(2)} `;
-    container.appendChild(dataType);
-  } else {
-    dataType.id = class_id;
-    dataType.classList = class_id;
-    dataType.textContent = `Not Available: ${class_id}`;
-    container.appendChild(dataType);
+  try {
+    if(value != undefined){
+        dataType.id = class_id;
+        dataType.classList = class_id;
+        dataType.textContent =  `${stringContent}  ${moneySign} ${value.toFixed(2)} `;
+        container.appendChild(dataType);
+        return dataType;
+    } else {
+        dataType.id = class_id;
+        dataType.classList = class_id;
+        dataType.textContent = `Not Available: ${class_id}`;
+        container.appendChild(dataType);
+        return dataType;
+    }
+  } catch (e) {
+    return "costData failed";
   }
 }
 
 function loadCostDetails(place){
     const date = getDate();
-    try {
-      // splits up the array opening_hours
+    try { // splits up the array opening_hours
       const opening_hours = place.opening_hours.weekday_text;
       const time24 = openCloseTimes24Hours(opening_hours, date);
-
       if(Number(time24.getTime) == 24){ // Opening Hours: Open 24 Hours
         createTicket("00:00", "23:59", false);
-
       } else {  // Opening Hours: Open specific Hours
         const time = openCloseTimes(opening_hours, date);
         const openClose = getOpenCloseTimes(time);
-        console.log("Open specific Hours"); 
         createTicket(openClose.getOpenTime, openClose.getCloseTime, false);
       }
     } catch (e) { // this is here if Open hour dont exist
-      console.log("Open hour dont exist");
       createTicket("00:00", "00:00", true);
     }
+    return "loadCostDetails works";
 }
 
 function getDate() {
   const date = new Date();
   const currentDate = date.toISOString().slice(0,10);
-  const todaysDate = date.getDay() - 1;
+  let todaysDate;
+  if (date.getDay() == 0) {
+    todaysDate = 6;
+  } else {
+    todaysDate = date.getDay() - 1;
+  }
 
   return {currentDate, todaysDate};
 }
@@ -132,42 +149,64 @@ function createTicket(openTime, closeTime , disabled) {
   const prevTicket_btn = document.getElementById("prevTicket_btn");
   createprevTicket(prevTicket_btn, "submit", "Preview Ticket", disabled);
 
+  return "createTicket all good";
 }
 
+
 function createLabel(container, string){ // label maker
-  const label = document.createElement('label');
-  label.textContent = string;
-  container.appendChild(label);
+  try {
+    const label = document.createElement('label');
+    label.textContent = string;
+    container.appendChild(label);
+    return label;
+  } catch (e) {
+    return "createLabel didnt work";
+  }
 }
 
 function ticketDataDate(container, type, value, disabled){ // Creats input section for ticket Date
-  const input = document.createElement('input');
-  input.type = type;
-  input.name = type;
-  input.value = value;
-  input.required = "true";
-  input.disabled = disabled;
-  container.appendChild(input);
+  try {
+    const ticketData = document.createElement('input');
+    ticketData.type = type;
+    ticketData.name = type;
+    ticketData.value = value;
+    ticketData.required = "true";
+    ticketData.disabled = disabled;
+    container.appendChild(ticketData);
+    return ticketData;
+  } catch (e) {
+      return "ticketDataDate didnt work";
+  }
 }
 
 function ticketDataTime(container, type, open, close, displayTime, disabled){ // Creats input section for ticket time
-  const input = document.createElement('input');
-  input.type = type;
-  input.name = type;
-  input.min = open;
-  input.max = close;
-  input.value = displayTime;
-  input.required = "true";
-  input.disabled = disabled;
-  container.appendChild(input);
+  try {
+    const dataTime = document.createElement('input');
+    dataTime.type = type;
+    dataTime.name = type;
+    dataTime.min = open;
+    dataTime.max = close;
+    dataTime.value = displayTime;
+    dataTime.required = "true";
+    dataTime.disabled = disabled;
+    container.appendChild(dataTime);
+    return dataTime;
+  } catch (e) {
+    return  "ticketDataTime didnt work";
+  }
 }
 
 function createprevTicket(container, type, value, disabled){ // Creats button for prev Ticket
-  const button = document.createElement('input');
-  button.type = type;
-  button.value = value;
-  button.disabled = disabled;
-  container.appendChild(button);
+  try {
+    const button = document.createElement('input');
+    button.type = type;
+    button.value = value;
+    button.disabled = disabled;
+    container.appendChild(button);
+    return button;
+  } catch (e) {
+    return "createprevTicket didnt work";
+  }
 }
 
 function openCloseTimes24Hours(opening_hours, date) {
@@ -195,17 +234,13 @@ function openCloseTimes(opening_hours, date) {
 function getOpenCloseTimes(time) {
   let getOpenTime, getCloseTime;
   if(time.openTime_AM_PM == "AM" || time.openTime_AM_PM == "am" ){ // when open
-    console.log("Open_AM");
     getOpenTime = `${checkTime(Number(time.openTimeHour))}:${time.openTimeMin}`;
   } else {
-    console.log("Open_PM");
     getOpenTime = `${Number(time.openTimeHour) + 12}:${time.openTimeMin}`;
   }
   if(time.closeTime_AM_PM == "PM" || time.closeTime_AM_PM == "pm" ){ // when the parking spaces close
-    console.log("Closed_PM");
     getCloseTime = `${ Number(time.closeTimeHour) + 12}:${time.closeTimeMin}`;
   } else {
-    console.log("Closed_AM");
     getCloseTime = `${checkTime(Number(time.closeTimeHour))}:${time.closeTimeMin}`;
   }
   return {getOpenTime, getCloseTime};
