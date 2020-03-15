@@ -1,6 +1,6 @@
 'use strict';
 
-function AutoSearch(){
+async function autoSearch(){
   const google = window.google;
   const searchInput = 'serch_input';
   const autocomplete = new google.maps.places.Autocomplete((document.getElementById(searchInput)), {
@@ -13,8 +13,8 @@ function AutoSearch(){
   });
 }
 
-function pageLoaded() {
-  AutoSearch();
-}
-
-window.addEventListener('load', pageLoaded);
+window.addEventListener('load', autoSearch);
+module.exports = {
+  // export modules
+  autoSearch
+};
