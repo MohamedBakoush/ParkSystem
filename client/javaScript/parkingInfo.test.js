@@ -15,7 +15,7 @@ Object.defineProperty(window, 'location', {
   }
 });
 
-describe('ticket', function () {
+describe('parkingInfo', function () {
   const createElement = document.createElement("section");
   const parkingDetail = findParkingDetail("ChIJ0XjfNHRddEgRQtXe1fjPW8w");
   const getCurrentDate = new Date();

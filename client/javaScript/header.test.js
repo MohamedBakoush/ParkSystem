@@ -9,10 +9,10 @@ Object.defineProperty(window, 'location', {
   }
 });
 
-describe('ticket', function () {
+describe('header', function () {
   const createElement = document.createElement("section");
 
-  it('check showHeader_Info', () => {
+  it('check showInfo', () => {
     const showInfo = showHeaderInfo();
     expect(showInfo).toBeDefined();
     expect(showInfo).toBe("ShowHeaderInfo works");
