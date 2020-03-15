@@ -1,10 +1,10 @@
 'use strict'
 const { getParkingDetail_Id, loadParkingDetail, createMap,
-        showParkingDetails, data, costData,
-        loadCostDetails, getDate, createTicket,
-        createLabel, ticketDataDate, ticketDataTime,
-        createprevTicket, openCloseTimes24Hours, openCloseTimes,
-        getOpenCloseTimes, checkTime
+        showParkingDetails, ParkingInfo, parkingCost,
+        ParkingOpeningHour, data, costData, loadCostDetails, getDate,
+        createTicket, createForm, createSection, createLabel,
+        ticketDataDate, ticketDataTime, createprevTicket, openCloseTimes24Hours,
+        openCloseTimes, getOpenCloseTimes, checkTime
     } = require('./parkingInfo');
 const {findParkingDetail} = require('../../parkingInfoBoard');
 global.window = Object.create(window);
@@ -204,6 +204,52 @@ describe('parkingInfo', function () {
     const parkingDetails = showParkingDetails(global.window.google.maps.places, parkingDetail);
     expect(parkingDetails).toBeDefined();
     expect(parkingDetails).toBe("showParkingDetails worked");
+  });
+
+  it('Check ParkingInfo', () => {
+    const info = ParkingInfo(global.window.google.maps.places, createElement);
+    expect(info).toBeDefined();
+    expect(info).toBe("ParkingInfo");
+  });
+
+  it('Check ParkingOpeningHour', () => {
+    const openingHour = ParkingOpeningHour(global.window.google.maps.places, createElement);
+    expect(openingHour).toBeDefined();
+    expect(openingHour).toBe("ParkingOpeningHour OK");
+
+    const openingHourNA = ParkingOpeningHour();
+    expect(openingHourNA).toBeDefined();
+    expect(openingHourNA).toBe("ParkingOpeningHour Failed");
+  });
+
+  it('Check parkingCost', () => {
+    const cost = parkingCost(global.window.google.maps.places, parkingDetail,createElement);
+    expect(cost).toBeDefined();
+    expect(cost).toBe("parkingCost");
+  });
+
+  it('Check createForm', () => {
+    const form = createForm(createElement, "classHere", "idHere", "action");
+    expect(form).toBeDefined();
+    expect(form.classList[0]).toBe("classHere");
+    expect(form.id).toBe("idHere");
+    expect(form.action).toBe("http://localhost/action");
+
+    const formNA = createForm();
+    expect(formNA).toBeDefined();
+    expect(formNA).toBe("createForm didnt work");
+  });
+
+  it('Check createSection', () => {
+    const section = createSection(createElement, "div", "classHere", "idHere", "textContent");
+    expect(section).toBeDefined();
+    expect(section.classList[0]).toBe("classHere");
+    expect(section.id).toBe("idHere");
+    expect(section.textContent).toBe("textContent");
+
+    const sectionNA = createSection();
+    expect(sectionNA).toBeDefined();
+    expect(sectionNA).toBe("createSection didnt work");
   });
 
   it('Check createMap', async () => {

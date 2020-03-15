@@ -33,25 +33,46 @@ async function createMap(parkingDetail){
 }
 
 function showParkingDetails(place, parkingDetail){
-    const ParkingInfoContainer = document.getElementById('ParkingInfo_ul');
-    const ParkingTimeContainer = document.getElementById('ParkingOpeningHours_ul');
-    data(ParkingInfoContainer, place.name, "ParkingInfo_name");
-    data(ParkingInfoContainer, place.formatted_address, "ParkingInfo_address");
-    data(ParkingInfoContainer, place.formatted_phone_number, "ParkingInfo_phoneNumber");
-    try { // gets opening hours for each day and displays it on ParkingTimeContainer
-      for (const ParkingTime of place.opening_hours.weekday_text) {
-        data(ParkingTimeContainer, ParkingTime , "ParkingTime_openingHours");
-      }
-    } catch (e) { // if error is given,then the program will show that there is no opening info available
-      data(ParkingTimeContainer, "Opening Hours Not Available", "ParkingTime_openingHours");
-    }
-
-    const ParkingCostContainer = document.getElementById('ParkingCost_ul');
-    costData(ParkingCostContainer, '15 Minutes:','£', parkingDetail.cost15Min, "cost15Min");
-    costData(ParkingCostContainer, '30 Minutes:','£',parkingDetail.cost30Min, "cost30Min");
-    costData(ParkingCostContainer, '1 Hour:', '£', parkingDetail.cost1Hour, "cost1Hour");
-    costData(ParkingCostContainer, 'Additional Hour:', '£', parkingDetail.costAdditionalHour, "costAdditionalHour");
+    const parkingInfoContainer = document.getElementById('parkingInfoContainer');
+    ParkingInfo(place, parkingInfoContainer);
+    parkingCost(place, parkingDetail, parkingInfoContainer);
+    ParkingOpeningHour(place, parkingInfoContainer);
     return "showParkingDetails worked";
+}
+
+function ParkingInfo(place, container) {
+  const ParkingInfo = createSection(container, "div", "parkingInfo", "parkingInfo")
+  createSection(ParkingInfo, "h1", "subHeader", "subHeader", "Parking Info")
+  const ParkingInfoContainer = createSection(ParkingInfo, "ul", "ParkingInfo_ul", "ParkingInfo_ul")
+  data(ParkingInfoContainer, place.name, "ParkingInfo_name");
+  data(ParkingInfoContainer, place.formatted_address, "ParkingInfo_address");
+  data(ParkingInfoContainer, place.formatted_phone_number, "ParkingInfo_phoneNumber");
+  return "ParkingInfo";
+}
+function parkingCost(place, parkingDetail, container) {
+  const parkingCost = createSection(container, "div", "parkingCost", "parkingCost")
+  createSection(parkingCost, "h1", "subHeader", "subHeader", "Rates")
+  const ParkingCostContainer = createSection(parkingCost, "ul", "ParkingCost_ul", "ParkingCost_ul")
+  costData(ParkingCostContainer, '15 Minutes:','£', parkingDetail.cost15Min, "cost15Min");
+  costData(ParkingCostContainer, '30 Minutes:','£',parkingDetail.cost30Min, "cost30Min");
+  costData(ParkingCostContainer, '1 Hour:', '£', parkingDetail.cost1Hour, "cost1Hour");
+  costData(ParkingCostContainer, 'Additional Hour:', '£', parkingDetail.costAdditionalHour, "costAdditionalHour");
+  return "parkingCost";
+}
+
+function ParkingOpeningHour(place, container) {
+  const ParkingOpeningHour = createSection(container, "div", "ParkingOpeningHour", "ParkingOpeningHour")
+  createSection(ParkingOpeningHour, "h1", "subHeader", "subHeader", "Opening Hours")
+  const ParkingTimeContainer = createSection(ParkingOpeningHour, "ul", "ParkingOpeningHours_ul", "ParkingOpeningHours_ul")
+  try { // gets opening hours for each day and displays it on ParkingTimeContainer
+    for (const ParkingTime of place.opening_hours.weekday_text) {
+      data(ParkingTimeContainer, ParkingTime , "ParkingTime_openingHours");
+    }
+    return "ParkingOpeningHour OK";
+  } catch (e) { // if error is given,then the program will show that there is no opening info available
+    data(ParkingTimeContainer, "Opening Hours Not Available", "ParkingTime_openingHours");
+    return "ParkingOpeningHour Failed";
+  }
 }
 
 function data(container, value, string){ // checks if cost data is not undefined, if available show data, else show Not Available:
@@ -129,29 +150,59 @@ function getDate() {
 
 function createTicket(openTime, closeTime , disabled) {
   const date = getDate();
+  const ticketContainer = document.getElementById("ticketContainer");
 
-  const parkingID = document.getElementById("parkingID");
+  const ticketForm = createForm(ticketContainer, "ticketForm", "ticketForm", "ticket");
+
+  createSection(ticketForm, "h1", "subHeader", "subHeader", "Buy a ticket");
+
+  const parkingID = createSection(ticketForm, "div", "parkingID", "parkingID");
   createLabel(parkingID, "Parking-ID");
   ticketDataDate(parkingID, "id", getParkingDetail_Id() , disabled);
 
-  const checkIn = document.getElementById("checkIn");
+  const checkIn = createSection(ticketForm, "div", "checkIn", "checkIn");
   createLabel(checkIn, "Arrivel Date");
   ticketDataDate(checkIn, "date", date.currentDate, disabled);
 
-  const timeIn = document.getElementById("timeIn");
+  const timeIn = createSection(ticketForm, "div", "time", "timeIn");
   createLabel(timeIn, "Time-In");
   ticketDataTime(timeIn, "time", openTime, closeTime, openTime, disabled);
 
-  const timeOut = document.getElementById("timeOut");
+  const timeOut = createSection(ticketForm,"div", "time", "timeOut");
   createLabel(timeOut, "Time-Out");
   ticketDataTime(timeOut, "time", openTime, closeTime, closeTime, disabled);
 
-  const prevTicket_btn = document.getElementById("prevTicket_btn");
+  const prevTicket_btn = createSection(ticketForm,"div", "prevTicket_btn", "prevTicket_btn");
   createprevTicket(prevTicket_btn, "submit", "Preview Ticket", disabled);
 
   return "createTicket all good";
 }
 
+function createForm(container, classHere, idHere, action){
+  try {
+    const form = document.createElement("form");
+    form.classList = classHere;
+    form.id = idHere;
+    form.action = action;
+    container.appendChild(form);
+    return form;
+  } catch (e) {
+    return "createForm didnt work";
+  }
+}
+
+function createSection(container,dataType, classHere, idHere, textContent){
+  try {
+    const section = document.createElement(dataType);
+    section.classList = classHere;
+    section.id = idHere;
+    section.textContent = textContent;
+    container.appendChild(section);
+    return section;
+  } catch (e) {
+    return "createSection didnt work";
+  }
+}
 
 function createLabel(container, string){ // label maker
   try {
@@ -265,11 +316,16 @@ module.exports = {
  loadParkingDetail,
  createMap,
  showParkingDetails,
+ ParkingInfo,
+ parkingCost,
+ ParkingOpeningHour,
  data,
  costData,
  loadCostDetails,
  getDate,
  createTicket,
+ createForm,
+ createSection,
  createLabel,
  ticketDataDate,
  ticketDataTime,
