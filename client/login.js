@@ -41,7 +41,7 @@ async function checkLogin(loginInfo) {
     console.log(response);
   }
   else {
-    console.log("user cannot log in");
+    console.log(response.json());
   }
 }
 

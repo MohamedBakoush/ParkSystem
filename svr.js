@@ -36,13 +36,18 @@ function postParkingDetail(req, res) {
 function createAcc(req, res) {
   const body = req.body;
   const account = uib.addUser(body.username, body.password, body.forename, body.surname, body.email, body.phoneNum);
-  res.json(account);
 }
 
 // Will log the user in
 function login(req, res) {
   const result =  uib.logIn(req.body.username, req.body.password);
-  res.send(result);
+  console.log("result: ", result);
+  if (result == "usernameWrong" || result == "passwordWrong") {
+    res.status(401).send({message: result});
+  }
+  else {
+    res.send(result);
+  }
 }
 
 // Gets all the user information

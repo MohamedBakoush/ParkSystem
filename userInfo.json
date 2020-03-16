@@ -16,5 +16,50 @@
     "email": "",
     "phoneNum": "",
     "loggedIn": false
+  },
+  "thing": {
+    "username": "thing",
+    "password": "thing123",
+    "forename": "",
+    "surname": "",
+    "email": "",
+    "phoneNum": "",
+    "loggedIn": true
+  },
+  "thi2": {
+    "username": "thi2",
+    "password": "",
+    "forename": "",
+    "surname": "",
+    "email": "",
+    "phoneNum": "",
+    "loggedIn": false
+  },
+  "": {
+    "username": "",
+    "password": "",
+    "forename": "",
+    "surname": "",
+    "email": "",
+    "phoneNum": "",
+    "loggedIn": false
+  },
+  "uiooo": {
+    "username": "uiooo",
+    "password": "",
+    "forename": "",
+    "surname": "",
+    "email": "",
+    "phoneNum": "",
+    "loggedIn": false
+  },
+  "testUser": {
+    "username": "testUser",
+    "password": "",
+    "forename": "",
+    "surname": "",
+    "email": "",
+    "phoneNum": "",
+    "loggedIn": false
   }
 }
