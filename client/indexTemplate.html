@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <link rel="icon" href="pictures/noParkingImgFound.png">
+  <title>ParkSystem | Team10C</title>
+
+  <link rel="stylesheet" href="stylesheets/styleHeader.css">
+  <link rel="stylesheet" href="stylesheets/styleIndex.css">
+
+</head>
+<body data-gr-c-s-loaded="true">
+    <header>
+      <nav class="headerNav" id="headerNav">
+      <section class="logoLinks" id="logoLinks">
+        <a class="Logo" id="Logo" href="/">ParkSystem</a>
+      </section>
+      <ul class="signinLinks" id="signinLinks">
+        <li class="undefined" id="undefined">
+          <a class="register" id="register" href="#">register</a>
+        </li>
+        <li class="undefined" id="undefined">
+          <a class="login" id="login" href="#">login</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+
+    <div id="map"> </div>
+    <section class="searchContainer">
+      <form class="searchForm" action="/maps">
+        <input class="search_input" type="text" id="serch_input" placeholder="Where are you going?" name="l" required="true" autocomplete="off">
+        <input type="hidden" name="lat" id="latitude_input">
+        <input type="hidden" name="lon" id="longitude_input">
+        <button class="search_input_btn" type="submit">Search</button>
+      </form>
+    </section>
+ 
+  </body>
+</html>

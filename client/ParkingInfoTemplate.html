@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+      <meta charset="utf-8">
+      <link rel="icon" href="pictures/noParkingImgFound.png">
+      <title>ParkSystem | ParkingInfo</title>
+      <link rel="stylesheet" href="stylesheets/styleHeader.css">
+      <link rel="stylesheet" href="stylesheets/styleParkingInfo.css">
+   </head>
+   <body>
+     <body data-gr-c-s-loaded="true">
+    <header>
+       <nav class="headerNav" id="headerNav">
+         <section class="logoLinks" id="logoLinks">
+           <a class="Logo" id="Logo" href="/">ParkSystem</a>
+         </section><ul class="signinLinks" id="signinLinks">
+           <li class="undefined" id="undefined">
+             <a class="register" id="register" href="#">register</a>
+           </li>
+           <li class="undefined" id="undefined">
+             <a class="login" id="login" href="#">login</a>
+           </li>
+         </ul>
+       </nav>
+    </header>
+     <article class="parkingInfoBody">
+       <section id="parkingInfoContainer" class="parkingInfoContainer">
+         <div class="parkingInfo" id="parkingInfo">
+           <h1 class="subHeader" id="subHeader">Parking Info</h1>
+           <ul class="ParkingInfo_ul" id="ParkingInfo_ul">
+             <li id="ParkingInfo_name" class="ParkingInfo_name">NCP Car Park Portsmouth Cascades</li>
+             <li id="ParkingInfo_address" class="ParkingInfo_address">Cascades, Charlotte St, Portsmouth PO1 4RS, UK</li>
+             <li id="ParkingInfo_phoneNumber" class="ParkingInfo_phoneNumber">0345 050 7080</li>
+           </ul>
+         </div>
+         <div class="parkingCost" id="parkingCost">
+           <h1 class="subHeader" id="subHeader">Rates</h1>
+           <ul class="ParkingCost_ul" id="ParkingCost_ul">
+             <li id="cost15Min" class="cost15Min">15 Minutes:  £ 1.50 </li>
+             <li id="cost30Min" class="cost30Min">30 Minutes:  £ 2.00 </li>
+             <li id="cost1Hour" class="cost1Hour">1 Hour:  £ 3.00 </li>
+             <li id="costAdditionalHour" class="costAdditionalHour">Additional Hour:  £ 1.00 </li>
+           </ul>
+         </div>
+         <div class="ParkingOpeningHour" id="ParkingOpeningHour">
+           <h1 class="subHeader" id="subHeader">Opening Hours</h1>
+           <ul class="ParkingOpeningHours_ul" id="ParkingOpeningHours_ul">
+             <li id="ParkingTime_openingHours" class="ParkingTime_openingHours">Monday: 8:00 AM – 6:30 PM</li>
+             <li id="ParkingTime_openingHours" class="ParkingTime_openingHours">Tuesday: 8:00 AM – 6:30 PM</li>
+             <li id="ParkingTime_openingHours" class="ParkingTime_openingHours">Wednesday: 8:00 AM – 6:30 PM</li>
+             <li id="ParkingTime_openingHours" class="ParkingTime_openingHours">Thursday: 8:00 AM – 6:30 PM</li>
+             <li id="ParkingTime_openingHours" class="ParkingTime_openingHours">Friday: 8:00 AM – 6:30 PM</li>
+             <li id="ParkingTime_openingHours" class="ParkingTime_openingHours">Saturday: 8:00 AM – 6:30 PM</li>
+             <li id="ParkingTime_openingHours" class="ParkingTime_openingHours">Sunday: 10:00 AM – 4:30 PM</li>
+           </ul>
+         </div>
+       </section>
+       <section class="ticketContainer" id="ticketContainer">
+         <form class="ticketForm" id="ticketForm" action="ticket">
+           <h1 class="subHeader" id="subHeader">Buy a ticket</h1>
+           <div class="parkingID" id="parkingID">
+             <label>Parking-ID</label>
+             <input type="id" name="id" required="">
+           </div>
+           <div class="checkIn" id="checkIn">
+             <label>Arrivel Date</label>
+             <input type="date" name="date" required="">
+           </div><div class="time" id="timeIn">
+             <label>Time-In</label>
+             <input type="time" name="time" min="08:00" max="18:30" required="">
+           </div>
+           <div class="time" id="timeOut">
+             <label>Time-Out</label>
+             <input type="time" name="time" min="08:00" max="18:30" required="">
+           </div>
+           <div class="prevTicket_btn" id="prevTicket_btn">
+             <input type="submit" value="Preview Ticket">
+           </div>
+         </form>
+       </section>
+     </article>
+  </body>
+</html>
