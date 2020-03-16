@@ -2,77 +2,28 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Info | Parking System </title>
+    <link rel="icon" href="pictures/noParkingImgFound.png">
+    <title>ParkSystem | ParkingInfo</title>
     <link rel="stylesheet" href="stylesheets/styleHeader.css">
     <link rel="stylesheet" href="stylesheets/styleParkingInfo.css">
-    <script src="parkingInfo.js" charset="utf-8"></script>
+    <script src="javaScript/parkingInfo.js" charset="utf-8"></script>
     <script src="javaScript/header.js" charset="utf-8"></script>
   </head>
   <header>
-    <nav class="headerBody" id="headerNav">
-      <ul class="logoLinks" id="logoLinks">
-      </ul>
-      <ul class="signinLinks" id="signinLinks">
-      </ul>
+    <nav class="headerNav" id="headerNav">
     </nav>
-
   </header>
   <body>
     <article class="parkingInfoBody">
-        <!--  Template -->
-      <section class="parkingInfoContainer">
-        <!-- info -->
-        <div class="parkingInfo">
-          <div class="parkingInfoHeader">
-            <h1 class="subHeader">Parking Info</h1>
-          </div>
-          <ul id="ParkingInfo_ul">
 
-          </ul>
-        </div>
-        <!-- cost -->
-        <div class="parkingCost">
-          <div class="parkingCostHeader">
-            <h1 class="subHeader">Rates</h1>
-          </div>
-          <ul id="ParkingCost_ul">
-
-
-          </ul>
-        </div>
-        <!-- time -->
-        <div class="ParkingOpeningHour">
-          <div class="ParkingTimesHeader">
-            <h1 class="subHeader">Opening Hours</h1>
-          </div>
-          <ul id="ParkingOpeningHours_ul">
-
-
-          </ul>
-        </div>
+      <section id="parkingInfoContainer" class="parkingInfoContainer">
       </section>
 
-      <section class="ticketContainer">
-        <form action="/ticket">
-          <h1 class="subHeader">Buy a ticket</h1>
-              <div id="parkingID" class="parkingID">
-              </div>
-              <div id="checkIn" class="checkIn">
-              </div>
-              <div id="timeIn" class="time">
-              </div>
-              <div id="timeOut" class="time">
-              </div>
-              <div id="prevTicket_btn" class="prevTicket_btn">
-              </div>
-        </form>
+      <section class="ticketContainer" id="ticketContainer">
       </section>
-      <!-- id="map" is here to not break the google api script-->
-      <div id="map"> </div>
-      <script async defer
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDNDyXPpAMGdAA1PnEWSeVu_YyNovRQVAw&libraries=places">
-      </script>
-
     </article>
+    <div id="map"> </div>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcQlOXG9jMpJ1ZXyq-u0JxkTiOk6XWjHo&libraries=places">
+    </script>
   </body>
 </html>
