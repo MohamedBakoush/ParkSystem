@@ -32,7 +32,7 @@ function callback(results, status) { // if staus is ok callback takes each avail
   }
 }
 
-function createMarker(place) { // creats a marker on google map
+async function createMarker(place) { // creats a marker on google map
   const google = window.google;
   let marker = new google.maps.Marker({  // creats a marker
     map: map,
@@ -47,7 +47,7 @@ function createMarker(place) { // creats a marker on google map
     'Rateing : ' + place.rating + '<br>' +
     `<a href='parkingInfo#${place.place_id}'> Place Information </a>`;
 
-  let infowindow = new google.maps.InfoWindow({
+  const infowindow = new google.maps.InfoWindow({
     content: contentString
   });
 
@@ -97,54 +97,68 @@ function fetchParkingInfo(place, parkingDetail) { // fetches parking information
   dataParking(ParkingInfoContainerInfo, "div", "ParkingInfoAddress", "ParkingInfoAddress", "", place.vicinity )   // vicinity of parking space inside in ParkingInfoContainerInfo
   const ParkingInfoContainerCost = dataParking(ParkingInfo, "div", "ParkingInfoContainerCost", "ParkingInfoContainerCost");  // Parking Info Cost Container Containg parking cost
   costData(ParkingInfoContainerCost, "div", 'ParkingInfoCost', 'ParkingInfoCost', '1 Hour: £', parkingDetail.cost1Hour);   // fill ParkingInfoContainerCost with cost data
+
+  return "fetchParkingInfo";
 }
 
 function checkGooglePhoto(photo) {
-  let checkPhoto;
-  if (photo == undefined) {
-    checkPhoto = "pictures/noParkingImgFound.png";
-  } else {
-      checkPhoto = photo[0].getUrl({maxWidth: 32, maxHeight: 32});
-    }
-  return checkPhoto;
+  try {
+    const checkPhoto = photo[0].getUrl({maxWidth: 1000, maxHeight: 1250 });
+    return checkPhoto;
+  } catch (e) {
+    const checkPhoto = "pictures/noParkingImgFound.png";
+    return checkPhoto;
+  }
 }
 
 function dataParking(container, elementType, idHere, classHere, href, textContent ) {
-  let ParkingInfo = document.createElement(elementType);
-  ParkingInfo.id = idHere;
-  ParkingInfo.classList = classHere;
-  ParkingInfo.textContent = textContent;
-  ParkingInfo.href = href;
-  container.appendChild(ParkingInfo);
-  return ParkingInfo;
+  try {
+    const ParkingInfo = document.createElement(elementType);
+    ParkingInfo.id = idHere;
+    ParkingInfo.classList = classHere;
+    ParkingInfo.textContent = textContent;
+    ParkingInfo.href = href;
+    container.appendChild(ParkingInfo);
+    return ParkingInfo;
+  } catch (e) {
+    return "dataParking failed";
+  }
 }
 
 function dataParkingPhoto(container, type, idHere, claseHere, height, width, src){
-  let ParkingPictureImg = document.createElement(type);
-  ParkingPictureImg.id = idHere;
-  ParkingPictureImg.classList = claseHere;
-  ParkingPictureImg.src = src;
-  ParkingPictureImg.height = height;
-  ParkingPictureImg.width = width;
-  container.appendChild(ParkingPictureImg);
-  return ParkingPictureImg;
+  try {
+    const ParkingPictureImg = document.createElement(type);
+    ParkingPictureImg.id = idHere;
+    ParkingPictureImg.classList = claseHere;
+    ParkingPictureImg.src = src;
+    ParkingPictureImg.height = height;
+    ParkingPictureImg.width = width;
+    container.appendChild(ParkingPictureImg);
+    return ParkingPictureImg;
+  } catch (e) {
+    return "dataParkingPhoto failed";
+  }
 }
 
 function costData(container, type, idHere, claseHere, moneySign, value){
-  const costData = document.createElement(type);
-  if(value != undefined){
-    costData.id = idHere;
-    costData.classList = claseHere;
-    costData.textContent =  `${moneySign} ${value.toFixed(2)}`;
-    container.appendChild(costData);
-    return costData;
-  } else {
-    costData.id = idHere;
-    costData.classList = claseHere;
-    costData.textContent = `Cost Not Available`;
-    container.appendChild(costData);
-    return costData;
-    }
+  try {
+    const costData = document.createElement(type);
+    if(value != undefined){
+      costData.id = idHere;
+      costData.classList = claseHere;
+      costData.textContent =  `${moneySign} ${value.toFixed(2)}`;
+      container.appendChild(costData);
+      return costData;
+    } else {
+      costData.id = idHere;
+      costData.classList = claseHere;
+      costData.textContent = `Cost Not Available`;
+      container.appendChild(costData);
+      return costData;
+      }
+  } catch (e) {
+    return "costData failed";
+  }
 }
 
 function loadLatLonDetail(){ // split up herf to get lat an lon
