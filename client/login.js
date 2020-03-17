@@ -38,11 +38,15 @@ async function checkLogin(loginInfo) {
     body: JSON.stringify(payload),
   });
   if (response.ok) {
-    console.log(response);
-  }
-  else {
+    console.log("login worked");
+  } else if (response.status == 400) {
+        console.log("usernameWrong");
+  } else if (response.status == 401){
+      console.log("passwordWrong");
+  }  else {
     console.log(response.json());
   }
+
 }
 
 window.addEventListener('load', pageLoaded);

@@ -42,7 +42,9 @@ function createAcc(req, res) {
 function login(req, res) {
   const result =  uib.logIn(req.body.username, req.body.password);
   console.log("result: ", result);
-  if (result == "usernameWrong" || result == "passwordWrong") {
+  if (result == "usernameWrong") {
+    res.status(400).send({message: result});
+  } else if (result == "passwordWrong") {
     res.status(401).send({message: result});
   }
   else {
