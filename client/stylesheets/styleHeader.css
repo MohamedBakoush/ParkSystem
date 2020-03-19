@@ -1,10 +1,15 @@
-html, body {
-  margin: 0;
-  padding: 0;
+* {
+    margin: 0;
+    padding: 0;
 }
-li{
-  list-style-type: none;
+ul {
+    list-style-type: none;
 }
+
+body {
+    font-family: "ParkSystem", Arial, Helvetica, sans-serif;
+  }
+
 .headerNav {
     display: flex;
     justify-content: space-between;
@@ -16,14 +21,37 @@ li{
 .signinLinks{
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-gap: 1ch;
 }
-.login, .register {
+ .login, .register {
     font-weight: 400;
     text-decoration: none;
     background-color: rgb(93, 106, 115);
     padding: .5em;
     color:rgb(255,255,255);
+}
+
+.Logo:hover{
+  border: .125rem solid #fff;
+}
+.login, .register{
+    font-weight: bold;
+    color: rgb(0, 0, 0);
+    text-align: center;
+    font-size: 0.75rem;
+    display: block;
+    background-color: rgb(255, 255, 255);
+    padding: 0.5rem;
+    border-width: 0.125rem;
+    border-style: solid;
+    border-color: rgb(41, 58, 127);
+    border-image: initial;
+    text-transform: capitalize;
+}
+
+.login:hover, .register:hover {
+    background-color:  #293a7f;
+    color: rgba(255, 255, 255, 1);
+      border: .125rem solid #fff;
 }
 .Logo{
     text-decoration: none;
@@ -31,4 +59,23 @@ li{
     color: rgb(0, 0, 0);
     font-size: 32px;
   font-weight: bold;
+}
+
+.headerNav ul li {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+
+@media (max-width: 650px) {
+  .Logo { 
+    padding: .25em;
+  }
+  .headerNav {
+      padding-left: 0;
+      padding-right: 0;
+  }
+
 }

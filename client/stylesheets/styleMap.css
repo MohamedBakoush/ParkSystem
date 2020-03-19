@@ -1,74 +1,72 @@
-html, body {
-  margin: 0;
-  padding: 0;
-}
-li{
-  list-style-type: none;
+* {
+    margin: 0;
+    padding: 0;
 }
 
-#map {
-  height: 60vh;
-  width: 100%;
-}
-
-.mapListContainer {
-  /*  to be able scroll for parkingList  */
-  overflow-y: scroll;
-  height: 60vh;
+  #map {
+    height: 93.2vh;
+    width: 100%;
+    background-color: #555555;
   }
-
-#placeInput {
-  background-color: #fff;
-  font-family: Roboto;
-  font-size: 15px;
-  font-weight: 300;
-  margin-left: 12px;
-  padding: 0 11px 0 13px;
-  text-overflow: ellipsis;
-  width: 80%;
-}
-
-#placeInput:focus {
-  border-color: #4d90fe;
-}
-
-
-.mapBody{
-  display: grid;
-  grid-template-columns: 4fr 10fr;
-  /* grid-gap: 1ch; */
-}
-
-.mapListContainer, .mapContainer{
-  padding: 0rem;
-}
-
-.ParkingInfo{
-  display: grid;
-  grid-template-areas:
-    'picture Info Info'
-    'picture Info Info'
-    'picture cost cost';
-  border: 1px solid;
-  border-color: rgb(0,0,0);
-}
-.ParkingInfoLink{
-  text-decoration: none;
-  color: black;
-}
-.ParkingInfoName, .ParkingInfoAddress, .ParkingInfoCost, .ParkingPictureImg{
-    padding: .5rem;
-    margin: auto;
-}
- .ParkingInfoName, .ParkingInfoAddress, .ParkingInfoCost{
-   text-align: center;
- }
-.ParkingInfoContainerCost, .ParkingPictureContainer{
+  .mapBody{
+    display: grid;
+    grid-template-columns: 4fr 10fr;
+    /* grid-gap: 1ch; */
+  }
+  .mapListContainer {
+    /*  to be able scroll for parkingList  */
+    overflow-y: scroll;
+    height: 93.2vh;
+    }
+    .ParkingInfo{
+      padding: 0.5rem;
+      border-width: 0.125rem;
+      border-style: solid;
+      border-color: rgb(41, 58, 127);
       display: grid;
+
+      grid-template-areas:
+        'picture Info Info'
+        'picture Info Info'
+        'picture cost cost';
+    }
+    .ParkingInfoLink{
+        color: black;
+        font-weight: bold;
+        text-decoration: none;
+    }
+    .ParkingInfo:hover{
+      background-color: rgba(41,58,127, 0.3);
+    }
+    .ParkingInfoName, .ParkingInfoAddress, .ParkingInfoCost, .ParkingPictureImg{
+        padding: .5rem;
+        margin: auto;
+        display: grid;
+        justify-content: center;
+    }
+    .ParkingPictureContainer { grid-area: picture; }
+    .ParkingInfoContainerInfo { grid-area: Info; }
+    .ParkingInfoContainerCost {
+      grid-area: cost;
+      background-color: #293a7f;
+      color: rgb(255,255,255);
+    }
+
+
+.ParkingInfoAddress{
+  border-width: 0.125rem;
+  border-style: solid;
+  border-color: rgb(41, 58, 127);
+  background-color: rgb(255,255,255);
 }
-.ParkingPictureContainer { grid-area: picture; }
-.ParkingInfoContainerInfo { grid-area: Info; }
-.ParkingInfoContainerCost {
-  grid-area: cost;
-  background-color: rgb(83, 161, 215);
+
+
+@media (max-width: 920px) {
+  .mapBody{
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+  .mapListContainer{
+    display: none;
+  }
 }

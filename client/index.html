@@ -17,15 +17,17 @@
 
   <body>
     <div id="map"> </div>
-    <section class="searchContainer">
-      <form class="searchForm" action="/maps">
-        <input class="search_input" type="text" id="serch_input" placeholder="Where are you going?"
-        name="l" required="true">
-        <input type="hidden" name="lat" id="latitude_input"/>
-        <input type="hidden" name="lon" id="longitude_input"/>
-        <button class="search_input_btn" type="submit">Search</button>
-      </form>
-    </section>
+    <article class="searchAndContent">
+      <section class="searchContainer">
+        <form class="searchForm" action="/maps">
+          <input class="search_input" type="text" id="serch_input" placeholder="Where are you going?" name="l" required="true" autocomplete="off">
+          <input type="hidden" name="lat" id="latitude_input">
+          <input type="hidden" name="lon" id="longitude_input">
+          <button class="search_input_btn" type="submit">Search</button>
+        </form>
+      </section>
+      <h2 class="container">ParkSystem shows available parking spaces in the area.</h2>
+    </article>
 
     <script async defer src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&key=AIzaSyAzmcJq7y-HW3_beX9kDsSG5k6hyo1TcNE">
     </script>

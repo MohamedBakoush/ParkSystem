@@ -1,26 +1,70 @@
-.ticketForm{
-    display: grid;
-   justify-items: center;
-   margin: auto;
+* {
+    margin: 0;
+    padding: 0;
 }
-  .parkingCostFinal, .DateDiffrence, .TimeCheckIn,.TimeCheckOut, .TimeDiffrence{
-    display: grid;
-    grid-template-columns: repeat(2,1fr);
-    width: 25rem;
-  }
-  .finalCost, .timeCheckIn, .timeCheckOut, .timeDiffrence, .dateDiffrence{
+.ticketBody{
+  display: grid;
+  justify-content: center;
+  padding: 1em;
+}
+
+.ticketHeader{
+  margin: auto;
+  display: grid;
+  justify-content: center;
+  padding: 1rem;
+  text-decoration: underline;
+    text-transform: uppercase;
+}
+.ticketBody{
+  padding-top: 10vh;
+}
+
+
+.ticketForm{
+  border-width: 0.125rem;
+  border-style: solid;
+  padding: 0.5rem;
+  border-color: rgb(41, 58, 127);
+}
+.TimeCheckIn,.TimeCheckOut,.TimeDiffrence,.parkingCostFinal, .DateDiffrence{
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  grid-gap: 1ch;
+}
+.TimeCheckOut h1, .TimeCheckIn h1, .TimeDiffrence h1, .parkingCostFinal h1 ,.DateDiffrence h1{
+  padding: 1em;
+}
+
+.dateDiffrence,.timeCheckOut,.finalCost,.timeDiffrence, .timeCheckIn{
+  padding: 1em;
   text-align: right;
- }
- .buyTicket_btn input{
-   width: 100%;
-   font-size: 16px;
-   letter-spacing: 1px;
-   padding: .5rem;
-   margin: auto;
-   display: block;
-   font-weight: 600;
-   background-color: rgb(83, 161, 215);
- }
- .buyTicket_btn{
-   padding: 1rem;
- }
+  margin-top: auto;
+  margin-bottom: auto;
+  font-weight: bold;
+  }
+
+.buyTicket{
+  margin: auto;
+  display: grid;
+  width: 100%;
+  font-weight: bold;
+  text-align: center;
+  font-size: 0.75rem;
+  display: block;
+  background-color:  #293a7f;
+  padding: 0.5rem;
+  border-width: 0.125rem;
+  border-style: solid;
+  border-color: rgb(41, 58, 127);
+  color: rgba(255, 255, 255, 1);
+  height: 2.75rem;
+}
+.buyTicket_btn{
+  padding: 0.5rem;
+}
+
+.buyTicket:disabled{
+  background-color:  rgba(41, 58, 127, .2);
+  border-color: rgba(41, 58, 127, .2);
+}
