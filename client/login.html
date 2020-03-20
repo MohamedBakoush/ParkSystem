@@ -11,12 +11,15 @@
 
 <body>
   <article class="inputForm">
-    <section>
+    <form action="#" onsubmit="return false">
       <label>Username</label>
-      <input type="text" id="username" placeholder="Username">
+      <input type="text" id="username" required="required"  placeholder="Username">
       <label>Password</label>
-      <input type="password" id="password" placeholder="Password">
+      <input type="password" id="password" required="required"  placeholder="Password">
       <button id="loginBut" type="submit">Submit</button>
+    </form>
+    <section id="errors">
+
     </section>
   </article>
 </body>

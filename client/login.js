@@ -31,7 +31,8 @@ async function checkLogin(loginInfo) {
   };
 
   console.log('Payload', payload);
-
+const errorContainer = document.getElementById('errors');
+    document.getElementById('errors').innerHTML = "";
   const response = await fetch('loginAcc', {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
@@ -39,14 +40,25 @@ async function checkLogin(loginInfo) {
   });
   if (response.ok) {
     console.log("login worked");
+          outcomeOutput(errorContainer,"loginWorked","loginWorked","login worked");
   } else if (response.status == 400) {
         console.log("usernameWrong");
+        outcomeOutput(errorContainer,"usernameWrong","usernameWrong","usernameWrong");
   } else if (response.status == 401){
       console.log("passwordWrong");
+        outcomeOutput(errorContainer,"passwordWrong","passwordWrong","passwordWrong");
   }  else {
     console.log(response.json());
   }
 
+}
+
+function outcomeOutput(container,idHere,classHere,textContent) {
+  const error = document.createElement("div");
+  error.id = idHere;
+  error.classList = classHere;
+  error.textContent = textContent;
+  container.appendChild(error);
 }
 
 window.addEventListener('load', pageLoaded);

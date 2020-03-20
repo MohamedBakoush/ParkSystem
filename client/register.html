@@ -18,17 +18,25 @@
         Just make sure that the id's of the inputs are the same as the querySelector in the js.
          -->
       <label>Username</label>
-      <input type="text" id="username" required="required" placeholder="Username">
+      <input type="text" id="username" pattern="[A-Za-z0-9.-]+"
+        title="only uppercase and lowercase letters and numbers and -"
+        required="required" placeholder="Username">
       <label>Password</label>
-      <input type="password" id="password" placeholder="Password">
+      <input type="password" id="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+        title="at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
+        required="required" placeholder="Password">
       <label>Forename</label>
-      <input type="text" id="forename" placeholder="Forename">
+      <input type="text" id="forename" pattern="[A-Za-z]+" title="letters only"
+        required="required" placeholder="Forename">
       <label>Surname</label>
-      <input type="text" id="surname" placeholder="Surname">
+      <input type="text" id="surname" pattern="[A-Za-z]+" title="letters only"
+        required="required" placeholder="Surname">
       <label>Email Address</label>
-      <input type="text" id="email" placeholder="Email Address">
+      <input type="email" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+        title="xyz@something.com" required="required" placeholder="Email Address">
       <label>Mobile Phone Number</label>
-      <input type="text" id="phoneNum" placeholder="Phone Number">
+      <input type="tel" id="phoneNum" pattern="^\d{10}$"
+        title="10 numeric characters only" required="required" placeholder="Phone Number">
       <input type="submit" id="regBut"></input>
     </form>
 
