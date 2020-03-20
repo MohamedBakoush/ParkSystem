@@ -31,8 +31,10 @@ async function checkLogin(loginInfo) {
   };
 
   console.log('Payload', payload);
-const errorContainer = document.getElementById('errors');
-    document.getElementById('errors').innerHTML = "";
+
+  const errorContainer = document.getElementById('errors');
+  document.getElementById('errors').innerHTML = "";
+
   const response = await fetch('loginAcc', {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
@@ -40,7 +42,8 @@ const errorContainer = document.getElementById('errors');
   });
   if (response.ok) {
     console.log("login worked");
-          outcomeOutput(errorContainer,"loginWorked","loginWorked","login worked");
+    // outcomeOutput(errorContainer,"loginWorked","loginWorked","login worked");
+    window.location = 'index'
   } else if (response.status == 400) {
         console.log("usernameWrong");
         outcomeOutput(errorContainer,"usernameWrong","usernameWrong","usernameWrong");
