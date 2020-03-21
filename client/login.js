@@ -42,7 +42,7 @@ async function checkLogin(loginInfo) {
   });
   if (response.ok) {
     console.log("login worked");
-    // outcomeOutput(errorContainer,"loginWorked","loginWorked","login worked");
+    currentUser(loginInfo); 
     window.location = 'index'
   } else if (response.status == 400) {
         console.log("usernameWrong");
@@ -50,10 +50,7 @@ async function checkLogin(loginInfo) {
   } else if (response.status == 401){
       console.log("passwordWrong");
         outcomeOutput(errorContainer,"passwordWrong","passwordWrong","passwordWrong");
-  }  else {
-    console.log(response.json());
   }
-
 }
 
 function outcomeOutput(container,idHere,classHere,textContent) {
@@ -63,5 +60,22 @@ function outcomeOutput(container,idHere,classHere,textContent) {
   error.textContent = textContent;
   container.appendChild(error);
 }
+
+async function currentUser(loginInfo) {
+  const payload = {
+    username: loginInfo.username,
+  };
+  const response = await fetch('CurrentUser', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  });
+  if (response.ok) {
+    console.log('user account created');
+  } else {
+    console.log('failed to add user', response);
+  }
+}
+
 
 window.addEventListener('load', pageLoaded);

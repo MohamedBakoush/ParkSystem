@@ -11,12 +11,7 @@
 
 <body>
   <article class="inputForm">
-    <form action="login">
-      <!-- IDEA: userInfomration -->
-      <!--
-        The labels and inputs are placeholder for whatever the final input will be.
-        Just make sure that the id's of the inputs are the same as the querySelector in the js.
-         -->
+    <form >
       <label>Username</label>
       <input type="text" id="username" pattern="[A-Za-z0-9.-]+"
         title="only uppercase and lowercase letters and numbers and -"
@@ -37,12 +32,12 @@
       <label>Mobile Phone Number</label>
       <input type="tel" id="phoneNum" pattern="^\d{10}$"
         title="10 numeric characters only" required="required" placeholder="Phone Number">
-      <input type="submit" id="regBut"></input>
     </form>
+    <button type="submit" id="regBut" onclick="grabEverything()">Submit</button>
 
-    <section>
-      <!-- IDEA: creditcard info -->
-    </section>
+      <section id="errors">
+
+      </section>
   </article>
 </body>
 

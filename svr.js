@@ -36,6 +36,11 @@ function postParkingDetail(req, res) {
 function createAcc(req, res) {
   const body = req.body;
   const account = uib.addUser(body.username, body.password, body.forename, body.surname, body.email, body.phoneNum);
+  if (account == "userExist") {
+    res.status(400).send({message: account});
+  }else {
+    res.json(account);
+  }
 }
 
 // Will log the user in
@@ -56,6 +61,18 @@ function login(req, res) {
 async function getUserList(req, res) {
   res.json(uib.getAllUsers());
 }
+
+
+function getCurrentUser(request, response){
+  response.json(uib.listCurrentUser());
+}
+function postCurrentUserDetail(req, res) {
+  const currentUser = uib.addCurrentUser(req.body.username);
+  res.json(currentUser);
+}
+
+app.get('/CurrentUser', getCurrentUser);
+
 
 app.get('/parkingDetails', getParkingDetails);
 app.get('/parkingDetails/:id', getParkingDetail);

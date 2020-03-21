@@ -4,12 +4,25 @@ const FileSystem = require('fs');
 const data = FileSystem.readFileSync('userInfo.json');
 const users = JSON.parse(data);
 
+
+let currentUser = [{username: undefined}];
+
+function listCurrentUser() {
+  // returns CurrentUser details
+  return currentUser;
+}
+function addCurrentUser(username) {
+    const newCurrentUser = {
+      username: username,
+    };
+    currentUser = [newCurrentUser];
+    return newCurrentUser;
+}
 // Finds a user by username
 function findUser(id){
  if (users[id] === undefined) {
    return undefined;
- }
- else {
+ } else {
    return users[id];
  }
 
@@ -50,8 +63,14 @@ function addUser(username, password, forename, surname, email, phoneNum) {
     };
     const newData = JSON.stringify(users, null, 2);
     FileSystem.writeFileSync('userInfo.json', newData, finished);
+    function finished(err) {
+      console.log("Successfully created acc");
+    }
+    return "addedUser"
+  }else {
+    console.log("userExist");
+    return "userExist";
   }
-  return "userExist";
 }
 
 // Removes a user
@@ -70,4 +89,6 @@ module.exports = {
   getAllUsers,
   removeUser,
   logIn,
+  listCurrentUser,
+  addCurrentUser
 };
