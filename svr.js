@@ -72,6 +72,7 @@ function postCurrentUserDetail(req, res) {
 }
 
 app.get('/CurrentUser', getCurrentUser);
+app.post('/CurrentUser', express.json(), postCurrentUserDetail);
 
 
 app.get('/parkingDetails', getParkingDetails);
