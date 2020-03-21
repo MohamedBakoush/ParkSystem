@@ -25,13 +25,6 @@ function getParkingDetail(req, res){
   res.json(result);
 }
 
-function postParkingDetail(req, res) {
-  // adds parking parkingDetail to the database
-  // TODO: Fill out required data for parkingDetails
-  const parkingDetails = pib.addParkingDetails(req.body.id, req.body.name, req.body.address, );
-  res.json(parkingDetails);
-}
-
 // Creates an account using the form
 function createAcc(req, res) {
   const body = req.body;
@@ -66,6 +59,7 @@ async function getUserList(req, res) {
 function getCurrentUser(request, response){
   response.json(uib.listCurrentUser());
 }
+
 function postCurrentUserDetail(req, res) {
   const currentUser = uib.addCurrentUser(req.body.username);
   res.json(currentUser);
@@ -74,12 +68,12 @@ function postCurrentUserDetail(req, res) {
 app.get('/CurrentUser', getCurrentUser);
 app.post('/CurrentUser', express.json(), postCurrentUserDetail);
 
-
 app.get('/parkingDetails', getParkingDetails);
 app.get('/parkingDetails/:id', getParkingDetail);
-app.post('/parkingDetails', express.json(), postParkingDetail);
+
 app.post('/registerAcc', express.json(), createAcc);
 app.get('/registerAcc', getUserList);
+
 app.post('/loginAcc', express.json(), login);
 
 app.listen(8080);
