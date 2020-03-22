@@ -16,10 +16,10 @@ async function prepareHandles() {
   elem.email = document.querySelector("#email");
   elem.phoneNum = document.querySelector("#phoneNum");
   elem.regBut = document.querySelector("#regBut");
-} 
+}
 
 // Creates an account if the username doesn't exist
-async function createUserAccount(userInfo) {
+async function createUserAccount(userInfo, errorContainer) {
   const payload = {
     username: userInfo.username,
     password: userInfo.password,
@@ -29,8 +29,7 @@ async function createUserAccount(userInfo) {
     phoneNum: userInfo.phoneNum
   };
   console.log('Payload', payload);
-  const errorContainer = document.getElementById('errors');
-  document.getElementById('errors').innerHTML = "";
+  // document.getElementById('errors').innerHTML = "";
 
   const response = await fetch('registerAcc', {
     method: 'POST',
@@ -152,18 +151,11 @@ function grabEverything() {
   }
   console.log(count);
   if (count == 6) {
-    createUserAccount(accountInfo);
+    createUserAccount(accountInfo, errorContainer);
   }
 
 }
 
-function outcomeOutput(container,idHere,classHere,textContent) {
-  const error = document.createElement("div");
-  error.id = idHere;
-  error.classList = classHere;
-  error.textContent = textContent;
-  container.appendChild(error);
-}
 
 
 /*Once page has loaded, will call function pageLoaded*/

@@ -1,0 +1,110 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+.registerBody{
+  padding-top: 5vh;
+  padding-bottom: 5vh;
+  display: grid;
+  justify-content: center;
+  grid-template-columns: repeat(2,1fr);
+}
+
+.registerForm{
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  grid-gap: 1ch;
+  border-width: 0.125rem;
+  border-style: solid;
+  padding: 0.5rem;
+  border-color: rgb(41, 58, 127);
+}
+
+.registerContainer, .registerMessages{
+  display: grid;
+  justify-content: center;
+}
+.registerMessages{
+  padding: .5rem;
+}
+.registerHeader{
+  margin: auto;
+  display: grid;
+  justify-content: center;
+  padding: 1rem;
+  text-decoration: underline;
+  text-transform: uppercase;
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
+.registerButton{
+  margin: auto;
+  display: grid;
+  width: 100%;
+  font-weight: bold;
+  text-align: center;
+  font-size: 0.75rem;
+  display: block;
+  background-color:  #293a7f;
+  padding: 0.5rem;
+  border-width: 0.125rem;
+  border-style: solid;
+  border-color: rgb(41, 58, 127);
+  color: rgba(255, 255, 255, 1);
+  height: 2.75rem;
+}
+.registerButton:hover{
+    background-color: rgba(41,58,127, 0.1);
+    border: .125rem solid rgba(41,58,127, 1);
+    color: rgb(0, 0, 0);
+  }
+.registerButtonContainer{
+  padding: 0.5rem;
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
+
+
+.userExist, .usernameWrong, .passwordWrong, .forenameWrong, .surnameWrong,
+.emailWrong, .phoneNumberWrong, .username, .password,
+.forename, .surname, .email, .phoneNum{
+  padding: 1em;
+  margin-top: auto;
+  margin-bottom: auto;
+  font-weight: bold;
+}
+
+.userExist, .usernameWrong, .passwordWrong, .forenameWrong, .surnameWrong,
+.emailWrong, .phoneNumberWrong{
+  border-width: 0.125rem;
+  border-style: solid;
+  border-color: rgb(41, 58, 127);
+  background-color: rgba(41,58,127, 0.3);
+}
+
+.usernameLabel, .passwordLabel, .forenameLabel, .surnameLabel,
+.emailLabel, .phoneNumLabel{
+  padding: 1em;
+  margin-top: auto;
+  margin-bottom: auto;
+  font-weight: bold;
+}
+.errorsContainer{
+  display: grid;
+  justify-content: center;
+  grid-gap: 1ch;
+}
+
+@media screen and (max-width: 920px) {
+  .registerBody{
+    padding-top: 5vh;
+    padding-bottom: 5vh;
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(1,1fr);
+  }
+  .registerContainer{
+    display: block;
+    padding: .5rem;
+  }
+}
