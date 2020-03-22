@@ -2,9 +2,34 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Place Details</title>
+    <link rel="icon" href="pictures/noParkingImgFound.png">
+    <title>ParkSystem | Team10C</title>
+    <script src="javaScript/index.js" charset="utf-8"></script>
+    <script src="javaScript/header.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="stylesheets/styleHeader.css">
+    <link rel="stylesheet" href="stylesheets/styleIndex.css">
   </head>
+
+  <header>
+    <nav class="headerNav" id="headerNav">
+    </nav>
+  </header>
+
   <body>
-    <a href="maps">GO TO MAPS</a>
+    <div id="map"> </div>
+    <article class="searchAndContent">
+      <section class="searchContainer">
+        <form class="searchForm" action="/maps">
+          <input class="search_input" type="text" id="serch_input" placeholder="Where are you going?" name="l" required="true" autocomplete="off">
+          <input type="hidden" name="lat" id="latitude_input">
+          <input type="hidden" name="lon" id="longitude_input">
+          <button class="search_input_btn" type="submit">Search</button>
+        </form>
+      </section>
+      <h2 class="container">ParkSystem shows available parking spaces in the area.</h2>
+    </article>
+
+    <script async defer src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&key=AIzaSyAzmcJq7y-HW3_beX9kDsSG5k6hyo1TcNE">
+    </script>
   </body>
 </html>

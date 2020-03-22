@@ -1,0 +1,188 @@
+'use strict'
+
+const {
+  loadLatLonDetail,
+  costData,
+  dataParkingPhoto,
+  dataParking,
+  checkGooglePhoto,
+  fetchParkingInfo,
+  loadParkingDetail,
+  checkLatLon,
+  createMarker,
+  callback,
+  createMap
+} = require('./maps');
+const {findParkingDetail} = require('../../parkingInfoBoard');
+global.window = Object.create(window);
+const url = "http://localhost:8080/maps?l=Stockholm%2C+Sweden&lat=59.32932349999999&lon=18.0685808";
+Object.defineProperty(window, 'location', {
+  value: {
+    href: url
+  }
+});
+
+
+describe('maps', function () {
+  const createElement = document.createElement("section");
+  const parkingDetail = findParkingDetail("ChIJ0XjfNHRddEgRQtXe1fjPW8w");
+
+  it('check fetchParkingInfo', () => {
+    const parkingInfo = fetchParkingInfo(global.window.google.maps.places, parkingDetail);
+    expect(parkingInfo).toBeDefined();
+    expect(parkingInfo).toBe("fetchParkingInfo");
+  });
+
+  it('check createMarker', async () => {
+    const marker = createMarker();
+    expect(marker).toBeDefined();
+  });
+
+  it('check createMap', async () => {
+    const map = createMap();
+    expect(map).toBeDefined();
+  });
+
+  it('check callback', () => { // TODO: Fix This
+    const call = callback();
+    expect(call).toBeDefined();
+  });
+
+  it('check checkLatLon', () => {
+    const latLon = checkLatLon(69,43);
+    expect(latLon).toBeDefined();
+    expect(latLon.lat).toBe(69);
+    expect(latLon.lng).toBe(43);
+
+    const latLonNA = checkLatLon();
+    expect(latLonNA).toBeDefined();
+    expect(latLonNA.lat).toBe(50.7952);
+    expect(latLonNA.lng).toBe(-1.0872);
+  });
+
+  it('check loadParkingDetail', async () => {
+    const loadDetail = loadParkingDetail(global.window.google.maps.places);
+    expect(loadDetail).toBeDefined();
+  });
+
+
+  it('check checkGooglePhoto', () => { // TODO: Fix This
+    const googlePhoto = checkGooglePhoto()
+    expect(googlePhoto).toBeDefined();
+    expect(googlePhoto).toBe("pictures/noParkingImgFound.png"); 
+  });
+
+
+  it('check dataParking', () => {
+    const parking = dataParking(createElement, "div", "idHere", "classHere", "href", "textContent")
+    expect(parking).toBeDefined();
+    expect(parking.id).toBe("idHere");
+    expect(parking.classList[0]).toBe("classHere");
+    expect(parking.textContent).toBe("textContent");
+    expect(parking.href).toBe("href");
+
+    const parkingNA = dataParking();
+    expect(parkingNA).toBeDefined();
+    expect(parkingNA).toBe("dataParking failed");
+  });
+
+  it('check dataParkingPhoto', () => {
+    const parkingPhoto = dataParkingPhoto(createElement, "div", "idHere", "claseHere", "100", "100", "src");
+    expect(parkingPhoto).toBeDefined();
+    expect(parkingPhoto.id).toBe("idHere");
+    expect(parkingPhoto.classList[0]).toBe("claseHere");
+    expect(parkingPhoto.src).toBe("src");
+    expect(parkingPhoto.height).toBe("100");
+    expect(parkingPhoto.width).toBe("100");
+
+    const parkingPhotoNA = dataParkingPhoto()
+    expect(parkingPhotoNA).toBeDefined();
+    expect(parkingPhotoNA).toBe("dataParkingPhoto failed");
+  });
+
+  it('check costData', () => {
+    const cost = costData(createElement, "div", "idHere", "claseHere", "$", 5);
+    expect(cost).toBeDefined();
+    expect(cost.id).toBe("idHere");
+    expect(cost.classList[0]).toBe("claseHere");
+    expect(cost.textContent).toBe("$ 5.00");
+
+    const costNoValue = costData(createElement, "div", "idHere", "claseHere");
+    expect(costNoValue).toBeDefined();
+    expect(costNoValue.id).toBe("idHere");
+    expect(costNoValue.classList[0]).toBe("claseHere");
+    expect(costNoValue.textContent).toBe("Cost Not Available");
+
+    const costNA = costData();
+    expect(costNA).toBeDefined();
+    expect(costNA).toBe("costData failed");
+  });
+
+  it('check loadLatLonDetail', () => {
+    const latLonDetail = loadLatLonDetail();
+    expect(latLonDetail).toBeDefined();
+    expect(latLonDetail.latitude).toBe("59.32932349999999");
+    expect(latLonDetail.longitude).toBe("18.0685808");
+  });
+})
+
+
+
+
+
+const setupGoogleMock = () => {
+  /*** Mock Google Maps JavaScript API ***/
+  const google = {
+    maps: {
+      places: {
+        AutocompleteService: () => {},
+        opening_hours: {
+          weekday_text:["Monday: 8:00 AM – 6:30 PM", "Tuesday: 8:00 AM – 6:30 PM", "Wednesday: 8:00 AM – 6:30 PM", "Thursday: 8:00 AM – 6:30 PM", "Friday: 8:00 AM – 6:30 PM", "Saturday: 8:00 AM – 6:30 PM", "Sunday: 10:00 AM – 4:30 PM"],
+        },
+        PlacesServiceStatus: {
+          INVALID_REQUEST: 'INVALID_REQUEST',
+          NOT_FOUND: 'NOT_FOUND',
+          OK: 'OK',
+          OVER_QUERY_LIMIT: 'OVER_QUERY_LIMIT',
+          REQUEST_DENIED: 'REQUEST_DENIED',
+          UNKNOWN_ERROR: 'UNKNOWN_ERROR',
+          ZERO_RESULTS: 'ZERO_RESULTS',
+        },
+      },
+      Geocoder: () => {},
+      GeocoderStatus: {
+        ERROR: 'ERROR',
+        INVALID_REQUEST: 'INVALID_REQUEST',
+        OK: 'OK',
+        OVER_QUERY_LIMIT: 'OVER_QUERY_LIMIT',
+        REQUEST_DENIED: 'REQUEST_DENIED',
+        UNKNOWN_ERROR: 'UNKNOWN_ERROR',
+        ZERO_RESULTS: 'ZERO_RESULTS',
+      },
+    },
+  };
+  global.window.google = google;
+};
+
+
+
+// in test file.
+beforeAll(() => {
+  setupGoogleMock();
+});
+
+//
+// it('check callback', () => {
+//   const callOK = callback("", global.window.google.maps.places.PlacesServiceStatus.OK);
+//   expect(callOK).toBeDefined();
+//   expect(callOK).toBe("PlacesServiceStatus OK");
+//   const callNA = callback();
+//   expect(callNA).toBeDefined();
+//   expect(callNA).toBe("PlacesServiceStatus Not OK");
+// });
+//
+// it('check createMap', () => {
+//   const map = createMap();
+//   expect(map).toBeDefined();
+// });
+//

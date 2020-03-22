@@ -2,119 +2,28 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Info | Parking System </title>
-    <link rel="stylesheet" href="styleMap.css">
-    <script src="parkingInfo.js" charset="utf-8"></script>
+    <link rel="icon" href="pictures/noParkingImgFound.png">
+    <title>ParkSystem | ParkingInfo</title>
+    <link rel="stylesheet" href="stylesheets/styleHeader.css">
+    <link rel="stylesheet" href="stylesheets/styleParkingInfo.css">
+    <script src="javaScript/parkingInfo.js" charset="utf-8"></script>
+    <script src="javaScript/header.js" charset="utf-8"></script>
   </head>
-  <style media="screen">
-    .parkingInfoBody{
-      display: grid;
-      grid-template-columns: repeat(2,1fr);
-      grid-gap: 1ch;
-      max-width: calc(100% * 3.5/6);
-      margin: auto;
-      padding: 1rem;
-    }
-    .parkingInfo, .parkingCost{
-          border-bottom: 1px solid #DEDEDE;
-    }
-    .subHeader{
-      text-align: center;
-    }
-    .checkIn, .checkOut, .time{
-        display: grid;
-        grid-template-columns: repeat(2,1fr);
-        grid-gap: 1ch;
-        border-bottom: 1px solid #DEDEDE;
-        padding: 1rem;
-        font-weight: 600;
-    }
-    .prevTicket_btn input{
-      width: 50%;
-      font-size: 16px;
-      letter-spacing: 1px;
-      padding: .5rem;
-      margin: auto;
-      display: block;
-      font-weight: 600;
-      background-color: rgb(83, 161, 215);
-    }
-    .prevTicket_btn{
-      padding: 1rem;
-    }
-    .ParkingTimesHeader{
-    }
-  </style>
+  <header>
+    <nav class="headerNav" id="headerNav">
+    </nav>
+  </header>
   <body>
     <article class="parkingInfoBody">
-        <!--  Template -->
-      <section class="parkingInfoContainer">
-        <!-- info -->
-        <div class="parkingInfo">
-          <div class="parkingInfoHeader">
-            <h1 class="subHeader">Parking Info</h1>
-          </div>
-          <ul id="ParkingInfo_ul">
 
-          </ul>
-        </div>
-        <!-- cost -->
-        <div class="parkingCost">
-          <div class="parkingCostHeader">
-            <h1 class="subHeader">Rates</h1>
-          </div>
-          <ul id="ParkingCost_ul">
-
-
-          </ul>
-        </div>
-        <!-- time -->
-        <div class="ParkingOpeningHour">
-          <div class="ParkingTimesHeader">
-            <h1 class="subHeader">Opening Hours</h1>
-          </div>
-          <ul id="ParkingOpeningHours_ul">
-
-
-          </ul>
-        </div>
+      <section id="parkingInfoContainer" class="parkingInfoContainer">
       </section>
 
-      <section class="ticketContainer">
-        <form action="ticket.html">
-          <h1 class="subHeader">Buy a ticket</h1>
-          <ul>
-              <li>
-                <div class="checkIn">
-                  <label for="">Check-In</label>
-                  <input type="date" name="" value="">
-                </div>
-                <div class="time">
-                  <label for="">Time</label>
-                  <input type="time" name="" value="00:00">
-                </div>
-              </li>
-              <li>
-                <div class="checkOut">
-                  <label for="">Check-Out</label>
-                  <input type="date" name="" value="">
-                </div>
-                <div class="time">
-                  <label for="">Time</label>
-                  <input type="time" name="" value="00:00">
-                </div>
-              </li>
-              <div class="prevTicket_btn">
-                <input type="submit" value="Preview Ticket" />
-              </div>
-          </ul>
-        </form>
+      <section class="ticketContainer" id="ticketContainer">
       </section>
-      <!-- id="map" is here to not break the google api script-->
-      <div id="map"> </div>
-      <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcQlOXG9jMpJ1ZXyq-u0JxkTiOk6XWjHo&libraries=places">
-      </script>
-
     </article>
+    <div id="map"> </div>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcQlOXG9jMpJ1ZXyq-u0JxkTiOk6XWjHo&libraries=places">
+    </script>
   </body>
 </html>

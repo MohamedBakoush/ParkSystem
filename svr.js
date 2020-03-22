@@ -14,6 +14,7 @@ function getParkingDetails(request, response){
   response.json(pib.listParkingDetails());
 }
 
+
 function getParkingDetail(req, res){
   //get a specific parkingDetails by id
   const result = pib.findParkingDetail(req.params.id);

@@ -1,0 +1,114 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+.parkingInfoBody{
+  padding-top: 10vh;
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+}
+
+.parkingInfoContainer, .ticketContainer{
+  display: grid;
+  padding: 1rem;
+}
+.ticketForm, .subHeader{
+  display: grid;
+  justify-content: center;
+}
+
+
+.parkingInfoContainer, .ticketContainer {
+  grid-gap: 1ch;
+}
+.subHeader{
+  margin: auto;
+  padding: 1rem;
+  text-decoration: underline;
+  text-transform: uppercase;
+}
+
+.parkingID label, .checkIn label, .time label, .ParkingInfo_ul, .ParkingCost_ul, .ParkingOpeningHours_ul{
+  font-weight: bold;
+}
+ .ParkingInfo_name, .ParkingInfo_address,.ParkingInfo_phoneNumber,
+.cost15Min, .cost30Min, .cost1Hour, .costAdditionalHour, .ParkingTime_openingHours{
+  padding: 0.25rem;
+  text-align: center;
+}
+
+.parkingID label, .checkIn label, .time label, .parkingID input, .checkIn input, .time input{
+  padding: 1em;
+  margin-top: auto;
+  margin-bottom: auto;
+  font-weight: bold;
+}
+
+
+.parkingID input, .checkIn input, .time input{
+    text-align: center;
+}
+.parkingID, .checkIn, .time{
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+    grid-gap: 1ch;
+    padding-top: .5rem;
+}
+
+.parkingInfo, .parkingCost, .ParkingOpeningHour, .ticketForm{
+  padding: 0.5rem;
+  border-width: 0.125rem;
+  border-style: solid;
+  border-color: rgb(41, 58, 127);
+
+}
+.prevTicket_btn{
+      padding-top: .5rem;
+}
+.prevTicket_btn input{
+  margin: auto;
+  display: grid;
+  width: 100%;
+  font-weight: bold;
+  text-align: center;
+  font-size: 0.75rem;
+  display: block;
+  background-color:  #293a7f;
+  padding: 0.5rem;
+  border-width: 0.125rem;
+  border-style: solid;
+  border-color: rgb(41, 58, 127);
+  color: rgba(255, 255, 255, 1);
+  height: 2.75rem;
+}
+
+.prevTicket_btn input:disabled{
+  background-color: rgba(41, 58, 127, .2);
+  border-color: rgba(41, 58, 127, .2);
+}
+
+
+@media (max-width: 920px) {
+  .parkingInfoBody{
+      grid-template-columns: repeat(1,1fr);
+  }
+}
+[type="id"] {
+    /* border: none; */
+}
+[type="date"] {
+  background:#fff url(https://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/calendar_2.png)  92% 50% no-repeat ;
+}
+[type="date"]::-webkit-inner-spin-button {
+  /* border: none; */
+}
+[type="date"]::-webkit-calendar-picker-indicator {
+  opacity: 0;
+}
+
+[type=time] {
+  /* border: none; */
+  color: #2a2c2d;
+  font-size: 14px;
+  font-family: helvetica;
+}

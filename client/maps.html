@@ -1,47 +1,32 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-  <title>Parking System</title>
-  <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-  <meta charset="utf-8">
-  <link rel="stylesheet" href="styleMap.css">
-  <script src="maps.js" charset="utf-8"></script>
-</head>
-
-<body>
+  <head>
+    <link rel="icon" href="pictures/noParkingImgFound.png">
+    <title>ParkSystem | Maps</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="stylesheets/styleMap.css">
+    <link rel="stylesheet" href="stylesheets/styleHeader.css">
+    <script src="javaScript/maps.js" charset="utf-8"></script>
+    <script src="javaScript/header.js" charset="utf-8"></script>
+  </head>
   <header>
-    <nav class="headerBody">
-      <h1>
-        <a href="index" class="Logo">ParkSystem</a>
-      </h1>
-      <input id="placeInput" type="text" placeholder="Enter a location">
-      <button type="submit" class="searchButton">Search</button>
-
-      <ul class="signinLinks">
-        <li><a href="login" class="login">login</a></li>
-        <li><a href="register" class="register">Register</a></li>
-      </ul>
+    <nav class="headerNav" id="headerNav">
     </nav>
-
   </header>
+  <body>
+    <article class="mapBody">
 
-  <article class="mapBody">
+      <section id="mapListContainer" class="mapListContainer">
+      </section>
 
-    <section id="mapListContainer" class="mapListContainer">
-    </section>
+      <section id="mapContainer" class="mapContainer">
+        <div id="map" class="map"></div>
+      </section>
 
-    <section id="mapContainer" class="mapContainer">
-      <div id="map" class="map"></div>
-    </section>
+    </article>
 
-  </article>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCFrqJV8YGajIiAgTzNo0uK1Tdl5W5AwUg&libraries=places"
+        async defer></script>
 
-  <!--
-      Google API Key Mohamed: AIzaSyAcQlOXG9jMpJ1ZXyq-u0JxkTiOk6XWjHo
-      Google API Key Max: AIzaSyAzmcJq7y-HW3_beX9kDsSG5k6hyo1TcNE
-    -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcQlOXG9jMpJ1ZXyq-u0JxkTiOk6XWjHo&libraries=places&callback=createMap" async defer></script>
-</body>
-
+   </body>
 </html>

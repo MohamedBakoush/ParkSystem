@@ -2,53 +2,39 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Ticket | Parking System </title>
+    <link rel="icon" href="pictures/noParkingImgFound.png">
+    <title>ParkSystem | Ticket</title>
+    <script src="javaScript/ticket.js" charset="utf-8"></script>
+    <script src="javaScript/header.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="stylesheets/styleheader.css">
+    <link rel="stylesheet" href="stylesheets/styleTicket.css">
   </head>
+  <header>
+    <nav class="headerNav" id="headerNav">
+    </nav>
+  </header>
   <body>
-
-    <article class="">
-      <form>
-        <ul>
-          <h1>Parking Space Details</h1>
-          <li>Duration</li>
-          <li>TotalCost</li>
-          <input type="submit" value="Buy Ticket" />
-        </ul>
+    <article class="ticketBody">
+      <form class="ticketForm">
+        <h1 class="ticketHeader">Parking Space Details</h1>
+          <div id="DateDiffrence" class="DateDiffrence">
+            <h1>Date:</h1>
+          </div>
+          <div id="TimeCheckIn" class="TimeCheckIn">
+            <h1>TimeCheckIn:</h1>
+          </div>
+          <div id="TimeCheckOut" class="TimeCheckOut">
+            <h1>TimeCheckOut:</h1>
+          </div>
+          <div id="TimeDiffrence" class="TimeDiffrence">
+            <h1>Total Time Stay:</h1>
+          </div>
+          <div id="parkingCostFinal" class="parkingCostFinal">
+            <h1>Total Cost:</h1>
+          </div>
+        <div id="buyTicket_btn" class="buyTicket_btn">
+        </div>
       </form>
-      <section>
-        <ul>
-          <h1>Driver Info</h1>
-          <li>
-            <input type="text" name="" value="FName">
-          </li>
-          <li>
-            <input type="text" name="" value="LName">
-          </li>
-          <li>
-            <input type="text" name="" value="Email">
-          </li>
-          <li>
-            <input type="text" name="" value="VehicleName">
-          </li>
-          <li>
-            <input type="text" name="" value="LicensePlate">
-          </li>
-        </ul>
-      </section>
-      <section>
-        <ul>
-          <h1>Payment Info</h1>
-          <li>
-            <input type="text" name="" value="Card Number">
-          </li>
-          <li>
-            <input type="text" name="" value="Expires (MM/YY)">
-          </li>
-          <li>
-            <input type="text" name="" value="CVC">
-          </li>
-        </ul>
-      </section>
     </article>
 
   </body>
