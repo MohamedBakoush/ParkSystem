@@ -5,19 +5,22 @@ const data = FileSystem.readFileSync('userInfo.json');
 const users = JSON.parse(data);
 
 
-let currentUser = [{username: undefined}];
+let currentUser = {username: undefined};
 
+// returns CurrentUser details
 function listCurrentUser() {
-  // returns CurrentUser details
   return currentUser;
 }
+
+// add login user to current user (currentlu login in)
 function addCurrentUser(username) {
     const newCurrentUser = {
       username: username,
     };
-    currentUser = [newCurrentUser];
+    currentUser = newCurrentUser;
     return newCurrentUser;
 }
+
 // Finds a user by username
 function findUser(id){
  if (users[id] === undefined) {

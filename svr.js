@@ -4,19 +4,17 @@ const app = express();
 const pib = require('./parkingInfoBoard');
 const uib = require('./userInfo');
 
-// adds html as extensions
-// dont need to write index.html
+// adds html as extensions, dont need to write index.html
 // www.example.com/index will work if the file exists
 app.use(express.static('client', { extensions: ['html'] }));
 
+//gets all Parking Details available
 function getParkingDetails(request, response){
-  //gets all Parking Details available
   response.json(pib.listParkingDetails());
 }
 
-
+//get a specific parkingDetails by id
 function getParkingDetail(req, res){
-  //get a specific parkingDetails by id
   const result = pib.findParkingDetail(req.params.id);
   console.log(req.params.id);
   if(!result){
@@ -56,11 +54,12 @@ async function getUserList(req, res) {
   res.json(uib.getAllUsers());
 }
 
-
+// Get Current login user
 function getCurrentUser(request, response){
   response.json(uib.listCurrentUser());
 }
 
+// add Current User that is login in
 function postCurrentUserDetail(req, res) {
   const currentUser = uib.addCurrentUser(req.body.username);
   res.json(currentUser);

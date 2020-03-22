@@ -1,10 +1,9 @@
 
 function showHeaderInfo(user) {
+
   const container = document.getElementById("headerNav");
   const logoContainer = makeElement(container, "section", "logoLinks", "logoLinks");
   contentInfo(logoContainer, "a", "Logo", "Logo", "ParkSystem", "/");
-
-
 
   if (user.username === undefined) {
     console.log("undefined");
@@ -58,8 +57,8 @@ async function getCurrentUser() {
   } else {
     user = { msg: 'failed to load messages' };
   }
-
-  showHeaderInfo(user[0]);
+ 
+  showHeaderInfo(user);
 }
 
 window.addEventListener('load', getCurrentUser);
