@@ -1,14 +1,24 @@
 
-function showHeaderInfo() {
+function showHeaderInfo(user) {
   const container = document.getElementById("headerNav");
   const logoContainer = makeElement(container, "section", "logoLinks", "logoLinks");
   contentInfo(logoContainer, "a", "Logo", "Logo", "ParkSystem", "/");
 
-  const accInfoContainer = makeElement(container, "ul", "signinLinks", "signinLinks");
-  const accInfoRegister = makeElement(accInfoContainer, "li");
-  const accInfoLogin = makeElement(accInfoContainer, "li");
-  contentInfo(accInfoLogin, "a", "login", "login", "login", "login");
-  contentInfo(accInfoRegister, "a", "register", "register", "register", "register");
+
+
+  if (user.username === undefined) {
+    console.log("undefined");
+    const accInfoContainer = makeElement(container, "ul", "signinLinks", "signinLinks");
+    const accInfoRegister = makeElement(accInfoContainer, "li");
+    const accInfoLogin = makeElement(accInfoContainer, "li");
+    contentInfo(accInfoLogin, "a", "login", "login", "login", "login");
+    contentInfo(accInfoRegister, "a", "register", "register", "register", "register");
+  } else {
+    console.log(user.username);
+    const accInfoContainer = makeElement(container, "ul", "loginUser", "loginUser");
+    const accInfo = makeElement(accInfoContainer, "li");
+    contentInfo(accInfo, "a", "LoginUser", "LoginUser", user.username, "#");
+  }
 
   return "ShowHeaderInfo works";
 }
@@ -40,7 +50,19 @@ function contentInfo(container, elementType, classHere , idHere, textContent, hr
   }
 }
 
-window.addEventListener('load', showHeaderInfo);
+async function getCurrentUser() {
+  const response = await fetch(`CurrentUser`);
+  let user;
+  if (response.ok) {
+    user = await response.json();
+  } else {
+    user = { msg: 'failed to load messages' };
+  }
+
+  showHeaderInfo(user[0]);
+}
+
+window.addEventListener('load', getCurrentUser);
 module.exports = {
   // export modules
   showHeaderInfo,
