@@ -7,8 +7,8 @@ function showHeaderInfo() {
   const accInfoContainer = makeElement(container, "ul", "signinLinks", "signinLinks");
   const accInfoRegister = makeElement(accInfoContainer, "li");
   const accInfoLogin = makeElement(accInfoContainer, "li");
-  contentInfo(accInfoLogin, "a", "login", "login", "login", "#");
-  contentInfo(accInfoRegister, "a", "register", "register", "register", "#");
+  contentInfo(accInfoLogin, "a", "login", "login", "login", "login");
+  contentInfo(accInfoRegister, "a", "register", "register", "register", "register");
 
   return "ShowHeaderInfo works";
 }
