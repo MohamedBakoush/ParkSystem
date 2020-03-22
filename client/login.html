@@ -14,16 +14,25 @@
   </nav>
 </header>
 <body>
-  <article class="inputForm">
-    <form action="#" onsubmit="return false">
-      <label>Username</label>
-      <input type="text" id="username" required="required"  placeholder="Username">
-      <label>Password</label>
-      <input type="password" id="password" required="required"  placeholder="Password">
-      <button id="loginBut" type="submit">Submit</button>
-    </form>
-    <section id="errors">
+  <article class="loginBody">
+    <section class="loginContainer">
 
+      <form class="loginForm"  action="#" onsubmit="return false">
+        <h1 class="loginHeader">Login Here</h1>
+        <label class="usernameLabel">Username</label>
+        <input class="username" type="text" id="username" required="required"  placeholder="Username">
+        <label class="passwordLabel">Password</label>
+        <input class="password" type="password" id="password" required="required"  placeholder="Password">
+
+        <div class="loginButtonContainer">
+        <button class="loginButton" id="loginBut" type="submit">Login</button>
+        </div>
+      </form>
+
+    </section>
+    <section class="loginMessages">
+      <section class="errorsContainer" id="errors">
+      </section>
     </section>
   </article>
 </body>

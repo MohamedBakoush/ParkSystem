@@ -42,14 +42,14 @@ async function checkLogin(loginInfo) {
   });
   if (response.ok) {
     console.log("login worked");
-    currentUser(loginInfo); 
+    currentUser(loginInfo);
     window.location = 'index'
   } else if (response.status == 400) {
         console.log("usernameWrong");
-        outcomeOutput(errorContainer,"usernameWrong","usernameWrong","usernameWrong");
+        outcomeOutput(errorContainer,"usernameWrong","usernameWrong","Username: Invalid User");
   } else if (response.status == 401){
       console.log("passwordWrong");
-        outcomeOutput(errorContainer,"passwordWrong","passwordWrong","passwordWrong");
+        outcomeOutput(errorContainer,"passwordWrong","passwordWrong","Password: Invalid Password");
   }
 }
 

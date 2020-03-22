@@ -1,0 +1,103 @@
+
+.loginContainer, .loginMessages{
+  display: grid;
+  justify-content: center;
+}
+.loginMessages{
+  padding: .5rem;
+}
+.errorsContainer{
+  display: grid;
+  justify-content: center;
+  grid-gap: 1ch;
+}
+.loginBody{
+  padding-top: 5vh;
+  padding-bottom: 5vh;
+  display: grid;
+  justify-content: center;
+  grid-template-columns: repeat(2,1fr);
+}
+.loginForm{
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  grid-gap: 1ch;
+  border-width: 0.125rem;
+  border-style: solid;
+  padding: 0.5rem;
+  border-color: rgb(41, 58, 127);
+}
+.loginHeader{
+  margin: auto;
+  display: grid;
+  justify-content: center;
+  padding: 1rem;
+  text-decoration: underline;
+  text-transform: uppercase;
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
+.loginButtonContainer{
+  padding: 0.5rem;
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
+
+.loginButton{
+  margin: auto;
+  display: grid;
+  width: 100%;
+  font-weight: bold;
+  text-align: center;
+  font-size: 0.75rem;
+  display: block;
+  background-color:  #293a7f;
+  padding: 0.5rem;
+  border-width: 0.125rem;
+  border-style: solid;
+  border-color: rgb(41, 58, 127);
+  color: rgba(255, 255, 255, 1);
+  height: 2.75rem;
+}
+
+.loginButton:hover{
+    background-color: rgba(41,58,127, 0.1);
+    border: .125rem solid rgba(41,58,127, 1);
+    color: rgb(0, 0, 0);
+  }
+
+
+.usernameWrong, .passwordWrong,  .username, .password{
+    padding: 1em;
+    margin-top: auto;
+    margin-bottom: auto;
+    font-weight: bold;
+  }
+
+.usernameWrong, .passwordWrong{
+    border-width: 0.125rem;
+    border-style: solid;
+    border-color: rgb(41, 58, 127);
+    background-color: rgba(41,58,127, 0.3);
+  }
+
+  .usernameLabel, .passwordLabel{
+    padding: 1em;
+    margin-top: auto;
+    margin-bottom: auto;
+    font-weight: bold;
+  }
+
+  @media screen and (max-width: 920px) {
+    .loginBody{
+      padding-top: 5vh;
+      padding-bottom: 5vh;
+      display: grid;
+      justify-content: center;
+      grid-template-columns: repeat(1,1fr);
+    }
+    .loginContainer{
+      display: block;
+      padding: .5rem;
+    }
+  }
