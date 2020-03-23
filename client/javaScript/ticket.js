@@ -143,23 +143,53 @@ function getTicketInfo(parkingDetail) {
   const herfData = splitHref();
   const time = calculateTime(herfData.checkInHour, herfData.checkInMin, herfData.checkOutHour, herfData.checkOutMin);
   const cost = calculateCost(parkingDetail, time.timeDiffrenceHour, time.timeDiffrenceMin );
-  // get element id from ticket.html
-  const timeCheckInContainer = document.getElementById("TimeCheckIn");
-  const timeCheckOutContainer = document.getElementById("TimeCheckOut");
-  const timeDiffrenceContainer =document.getElementById("TimeDiffrence");
-  const dateDiffrenceContainer = document.getElementById("DateDiffrence");
-  const costContainer = document.getElementById("parkingCostFinal");
-  const buyTicket_btn = document.getElementById("buyTicket_btn");
-  // shows ticket data in html
 
-  ticketData(timeCheckInContainer, time.timeCheckIn, "p", "timeCheckIn", "timeCheckIn");
-  ticketData(timeCheckOutContainer, time.timeCheckOut, "p", "timeCheckOut", "timeCheckOut");
-  ticketData(timeDiffrenceContainer, time.totalTimeDiffrence, "p", "timeDiffrence", "timeDiffrence");
+  // shows ticket data in html
+  const ticketBody = document.getElementById("ticketBody");
+
+  const ticketForm = createSection(ticketBody, "div", "ticketForm", "ticketForm");
+
+  createSection(ticketForm, "h1", "ticketHeader", "ticketHeader", "Parking Space Details");
+
+  const dateDiffrenceContainer = createSection(ticketForm, "div", "DateDiffrence", "DateDiffrence");
+  createSection(dateDiffrenceContainer, "h1", "", "", "Date:");
   ticketData(dateDiffrenceContainer, herfData.checkInDate, "p", "dateDiffrence", "dateDiffrence");
+
+  const timeCheckInContainer = createSection(ticketForm, "div", "TimeCheckIn", "TimeCheckIn");
+  createSection(timeCheckInContainer, "h1", "", "", "TimeCheckIn:");
+  ticketData(timeCheckInContainer, time.timeCheckIn, "p", "timeCheckIn", "timeCheckIn");
+
+  const timeCheckOutContainer = createSection(ticketForm, "div", "TimeCheckOut", "TimeCheckOut");
+  createSection(timeCheckOutContainer, "h1", "", "", "TimeCheckOut:");
+  ticketData(timeCheckOutContainer, time.timeCheckOut, "p", "timeCheckOut", "timeCheckOut");
+
+  const timeDiffrenceContainer = createSection(ticketForm, "div", "TimeDiffrence", "TimeDiffrence");
+  createSection(timeDiffrenceContainer, "h1", "", "", "Total Time Stay:");
+  ticketData(timeDiffrenceContainer, time.totalTimeDiffrence, "p", "timeDiffrence", "timeDiffrence");
+
+
+  const costContainer = createSection(ticketForm, "div", "parkingCostFinal", "parkingCostFinal");
+  createSection(costContainer, "h1", "", "", "Total Cost:");
   costData(costContainer, "£", cost, "p", "finalCost", "finalCost");
+
+  const buyTicket_btn = createSection(ticketForm, "div", "buyTicket_btn", "buyTicket_btn");
   createBuyTicket(buyTicket_btn, "submit", "Buy Ticket", true, "buyTicket", "buyTicket");
+
   return "getTicketInfo worked";
 
+}
+
+function createSection(container, dataType, classHere, idHere, string){
+  try {
+    const section = document.createElement(dataType);
+    section.classList = classHere;
+    section.id = idHere;
+    section.textContent = string;
+    container.appendChild(section);
+    return section;
+  } catch (e) {
+    return "createSection didnt work";
+  }
 }
 
 function pageLoaded() {

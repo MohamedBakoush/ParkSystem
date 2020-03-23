@@ -118,7 +118,7 @@ function createForm(container, classHere, action){ // Form maker
   }
 }
 
-function createSection(container, dataType, classHere, string){ // label maker
+function createSection(container, dataType, classHere, string){
   try {
     const section = document.createElement(dataType);
     section.classList = classHere;
