@@ -49,6 +49,17 @@ function login(req, res) {
   }
 }
 
+// Will log the user in
+function logout(req, res) {
+  const result =  uib.logOut(req.body.username);
+  console.log("result: ", result);
+  if (result == "noUserFound") {
+    res.status(400).send({message: result});
+  } else {
+    res.send(result);
+  }
+}
+
 // Gets all the user information
 async function getUserList(req, res) {
   res.json(uib.getAllUsers());
@@ -75,5 +86,7 @@ app.post('/registerAcc', express.json(), createAcc);
 app.get('/registerAcc', getUserList);
 
 app.post('/loginAcc', express.json(), login);
+
+app.post('/logOutAcc', express.json(), logout);
 
 app.listen(8080);

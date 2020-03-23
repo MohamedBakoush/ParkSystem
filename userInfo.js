@@ -37,7 +37,7 @@ function logIn(username, password) {
   if (user !== undefined) {
     if (user.password === password) {
       user.loggedIn = true;
-      return "ok";
+      return "user Login";
     }
     return "passwordWrong";
   }
@@ -45,10 +45,15 @@ function logIn(username, password) {
 }
 
 // Log out the user
-function logOut(usernane) {
+function logOut(username) {
+  console.log(username);
   const user = findUser(username);
   if (user !== undefined) {
     user.loggedIn = false;
+    currentUser = {};
+    return "LogOut";
+  }else {
+    return "noUserFound"
   }
 }
 
@@ -93,5 +98,6 @@ module.exports = {
   removeUser,
   logIn,
   listCurrentUser,
-  addCurrentUser
+  addCurrentUser,
+  logOut
 };

@@ -1,6 +1,6 @@
 
-function showHeaderInfo(user) {
-
+async function showHeaderInfo() {
+  const user = await getCurrentUser();
   const container = document.getElementById("headerNav");
   const logoContainer = makeElement(container, "section", "logoLinks", "logoLinks");
   contentInfo(logoContainer, "a", "Logo", "Logo", "ParkSystem", "/");
@@ -15,11 +15,27 @@ function showHeaderInfo(user) {
   } else {
     console.log(user.username);
     const accInfoContainer = makeElement(container, "ul", "loginUser", "loginUser");
-    const accInfo = makeElement(accInfoContainer, "li");
-    contentInfo(accInfo, "a", "LoginUser", "LoginUser", user.username, "#");
+    const accInfoUsername = makeElement(accInfoContainer, "li");
+    const accInfoLogout = makeElement(accInfoContainer, "li");
+    contentInfo(accInfoUsername, "a", "LoginUser", "LoginUser", user.username, "#");
+    createBtn(accInfoLogout, "input", "button", "logout", "logout", "logout", logout);
   }
-
   return "ShowHeaderInfo works";
+}
+
+function createBtn(container, elementType, type, classHere , idHere, textContent, onclick){
+  try {
+    const element = document.createElement(elementType);
+    element.type = type;
+    element.classList = classHere;
+    element.id = idHere;
+    element.value  = textContent;
+    element.onclick = onclick;
+    container.appendChild(element);
+    return element;
+  } catch (e) {
+    return "Button didnt create";
+  }
 }
 
 function makeElement(container, elementTypeList, classHere, idHere){
@@ -32,7 +48,6 @@ function makeElement(container, elementTypeList, classHere, idHere){
   } catch (e) {
     return "makeElement did not work";
   }
-
 }
 
 function contentInfo(container, elementType, classHere , idHere, textContent, href){
@@ -57,11 +72,26 @@ async function getCurrentUser() {
   } else {
     user = { msg: 'failed to load messages' };
   }
- 
-  showHeaderInfo(user);
+  return user;
 }
 
-window.addEventListener('load', getCurrentUser);
+
+async function logout() {
+  const user = await getCurrentUser();
+  const response = await fetch('logOutAcc', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(user),
+  });
+  if (response.ok) {
+    console.log("LogOut");
+    window.location.reload();
+  } else if (response.status == 400) {
+      console.log("LogOut Failed");
+  }
+}
+
+window.addEventListener('load', showHeaderInfo);
 module.exports = {
   // export modules
   showHeaderInfo,
