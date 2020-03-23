@@ -158,23 +158,36 @@ function grabEverything() {
 }
 
 function loadRegisteData() {
-  const registerContainer = document.getElementById("registerContainer");
+  const registerBody = document.getElementById("registerBody");
+
+  const registerContainer = createSection(registerBody, "section", "registerContainer","registerContainer");
   const registerForm = createForm(registerContainer, "registerForm" , "#");
-  createSection(registerForm, "h1", "registerHeader", "Register Here");
-  createSection(registerForm, "label", "usernameLabel", "Username:");
+
+  createSection(registerForm, "h1", "registerHeader","registerHeader", "Register Here");
+
+  createSection(registerForm, "label", "usernameLabel", "usernameLabel", "Username:");
   createRegisterInput(registerForm, "text", "username","username", "Username", "[A-Za-z0-9.-]+", "only uppercase and lowercase letters and numbers and dash", true);
-  createSection(registerForm, "label", "passwordLabel", "Password:");
+
+  createSection(registerForm, "label", "passwordLabel", "passwordLabel", "Password:");
   createRegisterInput(registerForm, "password", "password","password", "Password", "(?=.*d)(?=.*[a-z])(?=.*[A-Z]).{8,}", "At least one number and one uppercase and lowercase letter, and at least 8 or more characters", true);
-  createSection(registerForm, "label", "forenameLabel", "Forename:");
+
+  createSection(registerForm, "label", "forenameLabel", "forenameLabel", "Forename:");
   createRegisterInput(registerForm, "text", "forename","forename", "Forename", "[A-Za-z]+", "Forename: letters only", true);
-  createSection(registerForm, "label", "surnameLabel", "Surname:");
+
+  createSection(registerForm, "label", "surnameLabel", "surnameLabel", "Surname:");
   createRegisterInput(registerForm, "text", "surname","surname", "Surname", "[A-Za-z]+", "Surname: letters only", true);
-  createSection(registerForm, "label", "emailLabel", "Email Address:");
+
+  createSection(registerForm, "label", "emailLabel", "emailLabel", "Email Address:");
   createRegisterInput(registerForm, "email", "email","email", "Email Address", "[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$", "xyz@something.com", true);
-  createSection(registerForm, "label", "phoneNumLabel", "Phone Number:");
+
+  createSection(registerForm, "label", "phoneNumLabel", "phoneNumLabel", "Phone Number:");
   createRegisterInput(registerForm, "tel", "phoneNum","phoneNum", "Phone Number", "^d{10}$", "10 numeric characters only", true);
-  const registerButtonContainer = createSection(registerForm, "div", "registerButtonContainer");
+
+  const registerButtonContainer = createSection(registerForm, "div", "registerButtonContainer", "registerButtonContainer");
   createButton(registerButtonContainer, "submit", "registerButton","regBut", grabEverything, "Register")
+
+  const registerMessages = createSection(registerBody, "section", "registerMessages","registerMessages");
+  createSection(registerMessages, "section", "errorsContainer","errors");
 }
 
 function createRegisterInput(container,type, classHere,idHere, placeholder, pattern, title, required){
@@ -223,10 +236,11 @@ function createForm(container, classHere, action){ // Form maker
 }
 
 
-function createSection(container, dataType, classHere, string){ // label maker
+function createSection(container, dataType, classHere, idHere, string){ // label maker
   try {
     const section = document.createElement(dataType);
     section.classList = classHere;
+    section.id = idHere;
     section.textContent = string;
     container.appendChild(section);
     return section;
