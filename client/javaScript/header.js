@@ -77,7 +77,7 @@ async function getCurrentUser() {
 
 
 async function logout() {
-  const user = await getCurrentUser();
+  const user = await fetch(`CurrentUser`);
   const response = await fetch('logOutAcc', {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
