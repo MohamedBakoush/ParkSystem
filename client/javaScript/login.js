@@ -43,7 +43,7 @@ async function checkLogin(loginInfo) {
   if (response.ok) {
     console.log("login worked");
     currentUser(loginInfo);
-    window.location = 'index'
+    window.location = '/'
   } else if (response.status == 400) {
         console.log("usernameWrong");
         outcomeOutput(errorContainer,"usernameWrong","usernameWrong","Username: Invalid User");

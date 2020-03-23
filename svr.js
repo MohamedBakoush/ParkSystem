@@ -83,7 +83,7 @@ app.get('/parkingDetails', getParkingDetails);
 app.get('/parkingDetails/:id', getParkingDetail);
 
 app.post('/registerAcc', express.json(), createAcc);
-app.get('/registerAcc', getUserList);
+// app.get('/registerAcc', getUserList);
 
 app.post('/loginAcc', express.json(), login);
 
