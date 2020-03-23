@@ -21,7 +21,7 @@ body {
 .signinLinks, .loginUser{
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-} 
+}
  .logout, .login, .register, .LoginUser{
     font-weight: 400;
     text-decoration: none;
@@ -45,7 +45,9 @@ body {
     border-style: solid;
     border-color: rgb(41, 58, 127);
     border-image: initial;
-    text-transform: capitalize;
+}
+.logout, .login, .register{
+  text-transform: capitalize;
 }
 
 .logout:hover, .login:hover, .register:hover, .LoginUser:hover{

@@ -15,36 +15,7 @@
 </header>
 <body>
   <article class="registerBody">
-    <section class="registerContainer">
-      <form class="registerForm" action="#" onsubmit="return false">
-        <h1 class="registerHeader">Register Here</h1>
-
-        <label class="usernameLabel">Username:</label>
-        <input type="text" class="username" id="username" pattern="[A-Za-z0-9.-]+"
-          title="only uppercase and lowercase letters and numbers and -"
-          required="required" placeholder="Username">
-
-        <label class="passwordLabel">Password:</label>
-        <input type="password" class="password" id="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-          title="at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
-          required="required" placeholder="Password">
-        <label class="forenameLabel">Forename:</label>
-        <input type="text" class="forename" id="forename" pattern="[A-Za-z]+" title="letters only"
-          required="required" placeholder="Forename">
-        <label class="surnameLabel">Surname:</label>
-        <input type="text" class="surname"  id="surname" pattern="[A-Za-z]+" title="letters only"
-          required="required" placeholder="Surname">
-        <label class="emailLabel">Email Address:</label>
-        <input type="email" class="email" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
-          title="xyz@something.com" required="required" placeholder="Email Address">
-        <label class="phoneNumLabel">Phone Number:</label>
-        <input type="tel" class="phoneNum" id="phoneNum" pattern="^\d{10}$"
-          title="10 numeric characters only" required="required" placeholder="Phone Number">
-
-        <div class="registerButtonContainer">
-           <button class="registerButton" type="submit" id="regBut" onclick="grabEverything()">Register</button>
-        </div>
-      </form>
+    <section class="registerContainer" id="registerContainer">
     </section>
     <section class="registerMessages">
       <section class="errorsContainer" id="errors">

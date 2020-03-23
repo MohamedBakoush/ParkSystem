@@ -3,6 +3,7 @@
 const elem = {};
 
 async function pageLoaded() {
+  loadLoginData();
   prepareHandles();
   addEventListeners();
 }
@@ -10,7 +11,7 @@ async function pageLoaded() {
 async function prepareHandles() {
   elem.username = document.querySelector("#username");
   elem.password = document.querySelector("#password");
-  elem.loginBut = document.querySelector("#loginBut")
+  elem.loginBut = document.querySelector("#loginBut");
 }
 
 async function addEventListeners() {
@@ -77,5 +78,71 @@ async function currentUser(loginInfo) {
   }
 }
 
+function loadLoginData() {
+  const loginContainer = document.getElementById("loginContainer");
+  const loginForm = createForm(loginContainer, "loginForm" , "#");
+  createSection(loginForm, "h1", "loginHeader", "Login Here");
+  createSection(loginForm, "label", "usernameLabel", "Username");
+  loginData(loginForm, "text", "username", "username", "Username", true);
+  createSection(loginForm,"label", "passwordLabel", "Password");
+  loginData(loginForm, "password", "password", "password", "Password", true);
+
+  const loginButtonContainer = createSection(loginForm, "div", "loginButtonContainer");
+  createButton(loginButtonContainer, "submit", "loginButton","loginBut", "Login")
+}
+
+function createButton(container,type, classHere,idHere, textContent){ // Form maker
+  try {
+    const button = document.createElement('button');
+    button.type = type;
+    button.classList = classHere;
+    button.id = idHere;
+    button.textContent = textContent;
+    container.appendChild(button);
+    return button;
+  } catch (e) {
+    return "createButton didnt work";
+  }
+}
+
+function createForm(container, classHere, action){ // Form maker
+  try {
+    const form = document.createElement('form');
+    form.classList = classHere;
+    form.action = action;
+    form.onsubmit = function() {return false}
+    container.appendChild(form);
+    return form;
+  } catch (e) {
+    return "createForm didnt work";
+  }
+}
+
+function createSection(container, dataType, classHere, string){ // label maker
+  try {
+    const section = document.createElement(dataType);
+    section.classList = classHere;
+    section.textContent = string;
+    container.appendChild(section);
+    return section;
+  } catch (e) {
+    return "createSection didnt work";
+  }
+}
+
+function loginData(container, type, classHere, idHere, placeholder, required){ // Creats input section for loginData
+  try {
+    const ticketData = document.createElement('input');
+    ticketData.type = type;
+    ticketData.classList = classHere;
+    ticketData.id = idHere;
+    ticketData.placeholder = placeholder;
+    ticketData.required = required;
+    container.appendChild(ticketData);
+    return ticketData;
+  } catch (e) {
+      return "loginData didnt work";
+  }
+}
 
 window.addEventListener('load', pageLoaded);

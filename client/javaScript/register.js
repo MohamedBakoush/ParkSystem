@@ -4,6 +4,7 @@ const elem = {};
 
 /*Function which will set up handles on elements and event listeners when the page loads*/
 async function pageLoaded() {
+  loadRegisteData();
   prepareHandles();
 }
 
@@ -156,6 +157,83 @@ function grabEverything() {
 
 }
 
+function loadRegisteData() {
+  const registerContainer = document.getElementById("registerContainer");
+  const registerForm = createForm(registerContainer, "registerForm" , "#");
+  createSection(registerForm, "h1", "registerHeader", "Register Here");
+  createSection(registerForm, "label", "usernameLabel", "Username:");
+  createRegisterInput(registerForm, "text", "username","username", "Username", "[A-Za-z0-9.-]+", "only uppercase and lowercase letters and numbers and dash", true);
+  createSection(registerForm, "label", "passwordLabel", "Password:");
+  createRegisterInput(registerForm, "password", "password","password", "Password", "(?=.*d)(?=.*[a-z])(?=.*[A-Z]).{8,}", "At least one number and one uppercase and lowercase letter, and at least 8 or more characters", true);
+  createSection(registerForm, "label", "forenameLabel", "Forename:");
+  createRegisterInput(registerForm, "text", "forename","forename", "Forename", "[A-Za-z]+", "Forename: letters only", true);
+  createSection(registerForm, "label", "surnameLabel", "Surname:");
+  createRegisterInput(registerForm, "text", "surname","surname", "Surname", "[A-Za-z]+", "Surname: letters only", true);
+  createSection(registerForm, "label", "emailLabel", "Email Address:");
+  createRegisterInput(registerForm, "email", "email","email", "Email Address", "[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$", "xyz@something.com", true);
+  createSection(registerForm, "label", "phoneNumLabel", "Phone Number:");
+  createRegisterInput(registerForm, "tel", "phoneNum","phoneNum", "Phone Number", "^d{10}$", "10 numeric characters only", true);
+  const registerButtonContainer = createSection(registerForm, "div", "registerButtonContainer");
+  createButton(registerButtonContainer, "submit", "registerButton","regBut", grabEverything, "Register")
+}
+
+function createRegisterInput(container,type, classHere,idHere, placeholder, pattern, title, required){
+  try {
+    const input = document.createElement('input');
+    input.type = type;
+    input.classList = classHere;
+    input.id = idHere;
+    input.placeholder = placeholder;
+    input.pattern = pattern;
+    input.title = title;
+    input.required = required;
+    container.appendChild(input);
+    return input;
+  } catch (e) {
+    return "createRegisterInput didnt work";
+  }
+}
+
+function createButton(container,type, classHere,idHere,onclick, textContent){ // Form maker
+  try {
+    const button = document.createElement('button');
+    button.type = type;
+    button.classList = classHere;
+    button.id = idHere;
+    button.onclick = onclick;
+    button.textContent = textContent;
+    container.appendChild(button);
+    return button;
+  } catch (e) {
+    return "createButton didnt work";
+  }
+}
+
+function createForm(container, classHere, action){ // Form maker
+  try {
+    const form = document.createElement('form');
+    form.classList = classHere;
+    form.action = action;
+    form.onsubmit = function() {return false}
+    container.appendChild(form);
+    return form;
+  } catch (e) {
+    return "createForm didnt work";
+  }
+}
+
+
+function createSection(container, dataType, classHere, string){ // label maker
+  try {
+    const section = document.createElement(dataType);
+    section.classList = classHere;
+    section.textContent = string;
+    container.appendChild(section);
+    return section;
+  } catch (e) {
+    return "createSection didnt work";
+  }
+}
 
 
 /*Once page has loaded, will call function pageLoaded*/
