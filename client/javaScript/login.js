@@ -79,16 +79,22 @@ async function currentUser(loginInfo) {
 }
 
 function loadLoginData() {
-  const loginContainer = document.getElementById("loginContainer");
+  const loginBody = document.getElementById("loginBody");
+
+  const loginContainer = createSection(loginBody, "section", "loginContainer","loginContainer");
+
   const loginForm = createForm(loginContainer, "loginForm" , "#");
-  createSection(loginForm, "h1", "loginHeader", "Login Here");
-  createSection(loginForm, "label", "usernameLabel", "Username");
+  createSection(loginForm, "h1", "loginHeader", "loginHeader", "Login Here");
+  createSection(loginForm, "label", "usernameLabel", "usernameLabel", "Username");
   loginData(loginForm, "text", "username", "username", "Username", true);
-  createSection(loginForm,"label", "passwordLabel", "Password");
+  createSection(loginForm,"label", "passwordLabel", "passwordLabel", "Password");
   loginData(loginForm, "password", "password", "password", "Password", true);
 
   const loginButtonContainer = createSection(loginForm, "div", "loginButtonContainer");
   createButton(loginButtonContainer, "submit", "loginButton","loginBut", "Login")
+
+  const registerMessages = createSection(loginBody, "section", "loginMessages","loginMessages");
+  createSection(registerMessages, "section", "errorsContainer","errors");
 }
 
 function createButton(container,type, classHere,idHere, textContent){ // Form maker
@@ -118,10 +124,11 @@ function createForm(container, classHere, action){ // Form maker
   }
 }
 
-function createSection(container, dataType, classHere, string){
+function createSection(container, dataType, classHere, idHere, string){
   try {
     const section = document.createElement(dataType);
     section.classList = classHere;
+    section.id = idHere;
     section.textContent = string;
     container.appendChild(section);
     return section;
