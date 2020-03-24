@@ -81,7 +81,7 @@ function calculateCost(parkingDetail, timeDiffrenceHour, timeDiffrenceMin) {
 
 // shows BuyTicket button in html
 function createBuyTicket(container, type, value, disabled, classHere, idHere){
-  if(container != null){
+  try {
     const button = document.createElement('input');
     button.type = type;
     button.value = value;
@@ -90,8 +90,8 @@ function createBuyTicket(container, type, value, disabled, classHere, idHere){
     button.disabled = disabled;
     container.appendChild(button);
     return button;
-  }else {
-    return "container is equal to null"
+  } catch (e) {
+        return "createBuyTicket Failed"
   }
 }
 
@@ -209,4 +209,5 @@ module.exports = { // export modules
   getParkingDetail_Id,
   loadParkingDetail,
   getTicketInfo,
+  createSection,
 };

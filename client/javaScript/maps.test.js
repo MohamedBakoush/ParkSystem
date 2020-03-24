@@ -1,5 +1,4 @@
 'use strict'
-
 const {
   loadLatLonDetail,
   costData,
@@ -11,8 +10,8 @@ const {
   checkLatLon,
   createMarker,
   callback,
-  createMap
-} = require('./maps');
+  createMap } = require('./maps');
+
 const {findParkingDetail} = require('../../parkingInfoBoard');
 global.window = Object.create(window);
 const url = "http://localhost:8080/maps?l=Stockholm%2C+Sweden&lat=59.32932349999999&lon=18.0685808";
@@ -69,7 +68,7 @@ describe('maps', function () {
   it('check checkGooglePhoto', () => { // TODO: Fix This
     const googlePhoto = checkGooglePhoto()
     expect(googlePhoto).toBeDefined();
-    expect(googlePhoto).toBe("pictures/noParkingImgFound.png"); 
+    expect(googlePhoto).toBe("pictures/noParkingImgFound.png");
   });
 
 
@@ -126,10 +125,6 @@ describe('maps', function () {
   });
 })
 
-
-
-
-
 const setupGoogleMock = () => {
   /*** Mock Google Maps JavaScript API ***/
   const google = {
@@ -164,25 +159,6 @@ const setupGoogleMock = () => {
   global.window.google = google;
 };
 
-
-
-// in test file.
 beforeAll(() => {
   setupGoogleMock();
 });
-
-//
-// it('check callback', () => {
-//   const callOK = callback("", global.window.google.maps.places.PlacesServiceStatus.OK);
-//   expect(callOK).toBeDefined();
-//   expect(callOK).toBe("PlacesServiceStatus OK");
-//   const callNA = callback();
-//   expect(callNA).toBeDefined();
-//   expect(callNA).toBe("PlacesServiceStatus Not OK");
-// });
-//
-// it('check createMap', () => {
-//   const map = createMap();
-//   expect(map).toBeDefined();
-// });
-//

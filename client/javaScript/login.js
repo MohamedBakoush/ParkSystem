@@ -20,21 +20,23 @@ async function addEventListeners() {
 
 function grabEverything() {
   let loginInfo = {};
-  loginInfo.username = elem.username.value;
-  loginInfo.password = elem.password.value;
-  checkLogin(loginInfo);
+  try {
+    loginInfo.username = elem.username.value;
+    loginInfo.password = elem.password.value;
+    checkLogin(loginInfo);
+  } catch (e) {
+    return "grabEverything Failed";
+  }
 }
 
 async function checkLogin(loginInfo) {
+  const errorContainer = document.getElementById('errors');
+  document.getElementById('errors').innerHTML = "";
+
   const payload = {
     username: loginInfo.username,
     password: loginInfo.password
   };
-
-  console.log('Payload', payload);
-
-  const errorContainer = document.getElementById('errors');
-  document.getElementById('errors').innerHTML = "";
 
   const response = await fetch('loginAcc', {
     method: 'POST',
@@ -42,24 +44,28 @@ async function checkLogin(loginInfo) {
     body: JSON.stringify(payload),
   });
   if (response.ok) {
-    console.log("login worked");
     currentUser(loginInfo);
     window.location = '/'
   } else if (response.status == 400) {
-        console.log("usernameWrong");
-        outcomeOutput(errorContainer,"usernameWrong","usernameWrong","Username: Invalid User");
+    checkLoginOutput(errorContainer,"usernameWrong","usernameWrong","Username: Invalid User");
+    return "usernameWrong";
   } else if (response.status == 401){
-      console.log("passwordWrong");
-        outcomeOutput(errorContainer,"passwordWrong","passwordWrong","Password: Invalid Password");
+      checkLoginOutput(errorContainer,"passwordWrong","passwordWrong","Password: Invalid Password");
+      return "passwordWrong";
   }
 }
 
-function outcomeOutput(container,idHere,classHere,textContent) {
-  const error = document.createElement("div");
-  error.id = idHere;
-  error.classList = classHere;
-  error.textContent = textContent;
-  container.appendChild(error);
+function checkLoginOutput(container,idHere,classHere,textContent) {
+  try {
+    const message = document.createElement("div");
+    message.id = idHere;
+    message.classList = classHere;
+    message.textContent = textContent;
+    container.appendChild(message);
+    return message;
+  } catch (e) {
+    return "checkLoginOutput Fail";
+  }
 }
 
 async function currentUser(loginInfo) {
@@ -72,9 +78,9 @@ async function currentUser(loginInfo) {
     body: JSON.stringify(payload),
   });
   if (response.ok) {
-    console.log('user account created');
+    return "user account created"
   } else {
-    console.log('failed to add user', response);
+    return "failed to add user"
   }
 }
 
@@ -91,10 +97,12 @@ function loadLoginData() {
   loginData(loginForm, "password", "password", "password", "Password", true);
 
   const loginButtonContainer = createSection(loginForm, "div", "loginButtonContainer");
-  createButton(loginButtonContainer, "submit", "loginButton","loginBut", "Login")
+  createButton(loginButtonContainer, "submit", "loginButton","loginBut", "Login");
 
   const registerMessages = createSection(loginBody, "section", "loginMessages","loginMessages");
   createSection(registerMessages, "section", "errorsContainer","errors");
+
+  return "loadLoginData";
 }
 
 function createButton(container,type, classHere,idHere, textContent){ // Form maker
@@ -116,7 +124,7 @@ function createForm(container, classHere, action){ // Form maker
     const form = document.createElement('form');
     form.classList = classHere;
     form.action = action;
-    form.onsubmit = function() {return false}
+    form.onsubmit = function() {return false};
     container.appendChild(form);
     return form;
   } catch (e) {
@@ -153,3 +161,19 @@ function loginData(container, type, classHere, idHere, placeholder, required){ /
 }
 
 window.addEventListener('load', pageLoaded);
+
+module.exports = {
+  // export modules
+  loginData,
+  createSection,
+  createForm,
+  createButton,
+  loadLoginData,
+  currentUser,
+  checkLoginOutput,
+  checkLogin,
+  grabEverything,
+  addEventListeners,
+  prepareHandles,
+  pageLoaded,
+};

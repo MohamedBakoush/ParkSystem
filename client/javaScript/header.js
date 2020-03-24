@@ -6,14 +6,12 @@ async function showHeaderInfo() {
   contentInfo(logoContainer, "a", "Logo", "Logo", "ParkSystem", "/");
 
   if (user.username === undefined) {
-    console.log("undefined");
     const accInfoContainer = makeElement(container, "ul", "signinLinks", "signinLinks");
     const accInfoRegister = makeElement(accInfoContainer, "li");
     const accInfoLogin = makeElement(accInfoContainer, "li");
     contentInfo(accInfoLogin, "a", "login", "login", "login", "login");
     contentInfo(accInfoRegister, "a", "register", "register", "register", "register");
   } else {
-    console.log(user.username);
     const accInfoContainer = makeElement(container, "ul", "loginUser", "loginUser");
     const accInfoUsername = makeElement(accInfoContainer, "li");
     const accInfoLogout = makeElement(accInfoContainer, "li");
@@ -84,10 +82,9 @@ async function logout() {
     body: JSON.stringify(user),
   });
   if (response.ok) {
-    console.log("LogOut");
     window.location.reload();
   } else if (response.status == 400) {
-      console.log("LogOut Failed");
+      return "LogOut Failed";
   }
 }
 
@@ -95,6 +92,9 @@ window.addEventListener('DOMContentLoaded', showHeaderInfo);
 module.exports = {
   // export modules
   showHeaderInfo,
+  createBtn,
   makeElement,
   contentInfo,
+  getCurrentUser,
+  logout
 };
