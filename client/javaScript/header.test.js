@@ -1,5 +1,11 @@
 'use strict'
-const { showHeaderInfo, makeElement, contentInfo,} = require('./header');
+const {
+  showHeaderInfo,
+  createBtn,
+  makeElement,
+  contentInfo,
+  getCurrentUser,
+  logout } = require('./header');
 
 global.window = Object.create(window);
 const url = "http://localhost:8080";
@@ -11,13 +17,28 @@ Object.defineProperty(window, 'location', {
 
 describe('header', function () {
   const createElement = document.createElement("section");
+  function testFunction() {
+    const x = 1;
+    return x;
+  }
+  it('check createBtn', () => {
+    const createFail = createBtn();
+    expect(createFail).toBeDefined();
+    expect(createFail).toBe("Button didnt create");
 
-  it('check showInfo', () => {
-    const showInfo = showHeaderInfo();
-    expect(showInfo).toBeDefined();
-    expect(showInfo).toBe("ShowHeaderInfo works");
+    const create = createBtn(createElement, "input", "button", "logout", "logout", "logout", testFunction);
+    expect(create).toBeDefined();
+    expect(create.type).toBe("button");
+    expect(create.classList[0]).toBe("logout");
+    expect(create.id).toBe("logout");
+    expect(create.value).toBe("logout");
+    expect(create.onclick).toBe(testFunction);
   });
 
+  it('check showInfo', async () => {
+    const showInfo = showHeaderInfo();
+    expect(showInfo).toBeDefined();
+  });
   it('check makeElement', () => {
     const make = makeElement(createElement, "a", "classHere", "idHere");
     expect(make).toBeDefined();
@@ -40,5 +61,13 @@ describe('header', function () {
     const infoNA = contentInfo();
     expect(infoNA).toBeDefined();
     expect(infoNA).toBe("contentInfo did not work");
+  });
+  it('check getCurrentUser', async () => {
+    const currentUser = getCurrentUser();
+    expect(currentUser).toBeDefined();
+  });
+  it('check logout', async () => {
+    const out = logout();
+    expect(out).toBeDefined();
   });
 })
