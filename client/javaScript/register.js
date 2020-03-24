@@ -123,8 +123,7 @@ function grabEverything() {
       const splitPhoneNumber = elem.phoneNum.value.split(" ");
       if (splitPhoneNumber.length > 1) {
         checkRegisterOutput(errorContainer,"phoneNumberWrong","phoneNumberWrong","PhoneNumber: no spaces");
-      }else {
-        console.log("Valid PhoneNumber:", elem.phoneNum.value);
+      }else { 
         accountInfo.phoneNum = elem.phoneNum.value;
       }
     }else {

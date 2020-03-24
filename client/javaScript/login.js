@@ -78,9 +78,9 @@ async function currentUser(loginInfo) {
     body: JSON.stringify(payload),
   });
   if (response.ok) {
-    console.log('user account created');
+    return "user account created"
   } else {
-    console.log('failed to add user', response);
+    return "failed to add user"
   }
 }
 

@@ -16,7 +16,6 @@ function getParkingDetails(request, response){
 //get a specific parkingDetails by id
 function getParkingDetail(req, res){
   const result = pib.findParkingDetail(req.params.id);
-  console.log(req.params.id);
   if(!result){
     res.status(404).send('No match ID')
     return;
@@ -38,7 +37,6 @@ function createAcc(req, res) {
 // Will log the user in
 function login(req, res) {
   const result =  uib.logIn(req.body.username, req.body.password);
-  console.log("result: ", result);
   if (result == "usernameWrong") {
     res.status(400).send({message: result});
   } else if (result == "passwordWrong") {
@@ -52,7 +50,6 @@ function login(req, res) {
 // Will log the user in
 function logout(req, res) {
   const result =  uib.logOut(req.body.username);
-  console.log("result: ", result);
   if (result == "noUserFound") {
     res.status(400).send({message: result});
   } else {
