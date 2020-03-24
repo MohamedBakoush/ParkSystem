@@ -9,24 +9,26 @@ ParkSystem shows available parking spaces in the area.
 * Run the website on your local host port 8080 by running 'npm start'
 * Using your chosen web browser go to 'http://localhost:8080/' to view the website
 
-### Start Server 
+### Start Server
 ```
 npm start
 ```
 
-### Start Test 
+### Start Test
 ```
 npm test
 ```
 
 ### Team 10C
 
-|<a>**Mohamed Bakoush**</a>|<a>**Gavin Samraj**</a>|<a>**Kane Austin**</a>|<a>**Maxamillian Hutchings**</a>|<a>**Tsz Yu Lee**</a>| 
-| :---: |:---:| :---:| :---:| :---:| 
+|<a>**Mohamed Bakoush**</a>|<a>**Gavin Samraj**</a>|<a>**Kane Austin**</a>|<a>**Maxamillian Hutchings**</a>|<a>**Tsz Yu Lee**</a>|
+| :---: |:---:| :---:| :---:| :---:|
 
 ### Google API KEYS
 * Mohamed: AIzaSyAcQlOXG9jMpJ1ZXyq-u0JxkTiOk6XWjHo
 * AIzaSyDNDyXPpAMGdAA1PnEWSeVu_YyNovRQVAw
 * AIzaSyCFrqJV8YGajIiAgTzNo0uK1Tdl5W5AwUg
 * Gavin: AIzaSyBgEMibjP-KKDle5DwwhmWyf_jtQgBF1bM
+* AIzaSyAKG6_-UPN4KJhFA8nXj-e3pg-PU4Y2UsY
+* AIzaSyA0kK436cg5q9TEIhlvcry3lHu6ea6NGKw
 * Max: AIzaSyAzmcJq7y-HW3_beX9kDsSG5k6hyo1TcNE
