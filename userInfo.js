@@ -46,7 +46,6 @@ function logIn(username, password) {
 
 // Log out the user
 function logOut(username) {
-  console.log(username);
   const user = findUser(username);
   if (user !== undefined) {
     user.loggedIn = false;
@@ -70,13 +69,9 @@ function addUser(username, password, forename, surname, email, phoneNum) {
       loggedIn: false,
     };
     const newData = JSON.stringify(users, null, 2);
-    FileSystem.writeFileSync('userInfo.json', newData, finished);
-    function finished(err) {
-      console.log("Successfully created acc");
-    }
+    FileSystem.writeFileSync('userInfo.json', newData);
     return "addedUser"
   }else {
-    console.log("userExist");
     return "userExist";
   }
 }
@@ -84,6 +79,7 @@ function addUser(username, password, forename, surname, email, phoneNum) {
 // Removes a user
 function removeUser(username) {
   delete users[username];
+  return "deleted";
 }
 
 // Shows all of the user in /registerAcc
@@ -93,11 +89,12 @@ function getAllUsers() {
 
 
 module.exports = {
-  addUser,
-  getAllUsers,
-  removeUser,
-  logIn,
   listCurrentUser,
   addCurrentUser,
-  logOut
+  findUser,
+  logIn,
+  logOut,
+  addUser,
+  removeUser,
+  getAllUsers
 };

@@ -12,7 +12,7 @@ const {
   pageLoaded
 } = require('./register');
 
-describe('login', function () {
+describe('register', function () {
   const createElement = document.createElement("section");
 
   it('check createSection', () => {

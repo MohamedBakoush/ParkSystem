@@ -29,9 +29,6 @@ async function createUserAccount(userInfo, errorContainer) {
     email: userInfo.email,
     phoneNum: userInfo.phoneNum
   };
-  console.log('Payload', payload);
-  // document.getElementById('errors').innerHTML = "";
-
   const response = await fetch('registerAcc', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -39,11 +36,9 @@ async function createUserAccount(userInfo, errorContainer) {
   });
   if (response.ok) {
     window.location.href = 'login'
-    return "user account created";
   } else if (response.status == 400) {
-    console.log("userExist");
+    document.getElementById('errors').innerHTML = "";
     checkRegisterOutput(errorContainer,"userExist","userExist","Username already exists");
-    return "Username already exists";
   }
 }
 
