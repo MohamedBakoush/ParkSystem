@@ -91,7 +91,7 @@ async function logout() {
   }
 }
 
-window.addEventListener('load', showHeaderInfo);
+window.addEventListener('DOMContentLoaded', showHeaderInfo);
 module.exports = {
   // export modules
   showHeaderInfo,
