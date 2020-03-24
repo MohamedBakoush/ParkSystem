@@ -1,0 +1,29 @@
+{
+  "username": {
+    "username": "username",
+    "password": "password",
+    "forename": "forename",
+    "surname": "surname",
+    "email": "email",
+    "phoneNum": "phoneNum",
+    "loggedIn": false
+  },
+  "mohamed": {
+    "username": "mohamed",
+    "password": "Passweofsdoinf132",
+    "forename": "Forename",
+    "surname": "Surname",
+    "email": "gmail@gmail.com",
+    "phoneNum": "0408836172",
+    "loggedIn": false
+  },
+  "mohamed1": {
+    "username": "mohamed1",
+    "password": "Passweofsdoinf132",
+    "forename": "Forename",
+    "surname": "Surname",
+    "email": "gmail@gmail.com",
+    "phoneNum": "0408836172",
+    "loggedIn": false
+  }
+}

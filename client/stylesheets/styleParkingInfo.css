@@ -81,7 +81,11 @@
   color: rgba(255, 255, 255, 1);
   height: 2.75rem;
 }
-
+.prevTicket_btn input:hover{
+  background-color: rgba(41,58,127, 0.1);
+  border: .125rem solid rgba(41,58,127, 1);
+  color: rgb(0, 0, 0);
+}
 .prevTicket_btn input:disabled{
   background-color: rgba(41, 58, 127, .2);
   border-color: rgba(41, 58, 127, .2);

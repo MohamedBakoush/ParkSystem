@@ -18,11 +18,11 @@ body {
     padding-left: 1em;
     padding-right: 1em;
   }
-.signinLinks{
+.signinLinks, .loginUser{
   display: grid;
   grid-template-columns: repeat(2, 1fr);
 }
- .login, .register {
+ .logout, .login, .register, .LoginUser{
     font-weight: 400;
     text-decoration: none;
     background-color: rgb(93, 106, 115);
@@ -33,7 +33,7 @@ body {
 .Logo:hover{
   border: .125rem solid #fff;
 }
-.login, .register{
+.logout, .login, .register, .LoginUser{
     font-weight: bold;
     color: rgb(0, 0, 0);
     text-align: center;
@@ -45,10 +45,12 @@ body {
     border-style: solid;
     border-color: rgb(41, 58, 127);
     border-image: initial;
-    text-transform: capitalize;
+}
+.logout, .login, .register{
+  text-transform: capitalize;
 }
 
-.login:hover, .register:hover {
+.logout:hover, .login:hover, .register:hover, .LoginUser:hover{
     background-color:  #293a7f;
     color: rgba(255, 255, 255, 1);
       border: .125rem solid #fff;
@@ -70,7 +72,7 @@ body {
 
 
 @media (max-width: 650px) {
-  .Logo { 
+  .Logo {
     padding: .25em;
   }
   .headerNav {

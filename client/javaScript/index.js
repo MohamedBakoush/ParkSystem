@@ -13,7 +13,11 @@ async function autoSearch(){
   });
 }
 
-window.addEventListener('load', autoSearch);
+function pageLoaded() {
+  autoSearch();
+}
+
+window.addEventListener('load', pageLoaded);
 module.exports = {
   // export modules
   autoSearch
