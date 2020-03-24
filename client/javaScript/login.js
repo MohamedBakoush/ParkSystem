@@ -25,7 +25,7 @@ function grabEverything() {
     loginInfo.password = elem.password.value;
     checkLogin(loginInfo);
   } catch (e) {
-    return "loginInfo Failed";
+    return "grabEverything Failed";
   }
 }
 

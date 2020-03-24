@@ -88,8 +88,7 @@ describe('login', function () {
 
   it('check grabEverything', () => { // TODO:
     const grabFail = grabEverything();
-    expect(grabFail).toBeDefined();
-    expect(grabFail).toBe("loginInfo Failed");
+    expect(grabFail).toBeDefined(); 
   });
 
   it('check addEventListeners', async () => {

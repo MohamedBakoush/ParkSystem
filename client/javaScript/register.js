@@ -38,121 +38,114 @@ async function createUserAccount(userInfo, errorContainer) {
     body: JSON.stringify(payload),
   });
   if (response.ok) {
-    console.log('user account created');
     window.location.href = 'login'
+    return "user account created";
   } else if (response.status == 400) {
     console.log("userExist");
-    outcomeOutput(errorContainer,"userExist","userExist","Username already exists");
+    checkRegisterOutput(errorContainer,"userExist","userExist","Username already exists");
+    return "Username already exists";
   }
 }
 
-function outcomeOutput(container,idHere,classHere,textContent) {
-  const error = document.createElement("div");
-  error.id = idHere;
-  error.classList = classHere;
-  error.textContent = textContent;
-  container.appendChild(error);
+function checkRegisterOutput(container,idHere,classHere,textContent) {
+  try {
+    const message = document.createElement("div");
+    message.id = idHere;
+    message.classList = classHere;
+    message.textContent = textContent;
+    container.appendChild(message);
+    return message;
+  } catch (e) {
+    return "checkRegisterOutput failed";
+  }
 }
 
 /*Gathers all of the values from the form and returns them inside an object*/
 function grabEverything() {
-  const errorContainer = document.getElementById('errors');
-  document.getElementById('errors').innerHTML = "";
 
-  let accountInfo = {};
+  try {
+    const errorContainer = document.getElementById('errors');
+    document.getElementById('errors').innerHTML = "";
 
-  if (/[A-Za-z0-9.-]+/.test(elem.username.value)) {
-    const splitUsername = elem.username.value.split(" ");
-    if (splitUsername.length > 1) {
-      console.log("Username: no spaces");
-      outcomeOutput(errorContainer,"usernameWrong","usernameWrong","Username: no spaces");
+    let accountInfo = {};
 
+    if (/[A-Za-z0-9.-]+/.test(elem.username.value)) {
+      const splitUsername = elem.username.value.split(" ");
+      if (splitUsername.length > 1) {
+        checkRegisterOutput(errorContainer,"usernameWrong","usernameWrong","Username: no spaces");
+      }else {
+        accountInfo.username = elem.username.value;
+      }
     }else {
-      console.log("Valid Username:", elem.username.value);
-      accountInfo.username = elem.username.value;
+      checkRegisterOutput(errorContainer,"usernameWrong","usernameWrong","Username: only uppercase and lowercase letters and numbers and -");
     }
-  }else {
-    console.log("Username", "only uppercase and lowercase letters and numbers and -");
-    outcomeOutput(errorContainer,"usernameWrong","usernameWrong","Username: only uppercase and lowercase letters and numbers and -");
-  }
 
-  if (/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/.test(elem.password.value)) {
-    const splitPass = elem.password.value.split(" ");
-    if (splitPass.length > 1) {
-      console.log("Pass: no spaces");
-      outcomeOutput(errorContainer,"passwordWrong","passwordWrong","Password: no spaces");
+    if (/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/.test(elem.password.value)) {
+      const splitPass = elem.password.value.split(" ");
+      if (splitPass.length > 1) {
+        checkRegisterOutput(errorContainer,"passwordWrong","passwordWrong","Password: no spaces");
+      }else {
+        accountInfo.password = elem.password.value;
+      }
+    }else{
+      checkRegisterOutput(errorContainer,"passwordWrong","passwordWrong","Password: at least one number and one uppercase and lowercase letter, and at least 8 or more characters");
+      }
+
+    if (/[A-Za-z]$/.test(elem.forename.value)) {
+      const splitForename= elem.forename.value.split(" ");
+      if (splitForename.length > 1) {
+        checkRegisterOutput(errorContainer,"forenameWrong","forenameWrong","Forename: no spaces");
+      }else {
+        accountInfo.forename = elem.forename.value;
+      }
     }else {
-      console.log("Valid Pass:", elem.password.value);
-      accountInfo.password = elem.password.value;
-    }
-  }else{
-      console.log("at least one number and one uppercase and lowercase letter, and at least 8 or more characters");
-      outcomeOutput(errorContainer,"passwordWrong","passwordWrong","Password: at least one number and one uppercase and lowercase letter, and at least 8 or more characters");
+      checkRegisterOutput(errorContainer,"forenameWrong","forenameWrong","Forename: letters only");
     }
 
-  if (/[A-Za-z]$/.test(elem.forename.value)) {
-    const splitForename= elem.forename.value.split(" ");
-    if (splitForename.length > 1) {
-      console.log("Forename: no spaces");
-      outcomeOutput(errorContainer,"forenameWrong","forenameWrong","Forename: no spaces");
+    if (/[A-Za-z]$/.test(elem.surname.value)) {
+      const splitSurname = elem.surname.value.split(" ");
+      if (splitSurname.length > 1) {
+        checkRegisterOutput(errorContainer,"surnameWrong","surnameWrong","Surnamed: no spaces");
+      }else {
+        accountInfo.surname = elem.surname.value;
+      }
     }else {
-      console.log("Valid Forename:", elem.forename.value);
-      accountInfo.forename = elem.forename.value;
+      checkRegisterOutput(errorContainer,"surnameWrong","surnameWrong","Surname: letters only");
     }
-  }else {
-    console.log("Forename: letters only");
-    outcomeOutput(errorContainer,"forenameWrong","forenameWrong","Forename: letters only");
-  }
 
-  if (/[A-Za-z]$/.test(elem.surname.value)) {
-    const splitSurname = elem.surname.value.split(" ");
-    if (splitSurname.length > 1) {
-      console.log("Surnamed: no spaces");
-      outcomeOutput(errorContainer,"surnameWrong","surnameWrong","Surnamed: no spaces");
+    if (/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/.test(elem.email.value)) {
+      const splitEmail= elem.email.value.split(" ");
+      if (splitEmail.length > 1) {
+        checkRegisterOutput(errorContainer,"emailWrong","emailWrong","Email: no spaces");
+      }else {
+        accountInfo.email = elem.email.value;
+      }
     }else {
-      console.log("Valid Surname:", elem.surname.value);
-      accountInfo.surname = elem.surname.value;
+      checkRegisterOutput(errorContainer,"emailWrong","emailWrong","Email: invalid email address!");
     }
-  }else {
-    console.log("Surname: letters only");
-    outcomeOutput(errorContainer,"surnameWrong","surnameWrong","Surname: letters only");
-  }
 
-  if (/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/.test(elem.email.value)) {
-    const splitEmail= elem.email.value.split(" ");
-    if (splitEmail.length > 1) {
-      console.log("Email: no spaces");
-      outcomeOutput(errorContainer,"emailWrong","emailWrong","Email: no spaces");
+    if (/^\d{10}$/.test(elem.phoneNum.value)) {
+      const splitPhoneNumber = elem.phoneNum.value.split(" ");
+      if (splitPhoneNumber.length > 1) {
+        checkRegisterOutput(errorContainer,"phoneNumberWrong","phoneNumberWrong","PhoneNumber: no spaces");
+      }else {
+        console.log("Valid PhoneNumber:", elem.phoneNum.value);
+        accountInfo.phoneNum = elem.phoneNum.value;
+      }
     }else {
-      console.log("Valid Email:", elem.email.value);
-      accountInfo.email = elem.email.value;
+      checkRegisterOutput(errorContainer,"phoneNumberWrong","phoneNumberWrong","PhoneNumber: 10 numeric characters only");
     }
-  }else {
-    console.log("You have entered an invalid email address!");
-    outcomeOutput(errorContainer,"emailWrong","emailWrong","Email: invalid email address!");
-  }
 
-  if (/^\d{10}$/.test(elem.phoneNum.value)) {
-    const splitPhoneNumber = elem.phoneNum.value.split(" ");
-    if (splitPhoneNumber.length > 1) {
-      console.log("PhoneNumber: no spaces");
-      outcomeOutput(errorContainer,"phoneNumberWrong","phoneNumberWrong","PhoneNumber: no spaces");
-    }else {
-      console.log("Valid PhoneNumber:", elem.phoneNum.value);
-      accountInfo.phoneNum = elem.phoneNum.value;
+    let count = 0;
+    for (const items in accountInfo) {
+      count++;
     }
-  }else {
-    console.log("10 numeric characters only");
-    outcomeOutput(errorContainer,"phoneNumberWrong","phoneNumberWrong","PhoneNumber: 10 numeric characters only");
-  }
 
-  let count = 0;
-  for (const items in accountInfo) {
-    count++;
-  }
-  console.log(count);
-  if (count == 6) {
-    createUserAccount(accountInfo, errorContainer);
+    if (count == 6) {
+      createUserAccount(accountInfo, errorContainer);
+    }
+  } catch (e) {
+    return "grabEverything Failed";
   }
 
 }
@@ -184,10 +177,12 @@ function loadRegisteData() {
   createRegisterInput(registerForm, "tel", "phoneNum","phoneNum", "Phone Number", "^d{10}$", "10 numeric characters only", true);
 
   const registerButtonContainer = createSection(registerForm, "div", "registerButtonContainer", "registerButtonContainer");
-  createButton(registerButtonContainer, "submit", "registerButton","regBut", grabEverything, "Register")
+  createButton(registerButtonContainer, "submit", "registerButton","regBut", grabEverything, "Register");
 
   const registerMessages = createSection(registerBody, "section", "registerMessages","registerMessages");
   createSection(registerMessages, "section", "errorsContainer","errors");
+
+  return "loadRegisteData";
 }
 
 function createRegisterInput(container,type, classHere,idHere, placeholder, pattern, title, required){
@@ -236,7 +231,7 @@ function createForm(container, classHere, action){ // Form maker
 }
 
 
-function createSection(container, dataType, classHere, idHere, string){ // label maker
+function createSection(container, dataType, classHere, idHere, string){
   try {
     const section = document.createElement(dataType);
     section.classList = classHere;
@@ -252,3 +247,18 @@ function createSection(container, dataType, classHere, idHere, string){ // label
 
 /*Once page has loaded, will call function pageLoaded*/
 window.addEventListener('load', pageLoaded);
+
+
+module.exports = {
+  // export modules
+  createSection,
+  createForm,
+  createButton,
+  createRegisterInput,
+  loadRegisteData,
+  grabEverything,
+  checkRegisterOutput,
+  createUserAccount,
+  prepareHandles,
+  pageLoaded
+};
