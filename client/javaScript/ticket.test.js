@@ -1,7 +1,8 @@
 'use strict'
 const { splitHref, calculateTime, costData,
         calculateCost, createBuyTicket, ticketData, checkTime,
-        getParkingDetail_Id, loadParkingDetail, getTicketInfo
+        getParkingDetail_Id, loadParkingDetail, getTicketInfo,
+        createSection
     } = require('./ticket');
 const {findParkingDetail} = require('../../parkingInfoBoard');
 global.window = Object.create(window);
@@ -85,7 +86,7 @@ describe('ticket', function () {
     expect(id).toBe("ChIJ0XjfNHRddEgRQtXe1fjPW8w");
     expect(typeof id).toBe("string");
   });
-  it('check loadParkingDetail', () => {
+  it('check loadParkingDetail', async () => {
     const load = loadParkingDetail();
     expect(load).toBeDefined();
   });
@@ -94,4 +95,17 @@ describe('ticket', function () {
     expect(getTicket).toBeDefined();
     expect(getTicket).toBe("getTicketInfo worked");
   });
+
+  it('check createSection', () => {
+    const createFail = createSection();
+    expect(createFail).toBeDefined();
+    expect(createFail).toBe("createSection didnt work");
+
+    const create = createSection(createElement, "div", "class", "id", "string");
+    expect(create).toBeDefined();
+    expect(create.classList[0]).toBe("class");
+    expect(create.id).toBe("id");
+    expect(create.textContent).toBe("string");
+  });
+
 })

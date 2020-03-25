@@ -257,7 +257,7 @@ describe('parkingInfo', function () {
     expect(create).toBeDefined();
   });
 
-  it('Check loadParkingDetail', () => {
+  it('Check loadParkingDetail', async () => {
     const load = loadParkingDetail();
     expect(load).toBeDefined();
   });
@@ -303,7 +303,6 @@ const setupGoogleMock = () => {
   global.window.google = google;
 };
 
-// in test file.
 beforeAll(() => {
   setupGoogleMock();
 });
