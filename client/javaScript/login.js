@@ -1,23 +1,28 @@
 'use strict';
 
+// Stores the commonly used elements
 const elem = {};
 
+// Runs through the functions on page loading event listener
 async function pageLoaded() {
   loadLoginData();
   prepareHandles();
   addEventListeners();
 }
 
+// Grabs the handles of the elements and stores them in the elem object
 async function prepareHandles() {
   elem.username = document.querySelector("#username");
   elem.password = document.querySelector("#password");
   elem.loginBut = document.querySelector("#loginBut");
 }
 
+// Adds event listeners on the elements that require event listeners
 async function addEventListeners() {
   elem.loginBut.addEventListener('click', grabEverything);
 }
 
+// Grabs the information from the form once the submit button is pressed and stores them in an object
 function grabEverything() {
   let loginInfo = {};
   try {
@@ -29,6 +34,9 @@ function grabEverything() {
   }
 }
 
+/* Create a payload and a sends a POST request to the sever with the log in parameters
+   If the response contains an error then it is handled and the correct response is shown
+   to the user dependant on the login error*/
 async function checkLogin(loginInfo) {
   const errorContainer = document.getElementById('errors');
   document.getElementById('errors').innerHTML = "";
@@ -55,6 +63,7 @@ async function checkLogin(loginInfo) {
   }
 }
 
+// Shows the response of the POST request back to the user, in the case of a username or password error
 function checkLoginOutput(container,idHere,classHere,textContent) {
   try {
     const message = document.createElement("div");
@@ -68,6 +77,7 @@ function checkLoginOutput(container,idHere,classHere,textContent) {
   }
 }
 
+// Sends a POST request to the server to change the current user to be the new logged in user
 async function currentUser(loginInfo) {
   const payload = {
     username: loginInfo.username,
@@ -78,12 +88,13 @@ async function currentUser(loginInfo) {
     body: JSON.stringify(payload),
   });
   if (response.ok) {
-    return "user account created"
+    return "user account logged in"
   } else {
-    return "failed to add user"
+    return "failed to log in user"
   }
 }
 
+// Handles loading the HTML elements of the login page by calling each function
 function loadLoginData() {
   const loginBody = document.getElementById("loginBody");
 
@@ -105,7 +116,8 @@ function loadLoginData() {
   return "loadLoginData";
 }
 
-function createButton(container,type, classHere,idHere, textContent){ // Form maker
+// Handles creating button elements
+function createButton(container,type, classHere,idHere, textContent){
   try {
     const button = document.createElement('button');
     button.type = type;
@@ -119,7 +131,8 @@ function createButton(container,type, classHere,idHere, textContent){ // Form ma
   }
 }
 
-function createForm(container, classHere, action){ // Form maker
+// Handles creating form elements
+function createForm(container, classHere, action){
   try {
     const form = document.createElement('form');
     form.classList = classHere;
@@ -132,6 +145,7 @@ function createForm(container, classHere, action){ // Form maker
   }
 }
 
+// Handles creating section elements
 function createSection(container, dataType, classHere, idHere, string){
   try {
     const section = document.createElement(dataType);
@@ -145,7 +159,8 @@ function createSection(container, dataType, classHere, idHere, string){
   }
 }
 
-function loginData(container, type, classHere, idHere, placeholder, required){ // Creats input section for loginData
+// Handles creation of input elements
+function loginData(container, type, classHere, idHere, placeholder, required){
   try {
     const ticketData = document.createElement('input');
     ticketData.type = type;
@@ -160,10 +175,11 @@ function loginData(container, type, classHere, idHere, placeholder, required){ /
   }
 }
 
+// On page load will call the pageLoaded function
 window.addEventListener('load', pageLoaded);
 
+// Export modules
 module.exports = {
-  // export modules
   loginData,
   createSection,
   createForm,
