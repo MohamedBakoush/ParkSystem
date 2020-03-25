@@ -12,7 +12,7 @@ function listCurrentUser() {
   return currentUser;
 }
 
-// add login user to current user (currentlu login in)
+// add login user to current user (currentluylogin in)
 function addCurrentUser(username) {
     const newCurrentUser = {
       username: username,

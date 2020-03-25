@@ -1,14 +1,14 @@
 'use strict';
-/*Object to hold the commonly accessed elements*/
+// Object to hold the commonly accessed elements
 const elem = {};
 
-/*Function which will set up handles on elements and event listeners when the page loads*/
+// Function which will set up handles on elements and event listeners when the page loads
 async function pageLoaded() {
   loadRegisteData();
   prepareHandles();
 }
 
-/*Function to grab handles on commonly accessed elements and store them in the elem object*/
+// Function to grab handles on commonly accessed elements and store them in the elem object
 async function prepareHandles() {
   elem.username = document.querySelector("#username");
   elem.password = document.querySelector("#password");
@@ -19,7 +19,8 @@ async function prepareHandles() {
   elem.regBut = document.querySelector("#regBut");
 }
 
-// Creates an account if the username doesn't exist
+/* Sends a POST request to the server containing the information from the form,
+   this also handles if the response shows that the username already exists*/
 async function createUserAccount(userInfo, errorContainer) {
   const payload = {
     username: userInfo.username,
@@ -42,6 +43,7 @@ async function createUserAccount(userInfo, errorContainer) {
   }
 }
 
+// Handles creation of the div for the error output of the form
 function checkRegisterOutput(container,idHere,classHere,textContent) {
   try {
     const message = document.createElement("div");
@@ -55,7 +57,8 @@ function checkRegisterOutput(container,idHere,classHere,textContent) {
   }
 }
 
-/*Gathers all of the values from the form and returns them inside an object*/
+/* Gathers all of the values from the form and returns them inside an object,
+   this also handles validating all inputs from the form */
 function grabEverything() {
 
   try {
@@ -64,6 +67,7 @@ function grabEverything() {
 
     let accountInfo = {};
 
+    // Username must have no spaces and can only contain letters
     if (/[A-Za-z0-9.-]+/.test(elem.username.value)) {
       const splitUsername = elem.username.value.split(" ");
       if (splitUsername.length > 1) {
@@ -75,6 +79,8 @@ function grabEverything() {
       checkRegisterOutput(errorContainer,"usernameWrong","usernameWrong","Username: only uppercase and lowercase letters and numbers and -");
     }
 
+    /* Passwords must contain no spaces, must have at least 1 lowercase letter, 1 uppercase letter, 1 number and must be
+    longer than 8 characters */
     if (/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/.test(elem.password.value)) {
       const splitPass = elem.password.value.split(" ");
       if (splitPass.length > 1) {
@@ -86,6 +92,7 @@ function grabEverything() {
       checkRegisterOutput(errorContainer,"passwordWrong","passwordWrong","Password: at least one number and one uppercase and lowercase letter, and at least 8 or more characters");
       }
 
+    // Forname must contain only letters and no spaces
     if (/[A-Za-z]$/.test(elem.forename.value)) {
       const splitForename= elem.forename.value.split(" ");
       if (splitForename.length > 1) {
@@ -97,10 +104,11 @@ function grabEverything() {
       checkRegisterOutput(errorContainer,"forenameWrong","forenameWrong","Forename: letters only");
     }
 
+    // Surname must contain only letters and no spaces
     if (/[A-Za-z]$/.test(elem.surname.value)) {
       const splitSurname = elem.surname.value.split(" ");
       if (splitSurname.length > 1) {
-        checkRegisterOutput(errorContainer,"surnameWrong","surnameWrong","Surnamed: no spaces");
+        checkRegisterOutput(errorContainer,"surnameWrong","surnameWrong","Surname: no spaces");
       }else {
         accountInfo.surname = elem.surname.value;
       }
@@ -108,6 +116,7 @@ function grabEverything() {
       checkRegisterOutput(errorContainer,"surnameWrong","surnameWrong","Surname: letters only");
     }
 
+    // Email must meet the standard email format
     if (/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/.test(elem.email.value)) {
       const splitEmail= elem.email.value.split(" ");
       if (splitEmail.length > 1) {
@@ -118,12 +127,12 @@ function grabEverything() {
     }else {
       checkRegisterOutput(errorContainer,"emailWrong","emailWrong","Email: invalid email address!");
     }
-
+     // Phone number must meet the standard phone number format
     if (/^\d{10}$/.test(elem.phoneNum.value)) {
       const splitPhoneNumber = elem.phoneNum.value.split(" ");
       if (splitPhoneNumber.length > 1) {
         checkRegisterOutput(errorContainer,"phoneNumberWrong","phoneNumberWrong","PhoneNumber: no spaces");
-      }else { 
+      }else {
         accountInfo.phoneNum = elem.phoneNum.value;
       }
     }else {
@@ -131,7 +140,7 @@ function grabEverything() {
     }
 
     let count = 0;
-    for (const items in accountInfo) {
+    for (const items in accountInfo) {  // eslint-disable-line
       count++;
     }
 
@@ -144,6 +153,9 @@ function grabEverything() {
 
 }
 
+
+/* Handles the creation of the HTML elements of register page be calling each associated functions
+   to build the form */
 function loadRegisteData() {
   const registerBody = document.getElementById("registerBody");
 
@@ -179,6 +191,7 @@ function loadRegisteData() {
   return "loadRegisteData";
 }
 
+// Handles creation of input elements
 function createRegisterInput(container,type, classHere,idHere, placeholder, pattern, title, required){
   try {
     const input = document.createElement('input');
@@ -196,6 +209,7 @@ function createRegisterInput(container,type, classHere,idHere, placeholder, patt
   }
 }
 
+// Handles creation of button elements
 function createButton(container,type, classHere,idHere,onclick, textContent){ // Form maker
   try {
     const button = document.createElement('button');
@@ -211,6 +225,7 @@ function createButton(container,type, classHere,idHere,onclick, textContent){ //
   }
 }
 
+// Handles creation of a form element
 function createForm(container, classHere, action){ // Form maker
   try {
     const form = document.createElement('form');
@@ -224,7 +239,7 @@ function createForm(container, classHere, action){ // Form maker
   }
 }
 
-
+// Handles creation of a section element
 function createSection(container, dataType, classHere, idHere, string){
   try {
     const section = document.createElement(dataType);
@@ -239,12 +254,11 @@ function createSection(container, dataType, classHere, idHere, string){
 }
 
 
-/*Once page has loaded, will call function pageLoaded*/
+// Once page has loaded, will call function pageLoaded
 window.addEventListener('load', pageLoaded);
 
-
+// Export modules
 module.exports = {
-  // export modules
   createSection,
   createForm,
   createButton,
