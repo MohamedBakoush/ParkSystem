@@ -20,7 +20,7 @@ async function loadParkingDetail() {// useing id fetch details from parkingDetai
 
 async function createMap(parkingDetail){
   const google = window.google;
-  const service = new google.maps.places.PlacesService(map);
+  const service = new google.maps.places.PlacesService(map); // eslint-disable-line
   const request = {
     placeId: getParkingDetail_Id(),
     // type of values to get from

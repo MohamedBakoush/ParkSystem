@@ -140,7 +140,7 @@ function grabEverything() {
     }
 
     let count = 0;
-    for (const items in accountInfo) {
+    for (const items in accountInfo) {  // eslint-disable-line
       count++;
     }
 
