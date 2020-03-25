@@ -123,7 +123,7 @@ function grabEverything() {
       const splitPhoneNumber = elem.phoneNum.value.split(" ");
       if (splitPhoneNumber.length > 1) {
         checkRegisterOutput(errorContainer,"phoneNumberWrong","phoneNumberWrong","PhoneNumber: no spaces");
-      }else { 
+      }else {
         accountInfo.phoneNum = elem.phoneNum.value;
       }
     }else {
@@ -131,7 +131,7 @@ function grabEverything() {
     }
 
     let count = 0;
-    for (const items in accountInfo) {
+    for (const items in accountInfo) {  // eslint-disable-line
       count++;
     }
 
