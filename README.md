@@ -15,6 +15,7 @@ Alternatively you may download and unpack the [zip](https://github.com/MohamedBa
 ```
 unzip master.zip
 cd ParkSystem-master
+npm install
 ```
 
 Start Server
