@@ -14,11 +14,14 @@ Object.defineProperty(window, 'location', {
 });
 
 describe('header', function () {
+
   const createElement = document.createElement("section"); // create an element  for testion purposes
+
   function testFunction() {  // create function for testion purposes
     const x = 1;
     return x;
   }
+
   it('check createBtn', () => { // test for createBtn function
     const createFail = createBtn();
     expect(createFail).toBeDefined();
@@ -71,5 +74,5 @@ describe('header', function () {
     const out = logout();
     expect(out).toBeDefined();
   });
-  
+
 })

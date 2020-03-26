@@ -1,15 +1,17 @@
 'use strict'
+
 const { loginData, createSection, createForm,
         createButton, loadLoginData, currentUser,
         checkLoginOutput, checkLogin, grabEverything,
         addEventListeners, prepareHandles, pageLoaded
-      } = require('./login');
+      } = require('./login'); // import functions from login
 
 
 describe('login', function () {
-  const createElement = document.createElement("section");
 
-  it('check loginData', () => {
+  const createElement = document.createElement("section"); // create an element  for testion purposes
+
+  it('check loginData', () => {  // test for loginData function
     const createFail = loginData();
     expect(createFail).toBeDefined();
     expect(createFail).toBe("loginData didnt work");
@@ -23,7 +25,7 @@ describe('login', function () {
     expect(create.required).toBe(true);
   });
 
-  it('check createSection', () => {
+  it('check createSection', () => {   // test for createSection function
     const createFail = createSection();
     expect(createFail).toBeDefined();
     expect(createFail).toBe("createSection didnt work");
@@ -34,7 +36,7 @@ describe('login', function () {
     expect(create.id).toBe("idHere");
   });
 
-  it('check createForm', () => {
+  it('check createForm', () => { // test for createForm function
     const createFail = createForm();
     expect(createFail).toBeDefined();
     expect(createFail).toBe("createForm didnt work");
@@ -45,7 +47,7 @@ describe('login', function () {
     expect(create.action).toBe("http://localhost/#");
   });
 
-  it('check createButton', () => {
+  it('check createButton', () => { // test for createButton function
     const createFail = createButton();
     expect(createFail).toBeDefined();
     expect(createFail).toBe("createButton didnt work");
@@ -58,18 +60,18 @@ describe('login', function () {
     expect(create.textContent).toBe("Login");
   });
 
-  it('check loadLoginData', () => {
+  it('check loadLoginData', () => { // test for loadLoginData function
     const loginData = loadLoginData();
     expect(loginData).toBeDefined();
     expect(loginData).toBe("loadLoginData");
   });
 
-  it('check currentUser', async () => {
+  it('check currentUser', async () => { // test for currentUser function
     const current = currentUser();
     expect(current).toBeDefined();
   });
 
-  it('check checkLoginOutput', () => {
+  it('check checkLoginOutput', () => { // test for checkLoginOutput function
     const checkLoginOutputFail = checkLoginOutput();
     expect(checkLoginOutputFail).toBeDefined();
     expect(checkLoginOutputFail).toBe("checkLoginOutput Fail");
@@ -81,27 +83,27 @@ describe('login', function () {
     expect(checkLoginOutputOK.textContent).toBe("textContent");
   });
 
-  it('check checkLogin', async() => {
+  it('check checkLogin', async() => { // test for checkLogin function
     const check = checkLogin();
     expect(check).toBeDefined();
   });
 
-  it('check grabEverything', () => { // TODO:
+  it('check grabEverything', () => { // test for grabEverything function
     const grabFail = grabEverything();
-    expect(grabFail).toBeDefined(); 
+    expect(grabFail).toBeDefined();
   });
 
-  it('check addEventListeners', async () => {
+  it('check addEventListeners', async () => { // test for addEventListeners function
     const eventListeners = addEventListeners();
     expect(eventListeners).toBeDefined();
   });
 
-  it('check prepareHandles', async () => {
+  it('check prepareHandles', async () => { // test for prepareHandles function
     const handles = prepareHandles();
     expect(handles).toBeDefined();
   });
 
-  it('check pageLoaded', async () => {
+  it('check pageLoaded', async () => { // test for pageLoaded function
     const load = pageLoaded();
     expect(load).toBeDefined();
   });
