@@ -5,7 +5,7 @@ const {
   dataParking, checkGooglePhoto, fetchParkingInfo,
   loadParkingDetail, checkLatLon, createMarker,
   callback, createMap
-} = require('./maps'); // import functions from header
+} = require('./maps'); // import functions from maps
 
 const {findParkingDetail} = require('../../parkingInfoBoard'); // import findParkingDetail functions from parkingInfoBoard
 global.window = Object.create(window);  // create a window
