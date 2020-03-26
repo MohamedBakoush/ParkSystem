@@ -6,7 +6,7 @@ const {
 } = require('./header'); // import functions from header
 
 global.window = Object.create(window); // create a window
-const url = "http://localhost:8080";  // set url with index url
+const url = "http://localhost:8080";  // set url with index (url that would be seen when load index.html) url
 Object.defineProperty(window, 'location', {
   value: {
     href: url  // url that these test will use

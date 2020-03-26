@@ -1,23 +1,18 @@
 'use strict'
-const {
-  loadLatLonDetail,
-  costData,
-  dataParkingPhoto,
-  dataParking,
-  checkGooglePhoto,
-  fetchParkingInfo,
-  loadParkingDetail,
-  checkLatLon,
-  createMarker,
-  callback,
-  createMap } = require('./maps');
 
-const {findParkingDetail} = require('../../parkingInfoBoard');
-global.window = Object.create(window);
-const url = "http://localhost:8080/maps?l=Stockholm%2C+Sweden&lat=59.32932349999999&lon=18.0685808";
+const {
+  loadLatLonDetail, costData, dataParkingPhoto,
+  dataParking, checkGooglePhoto, fetchParkingInfo,
+  loadParkingDetail, checkLatLon, createMarker,
+  callback, createMap
+} = require('./maps'); // import functions from header
+
+const {findParkingDetail} = require('../../parkingInfoBoard'); // import findParkingDetail functions from parkingInfoBoard
+global.window = Object.create(window);  // create a window
+const url = "http://localhost:8080/maps?l=Stockholm%2C+Sweden&lat=59.32932349999999&lon=18.0685808"; // set url with maps (url that would be seen when load maps.html) url
 Object.defineProperty(window, 'location', {
   value: {
-    href: url
+    href: url // url that these test will use
   }
 });
 
@@ -37,17 +32,17 @@ describe('maps', function () {
     expect(marker).toBeDefined();
   });
 
-  it('check createMap', async () => {
+  it('check createMap', async () => { // test for createMap function
     const map = createMap();
     expect(map).toBeDefined();
   });
 
-  it('check callback', () => { // TODO: Fix This
+  it('check callback', () => { // test for callback function
     const call = callback();
     expect(call).toBeDefined();
   });
 
-  it('check checkLatLon', () => {
+  it('check checkLatLon', () => { // test for checkLatLon function
     const latLon = checkLatLon(69,43);
     expect(latLon).toBeDefined();
     expect(latLon.lat).toBe(69);
@@ -59,20 +54,20 @@ describe('maps', function () {
     expect(latLonNA.lng).toBe(-1.0872);
   });
 
-  it('check loadParkingDetail', async () => {
+  it('check loadParkingDetail', async () => {  // test for loadParkingDetail function
     const loadDetail = loadParkingDetail(global.window.google.maps.places);
     expect(loadDetail).toBeDefined();
   });
 
 
-  it('check checkGooglePhoto', () => { // TODO: Fix This
+  it('check checkGooglePhoto', () => { // test for checkGooglePhoto function
     const googlePhoto = checkGooglePhoto()
     expect(googlePhoto).toBeDefined();
     expect(googlePhoto).toBe("pictures/noParkingImgFound.png");
   });
 
 
-  it('check dataParking', () => {
+  it('check dataParking', () => { // test for dataParking function
     const parking = dataParking(createElement, "div", "idHere", "classHere", "href", "textContent")
     expect(parking).toBeDefined();
     expect(parking.id).toBe("idHere");
@@ -85,7 +80,7 @@ describe('maps', function () {
     expect(parkingNA).toBe("dataParking failed");
   });
 
-  it('check dataParkingPhoto', () => {
+  it('check dataParkingPhoto', () => { // test for dataParkingPhoto function
     const parkingPhoto = dataParkingPhoto(createElement, "div", "idHere", "claseHere", "100", "100", "src");
     expect(parkingPhoto).toBeDefined();
     expect(parkingPhoto.id).toBe("idHere");
@@ -99,7 +94,7 @@ describe('maps', function () {
     expect(parkingPhotoNA).toBe("dataParkingPhoto failed");
   });
 
-  it('check costData', () => {
+  it('check costData', () => { // test for costData function
     const cost = costData(createElement, "div", "idHere", "claseHere", "$", 5);
     expect(cost).toBeDefined();
     expect(cost.id).toBe("idHere");
@@ -117,7 +112,7 @@ describe('maps', function () {
     expect(costNA).toBe("costData failed");
   });
 
-  it('check loadLatLonDetail', () => {
+  it('check loadLatLonDetail', () => { // test for loadLatLonDetail function
     const latLonDetail = loadLatLonDetail();
     expect(latLonDetail).toBeDefined();
     expect(latLonDetail.latitude).toBe("59.32932349999999");
@@ -125,8 +120,7 @@ describe('maps', function () {
   });
 })
 
-const setupGoogleMock = () => {
-  /*** Mock Google Maps JavaScript API ***/
+const setupGoogleMock = () => { // Mock Google Maps JavaScript API
   const google = {
     maps: {
       places: {
@@ -159,6 +153,6 @@ const setupGoogleMock = () => {
   global.window.google = google;
 };
 
-beforeAll(() => {
+beforeAll(() => { // load function before start test
   setupGoogleMock();
 });
