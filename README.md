@@ -2,19 +2,32 @@
 
 ParkSystem shows available parking spaces in the area.
 
-### Setting Up The Website
-* Clone the repository using 'git clone https://github.com/MohamedBakoush/ParkSystem.git'
-* Navigate to the directory on your personal machine through the terminal using 'cd <Insert Directory>'
-* Install all of the dependencies for the website by running 'npm i'
-* Run the website on your local host port 8080 by running 'npm start'
-* Using your chosen web browser go to 'http://localhost:8080/' to view the website
+Installation
+------------
+```
+git clone https://github.com/MohamedBakoush/ParkSystem.git
+cd ParkSystem
+npm install
+```
 
-### Start Server
+Alternatively you may download and unpack the [zip](https://github.com/MohamedBakoush/ParkSystem/archive/master.zip)
+
+```
+unzip master.zip
+cd ParkSystem-master
+```
+
+Start Server
+------------
+Run the Server by typing:
 ```
 npm start
 ```
+Then open `http://localhost:8080` in your preferred browser.
 
-### Start Test
+Start Test
+----------
+Run the tests by typing:
 ```
 npm test
 ```
@@ -24,7 +37,10 @@ npm test
 |<a>**Mohamed Bakoush**</a>|<a>**Gavin Samraj**</a>|<a>**Kane Austin**</a>|<a>**Maxamillian Hutchings**</a>|<a>**Tsz Yu Lee**</a>|
 | :---: |:---:| :---:| :---:| :---:|
 
-### Google API KEYS
+Google API KEYS
+---------------
+If the system requires change in google api when a google api reaches its limit, use one of these keys
+
 * Mohamed: AIzaSyAcQlOXG9jMpJ1ZXyq-u0JxkTiOk6XWjHo
 * AIzaSyDNDyXPpAMGdAA1PnEWSeVu_YyNovRQVAw
 * AIzaSyCFrqJV8YGajIiAgTzNo0uK1Tdl5W5AwUg
