@@ -18,16 +18,16 @@ Object.defineProperty(window, 'location', {
 
 
 describe('maps', function () {
-  const createElement = document.createElement("section");
-  const parkingDetail = findParkingDetail("ChIJ0XjfNHRddEgRQtXe1fjPW8w");
+  const createElement = document.createElement("section");  // create an element  for testion purposes
+  const parkingDetail = findParkingDetail("ChIJ0XjfNHRddEgRQtXe1fjPW8w");  // get parkingDetail from findParkingDetail by useing id ChIJ0XjfNHRddEgRQtXe1fjPW8w
 
-  it('check fetchParkingInfo', () => {
+  it('check fetchParkingInfo', () => {  // test for fetchParkingInfo function
     const parkingInfo = fetchParkingInfo(global.window.google.maps.places, parkingDetail);
     expect(parkingInfo).toBeDefined();
     expect(parkingInfo).toBe("fetchParkingInfo");
   });
 
-  it('check createMarker', async () => {
+  it('check createMarker', async () => { // test for createMarker function
     const marker = createMarker();
     expect(marker).toBeDefined();
   });

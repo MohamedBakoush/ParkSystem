@@ -1,14 +1,14 @@
-const { listParkingDetails, findParkingDetail} = require('./parkingInfoBoard');
+const { listParkingDetails, findParkingDetail} = require('./parkingInfoBoard'); // import functions from parkingInfoBoard
 
 describe('parkingInfoBoard', function () {
 
-    it('Check if listParkingDetails brigs back Array full of parking data', () => {
+    it('Check if listParkingDetails brigs back Array full of parking data', () => {// test for listParkingDetails function
       const list = listParkingDetails();
       expect(list).toBeDefined();
       expect(Array.isArray([list])).toBe(true);
     });
 
-    it('Check if findParkingDetail can bring data from specified id', () => {
+    it('Check if findParkingDetail can bring data from specified id', () => { // test for findParkingDetail function
        const find = findParkingDetail("id_example");  //id_example the id which is available on parkingDetails
       expect(find).toBeDefined();
       expect(find.id).toBe('id_example');

@@ -5,34 +5,36 @@ const { getParkingDetail_Id, loadParkingDetail, createMap,
         createTicket, createForm, createSection, createLabel,
         ticketDataDate, ticketDataTime, createprevTicket, openCloseTimes24Hours,
         openCloseTimes, getOpenCloseTimes, checkTime
-    } = require('./parkingInfo');
-const {findParkingDetail} = require('../../parkingInfoBoard');
-global.window = Object.create(window);
-const url = "http://localhost:8080/parkingInfo#ChIJ0XjfNHRddEgRQtXe1fjPW8w";
+    } = require('./parkingInfo'); // import functions from parkingInfo
+const {findParkingDetail} = require('../../parkingInfoBoard'); // import findParkingDetail functions from parkingInfoBoard
+global.window = Object.create(window);  // create a window
+const url = "http://localhost:8080/parkingInfo#ChIJ0XjfNHRddEgRQtXe1fjPW8w"; // set url with parkingInfo (url that would be seen when load parkingInfo.html) url
 Object.defineProperty(window, 'location', {
   value: {
-    href: url
+    href: url // url that these test will use
   }
 });
 
 describe('parkingInfo', function () {
-  const createElement = document.createElement("section");
-  const parkingDetail = findParkingDetail("ChIJ0XjfNHRddEgRQtXe1fjPW8w");
-  const getCurrentDate = new Date();
+  const createElement = document.createElement("section"); // create an element  for testion purposes
+  const parkingDetail = findParkingDetail("ChIJ0XjfNHRddEgRQtXe1fjPW8w");  // get parkingDetail from findParkingDetail by useing id ChIJ0XjfNHRddEgRQtXe1fjPW8w
+  const getCurrentDate = new Date(); // assign getCurrentDate Date()
+  // assign opening_hours24 an array
   const opening_hours24 = ["Monday: Open 24 hours", "Tuesday: Open 24 hours", "Wednesday: Open 24 hours", "Thursday: Open 24 hours", "Friday: Open 24 hours", "Saturday: Open 24 hours", "Sunday: Open 24 hours"];
+  // assign opening_hours an array
   const opening_hours = ["Monday: 8:00 AM – 6:30 PM", "Tuesday: 8:00 AM – 6:30 PM", "Wednesday: 8:00 AM – 6:30 PM", "Thursday: 8:00 AM – 6:30 PM", "Friday: 8:00 AM – 6:30 PM", "Saturday: 8:00 AM – 6:30 PM", "Sunday: 10:00 AM – 4:30 PM"];
 
-  const openSplit = opening_hours[getDate().todaysDate].split(" ");
-  const openTime = openSplit[1].split(":");
-  const openTimeHour = openTime[0];
-  const openTimeMin = openTime[1];
-  const openTime_AM_PM = openSplit[2];
-  const closeTime = openSplit[4].split(":");
-  const closeTimeHour = closeTime[0];
-  const closeTimeMin = closeTime[1];
-  const closeTime_AM_PM = openSplit[5];
+  const openSplit = opening_hours[getDate().todaysDate].split(" "); // split openSplit where theres a space
+  const openTime = openSplit[1].split(":");  // split openSplit where theres : and assign to openTime
+  const openTimeHour = openTime[0]; // assign openTimeHour first part of openTime
+  const openTimeMin = openTime[1];  // assign openTimeMin second part of openTime
+  const openTime_AM_PM = openSplit[2]; // assign openTime_AM_PM third part of openTime
+  const closeTime = openSplit[4].split(":");  // split openSplit where theres : and assign to closeTime
+  const closeTimeHour = closeTime[0];  // assign closeTimeHour first part of closeTime
+  const closeTimeMin = closeTime[1]; // assign closeTimeMin second part of closeTime
+  const closeTime_AM_PM = openSplit[5]; // assign closeTime_AM_PM sixth part of closeTime
 
-  it('Check checkTime', () => {
+  it('Check checkTime', () => { // test for checkTime function
       const timeLess10 = checkTime(1);
       expect(timeLess10).toBeDefined();
       expect(timeLess10).toBe("01");
@@ -42,7 +44,7 @@ describe('parkingInfo', function () {
       expect(time10OrMore).toBe(27);
       expect(typeof time10OrMore).toBe("number");
     });
-  it('Check getOpenCloseTimes', () => {
+  it('Check getOpenCloseTimes', () => { // test for getOpenCloseTimes function
       const time = openCloseTimes(opening_hours, getDate());
       const getOpenClose = getOpenCloseTimes(time);
       expect(getOpenClose).toBeDefined();
@@ -65,7 +67,7 @@ describe('parkingInfo', function () {
       expect(getOpenClose.getCloseTime).toStrictEqual(getCloseTime);
   });
 
-  it('Check openCloseTimes', () => {
+  it('Check openCloseTimes', () => {  // test for openCloseTimes function
     const openClose = openCloseTimes(opening_hours, getDate());
     expect(openClose).toBeDefined();
     expect(openClose.openSplit).toStrictEqual(openSplit);
@@ -79,7 +81,7 @@ describe('parkingInfo', function () {
     expect(openClose.closeTime_AM_PM).toStrictEqual(closeTime_AM_PM);
   });
 
-  it('Check openCloseTimes24Hours', () => {
+  it('Check openCloseTimes24Hours', () => {  // test for openCloseTimes24Hours function
     const time24Hours = openCloseTimes24Hours(opening_hours24, getDate() );
     expect(time24Hours).toBeDefined();
     const openSplit = opening_hours24[getDate().todaysDate].split(" ");
@@ -93,7 +95,7 @@ describe('parkingInfo', function () {
     expect(time24Hours.getHours).toBe(getHours);
   });
 
-  it('Check createprevTicket', () => {
+  it('Check createprevTicket', () => {  // test for createprevTicket function
     const prevTicket = createprevTicket(createElement, "submit", "Preview Ticket", false);
     expect(prevTicket).toBeDefined();
     expect(prevTicket.type).toBe("submit");
@@ -105,7 +107,7 @@ describe('parkingInfo', function () {
     expect(prevTicketNA).toBe("createprevTicket didnt work");
   });
 
-  it('Check ticketDataTime', () => {
+  it('Check ticketDataTime', () => {  // test for ticketDataTime function
     const dateTime = ticketDataTime(createElement, "time", "00:00", "24:00", "00:00", false);
     expect(dateTime).toBeDefined();
     expect(dateTime.type).toBe("time");
@@ -121,7 +123,7 @@ describe('parkingInfo', function () {
     expect(dateTimeNA).toBe("ticketDataTime didnt work");
   });
 
-  it('Check ticketDataDate', () => {
+  it('Check ticketDataDate', () => {  // test for ticketDataDate function
     const ticket = ticketDataDate(createElement, "date", getCurrentDate.toISOString().slice(0,10) , false);
     expect(ticket).toBeDefined();
     expect(ticket.type).toBe("date");
@@ -135,13 +137,13 @@ describe('parkingInfo', function () {
     expect(ticketNA).toBe("ticketDataDate didnt work");
   });
 
-  it('Check createTicket', () => {
+  it('Check createTicket', () => { // test for createTicket function
     const ticket = createTicket("00:00", "00:00", true);
     expect(ticket).toBeDefined();
     expect(ticket).toBe("createTicket all good");
   });
 
-  it('Check getDate', () => {
+  it('Check getDate', () => { // test for getDate function
     let todaysDate;
     if (getCurrentDate.getDay() == 0) {
       todaysDate = 6;
@@ -154,7 +156,7 @@ describe('parkingInfo', function () {
     expect(date.todaysDate).toBe(todaysDate);
   });
 
-  it('Check createLabel', () => {
+  it('Check createLabel', () => { // test for createLabel function
     const label = createLabel(createElement, "content");
     expect(label).toBeDefined();
     expect(label.textContent).toBe("content");
@@ -163,13 +165,13 @@ describe('parkingInfo', function () {
     expect(labelNA).toBe("createLabel didnt work");
   });
 
-  it('Check loadCostDetails', () => { // TODO: add all steps
+  it('Check loadCostDetails', () => { // test for loadCostDetails function
     const load = loadCostDetails();
     expect(load).toBeDefined();
     expect(load).toBe("loadCostDetails works");
   });
 
-  it('Check costData', () => {
+  it('Check costData', () => { // test for costData function
     const costValueDefined = costData(createElement, "stringContent", "$", 4, "class_id");
     expect(costValueDefined).toBeDefined();
     expect(costValueDefined.id).toBe("class_id");
@@ -186,7 +188,7 @@ describe('parkingInfo', function () {
   });
 
 
-  it('Check data', () => {
+  it('Check data', () => { // test for data function
     const getData = data(createElement, "value", "string");
     expect(getData).toBeDefined();
     expect(getData.id).toBe("string");
@@ -200,19 +202,19 @@ describe('parkingInfo', function () {
     expect(getDataNA.textContent).toBe("Not Available: string");
   });
 
-  it('Check showParkingDetails', () => {
+  it('Check showParkingDetails', () => { // test for showParkingDetails function
     const parkingDetails = showParkingDetails(global.window.google.maps.places, parkingDetail);
     expect(parkingDetails).toBeDefined();
     expect(parkingDetails).toBe("showParkingDetails worked");
   });
 
-  it('Check ParkingInfo', () => {
+  it('Check ParkingInfo', () => { // test for ParkingInfoParkingInfo function
     const info = ParkingInfo(global.window.google.maps.places, createElement);
     expect(info).toBeDefined();
     expect(info).toBe("ParkingInfo");
   });
 
-  it('Check ParkingOpeningHour', () => {
+  it('Check ParkingOpeningHour', () => { // test for ParkingOpeningHour function
     const openingHour = ParkingOpeningHour(global.window.google.maps.places, createElement);
     expect(openingHour).toBeDefined();
     expect(openingHour).toBe("ParkingOpeningHour OK");
@@ -222,13 +224,13 @@ describe('parkingInfo', function () {
     expect(openingHourNA).toBe("ParkingOpeningHour Failed");
   });
 
-  it('Check parkingCost', () => {
+  it('Check parkingCost', () => { // test for parkingCost function
     const cost = parkingCost(global.window.google.maps.places, parkingDetail,createElement);
     expect(cost).toBeDefined();
     expect(cost).toBe("parkingCost");
   });
 
-  it('Check createForm', () => {
+  it('Check createForm', () => { // test for createForm function
     const form = createForm(createElement, "classHere", "idHere", "action");
     expect(form).toBeDefined();
     expect(form.classList[0]).toBe("classHere");
@@ -240,7 +242,7 @@ describe('parkingInfo', function () {
     expect(formNA).toBe("createForm didnt work");
   });
 
-  it('Check createSection', () => {
+  it('Check createSection', () => { // test for createSection function
     const section = createSection(createElement, "div", "classHere", "idHere", "textContent");
     expect(section).toBeDefined();
     expect(section.classList[0]).toBe("classHere");
@@ -252,25 +254,24 @@ describe('parkingInfo', function () {
     expect(sectionNA).toBe("createSection didnt work");
   });
 
-  it('Check createMap', async () => {
+  it('Check createMap', async () => { // test for createMap function
     const create = createMap(parkingDetail);
     expect(create).toBeDefined();
   });
 
-  it('Check loadParkingDetail', async () => {
+  it('Check loadParkingDetail', async () => { // test for loadParkingDetail function
     const load = loadParkingDetail();
     expect(load).toBeDefined();
   });
 
-  it('Check getParkingDetail_Id', () => {
+  it('Check getParkingDetail_Id', () => { // test for getParkingDetail_Id function
     const id = getParkingDetail_Id();
     expect(id).toBeDefined();
     expect(id).toBe("ChIJ0XjfNHRddEgRQtXe1fjPW8w");
   });
 })
 
-const setupGoogleMock = () => {
-  /*** Mock Google Maps JavaScript API ***/
+const setupGoogleMock = () => {// Mock Google Maps JavaScript API
   const google = {
     maps: {
       places: {
@@ -303,6 +304,6 @@ const setupGoogleMock = () => {
   global.window.google = google;
 };
 
-beforeAll(() => {
+beforeAll(() => {// load function before start test
   setupGoogleMock();
 });
