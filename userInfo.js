@@ -88,7 +88,7 @@ function getAllUsers() {
 }
 
 
-module.exports = {
+module.exports = { // export modules
   listCurrentUser,
   addCurrentUser,
   findUser,
