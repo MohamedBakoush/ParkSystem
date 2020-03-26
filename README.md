@@ -32,8 +32,8 @@ Run the tests by typing:
 npm test
 ```
 
-### Team 10C
-
+Team 10C
+------------
 |<a>**Mohamed Bakoush**</a>|<a>**Gavin Samraj**</a>|<a>**Kane Austin**</a>|<a>**Maxamillian Hutchings**</a>|<a>**Tsz Yu Lee**</a>|
 | :---: |:---:| :---:| :---:| :---:|
 
