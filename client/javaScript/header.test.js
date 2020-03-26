@@ -1,4 +1,5 @@
 'use strict'
+
 const {
     showHeaderInfo, createBtn, makeElement,
     contentInfo, getCurrentUser, logout
@@ -70,4 +71,5 @@ describe('header', function () {
     const out = logout();
     expect(out).toBeDefined();
   });
+  
 })
