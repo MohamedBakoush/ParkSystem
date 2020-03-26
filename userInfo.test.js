@@ -19,7 +19,7 @@ const {
     });
 
     it('check findUser', () => {// test for findUser function
-      const find = findUser();
+      const find = findUser(undefined);
       expect(find).toBeDefined();
     });
 
