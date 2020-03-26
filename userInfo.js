@@ -76,12 +76,6 @@ function addUser(username, password, forename, surname, email, phoneNum) {
   }
 }
 
-// Removes a user
-function removeUser(username) {
-  delete users[username];
-  return "deleted";
-}
-
 // Shows all of the user in /registerAcc
 function getAllUsers() {
   return users;
@@ -95,6 +89,5 @@ module.exports = { // export modules
   logIn,
   logOut,
   addUser,
-  removeUser,
   getAllUsers
 };

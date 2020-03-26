@@ -6,7 +6,7 @@
     "surname": "surname",
     "email": "email",
     "phoneNum": "phoneNum",
-    "loggedIn": false
+    "loggedIn": true
   },
   "mohamed": {
     "username": "mohamed",
@@ -17,13 +17,7 @@
     "phoneNum": "0408836172",
     "loggedIn": false
   },
-  "mohamed1": {
-    "username": "mohamed1",
-    "password": "Passweofsdoinf132",
-    "forename": "Forename",
-    "surname": "Surname",
-    "email": "gmail@gmail.com",
-    "phoneNum": "0408836172",
+  "undefined": {
     "loggedIn": false
   }
 }
