@@ -108,7 +108,7 @@ function ticketData(container, textContent, datatype, classHere, idHere){ // cre
 
 function checkTime(number) { // check time
   if (number < 10) {  // check if number less then 10
-    number = "0" + number; // adds 0 before i value to show time as a double didget
+    number = "0" + number; // adds 0 before number value to show time as a double didget
   }
   return number; // return number
 }
