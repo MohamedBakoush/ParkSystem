@@ -122,7 +122,7 @@ function getParkingDetail_Id() { // get id from url
 
 async function loadParkingDetail() { // load parking details
   const id = getParkingDetail_Id(); // assign id from getParkingDetail_Id
-  const response = await fetch(`parkingDetails/${id}`); // useing fetch parkingDetails with provided id
+  const response = await fetch(`parkingDetails/${id}`);  // fetch parkingDetails with provided id
   let parkingDetail;
   if (response.ok) { // if response is ok assign parkingDetail with data from database
     parkingDetail = await response.json();
