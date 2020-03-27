@@ -52,7 +52,7 @@ async function checkLogin(loginInfo) {
     body: JSON.stringify(payload),
   });
   if (response.ok) {
-    currentUser(loginInfo);
+    await currentUser(loginInfo);
     window.location = '/'
   } else if (response.status == 400) {
     checkLoginOutput(errorContainer,"usernameWrong","usernameWrong","Username: Invalid User");
