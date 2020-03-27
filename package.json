@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node svr",
-    "test": "jest --watch"
+    "test": "jest"
   },
   "dependencies": {
     "express": "^4.17.1"
