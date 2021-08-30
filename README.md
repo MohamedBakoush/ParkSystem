@@ -39,13 +39,5 @@ Team 10C
 | :---: |:---:| :---:| :---:| :---:|
 
 Google API KEYS
----------------
-If the system requires change in google api when a google api reaches its limit, use one of these keys
-
-* Mohamed: AIzaSyAcQlOXG9jMpJ1ZXyq-u0JxkTiOk6XWjHo
-* AIzaSyDNDyXPpAMGdAA1PnEWSeVu_YyNovRQVAw
-* AIzaSyCFrqJV8YGajIiAgTzNo0uK1Tdl5W5AwUg
-* Gavin: AIzaSyBgEMibjP-KKDle5DwwhmWyf_jtQgBF1bM
-* AIzaSyAKG6_-UPN4KJhFA8nXj-e3pg-PU4Y2UsY
-* AIzaSyA0kK436cg5q9TEIhlvcry3lHu6ea6NGKw
-* Max: AIzaSyAzmcJq7y-HW3_beX9kDsSG5k6hyo1TcNE
+--------------- 
+https://developers.google.com/maps/documentation/javascript/get-api-key#creating-api-keys
